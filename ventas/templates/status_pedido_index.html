@@ -1,0 +1,147 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<div class="loader"></div>
+<h1 class="text-center display-4 mt-3 fw-bold" style="background-color: #C5CAE9; color: #FBFCFC; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);">Estatus de Pedidos</h1>
+
+<main class="container">
+  
+  <ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" aria-current="page" href="{% url 'ingresados' %}" style="color: #DC143C; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">inventory_2</span>
+          Pedidos Ingresados
+        </div>
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" aria-current="page" href="{% url 'status_pedido' %}" style="color: #839192; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">fast_forward</span>
+          Pedidos Activos
+        </div>
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" aria-current="page" href="{% url 'cartera' %}" style="color: #009AA6; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">groups</span>
+          Cartera de Clientes
+        </div>
+      </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" aria-current="page" href="{% url 'embarque' %}" style="color: #F1C40F; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.09);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-outlined">box</span>
+          Embarques
+        </div>
+      </a>
+    </li>
+  </ul>
+  
+  {% if mensaje %}
+<div class="mensaje-error">
+    {{ mensaje }}
+</div>
+{% endif %}
+<!-- ---------.....ESTILO ICONOS.....--------- -->
+  <style>
+    .icon-above-text {
+      align-items: center; 
+      text-align: center; 
+    }
+  
+    .icon-above-text .material-icons {
+      margin-bottom: 3px; 
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+    }
+        
+    .material-icons-round {
+      margin-right: 5px;
+    }
+  </style>
+<!-- ---------.....ESTILO ICONOS.....--------- -->
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#datatable-search-input').on('input', function() {
+        var searchText = $(this).val().toLowerCase();
+        $('#datatable tbody tr').each(function() {
+          var rowText = $(this).text().toLowerCase();
+          if (rowText.indexOf(searchText) === -1) {
+            $(this).hide();
+          } else {
+            $(this).show();
+          }
+        });
+      });
+    });
+    // Preload
+  const loader = document.querySelector(".loader");
+
+  // Mostrar el preload al hacer clic en un enlace, excluyendo elementos dentro de la barra de navegación
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+  
+    // Verificar si el elemento clickeado es un enlace o parte del menú desplegable
+    const isLink = target.tagName === "A";
+    const isDropdownItem = target.classList.contains("dropdown-item");
+  
+    // Verificar si el elemento clickeado o sus ancestros contienen una clase específica
+    // que identifique la barra de navegación (en este caso, usaremos "navbar-nav")
+    const isNavbarItem = target.closest(".navbar-nav");
+  
+    // Si el elemento clickeado es un enlace, no es parte del menú desplegable,
+    // y no se encuentra dentro de la barra de navegación, mostrar preload
+    if (isLink && !isDropdownItem && !isNavbarItem) {
+      loader.classList.remove("loader-hidden");
+    }
+  });
+  
+  // Ocultar el preload una vez que la página haya cargado completamente
+  window.addEventListener("load", () => {
+    loader.classList.add("loader-hidden");
+  });
+  </script>
+  
+</main>       
+
+<footer class="bg-light text-center mt-4 fixed-bottom" style="background-color: #F5F5F5;">
+
+  <div class="row">
+
+    <section class="mb-4 mt-4">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center p-3 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+
+</footer>
+{% endblock %}

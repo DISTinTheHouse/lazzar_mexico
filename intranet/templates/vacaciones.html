@@ -1,0 +1,308 @@
+{% extends 'layouts/menu_rh.html' %}
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<!--BANNER-->
+<div class="p-5" style="background-color: #03202f;">
+    <div class="container-fluid py-5">
+      <h1 class="display-4 fw-bold text-light " style="color: #495057;">Programación De Vacaciones</h1>
+      <p class="col-md-8 fs-4 text-light ">Solicita tus vacaciones y descarga tu archivo PDF para presentar.</p>
+     
+    </div>
+</div>
+<!--FIN BANNER-->
+
+<!--HEADER-->
+<header class="pb-3" style="background: linear-gradient(to right, #0B2265, #03202f, #03202f, #0B2265); padding: 25px;">
+    <span class="display-1 fw-semibold" style="color:  #fdfefe ; "></span>
+</header>
+<header class="pb-3" style="background: linear-gradient(to right, #0B2265, #03202f, #03202f, #0B2265); padding: 25px;">
+    <span class="display-1 fw-semibold" style="color:  #fdfefe ; "></span>
+</header>
+<header class="pb-3" style="background: linear-gradient(to right, #0B2265, #03202f, #03202f, #0B2265); padding: 25px;">
+    <span class="display-1 fw-semibold" style="color:  #fdfefe ; "></span>
+</header>
+<!--FIN HEADER-->
+
+<!--DIV FORM PARA COLABORADOR-->
+<section name="mas_informacion" id="mas_informacion">
+    <div class="p-3" style="background: linear-gradient(to right, #0B2265, #03202f, #03202f, #0B2265);">
+        <div class="container-fluid py-5">
+            <div class="accordion accordion-flush container-sm " id="accordionFlushExample">
+                <div class="accordion-item" style="background: linear-gradient(to left,#eaf2f8 , #d4e6f1,#85c1e9); border-radius: 25px; border:solid 7px #002d72;">
+                    <h1 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed " id="accordion-button-{{ item.dato_empleado.codigo }}" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne" style="border-radius: 25px; background-color: #85c1e9;">
+                            <strong>{{ vacaciones.dato_empleado.apellido_paterno }} {{ vacaciones.dato_empleado.apellido_materno }} {{ vacaciones.dato_empleado.nombre }}</strong> 
+                        </button>
+                    </h1>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample" >
+                        <div class="accordion-body">
+                            <table class="table table-hover table-secondary table-bordered table-striped table-responsive table-sm">
+                                <thead class="table table-primary text-center fw-lighter ">
+                                <tr>
+                                    <th class="fw-semibold" scope="col" style="color: #002244; text-transform: uppercase;">CODIGO COLABORADOR</th>
+                                    <th class="fw-medium  " scope="col" style="color: #002244; text-transform: uppercase;">SALDO VACACIONES 2023</th>
+                                    <th class="fw-medium  " scope="col" style="color: #002244; text-transform: uppercase;">VACACIONES 2024</th>
+                                    <th class="fw-medium " scope="col" style="color: #002244; text-transform: uppercase;">SEMANA SANTA 2024</th>
+                                    <th class="fw-medium  " scope="col" style="color: #002244; text-transform: uppercase;">PROGRAMADOS 2024</th>
+                                    <th class="fw-medium  " scope="col" style="color: #002244; text-transform: uppercase;">TOMADOS EN 2024</th>
+                                    <th class="fw-semibold" scope="col" style="color: #002244; text-transform: uppercase;">SALDO DE VACACIONES 2024</th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-center ">
+                                        <tr>
+                                            <td class="fw-bold ">{{ vacaciones.dato_empleado.codigo }}</td>
+                                            <td>{{ vacaciones.saldo_anterior }}</td>
+                                            <td>{{ vacaciones.dias_vacaciones }}</td>
+                                            <td class="fw-bold" style="color: #ff7900;">{{ vacaciones.semana_santa }}</td>
+                                            <td>{{ vacaciones.programados }}</td>
+                                            <td>{{ vacaciones.dias_tomados }}</td>
+                                            <td class="fw-bold" style="color: #028090;">{{ vacaciones.saldo_final }}</td>
+                                        </tr>
+                                </tbody>
+                            </table>
+    
+                            <hr class="container-fluid">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <!-- Contenido de la parte izquierda -->
+                                        <div id="left-section">
+                                            <h2 class="text-center mb-4 mt-3" style="color: #2980B9; text-transform: uppercase;">Programa tus vacaciones:</h2>
+                                            <form  method="POST" action="{% url 'programar_dias' vacaciones.dato_empleado.id %}" id="vacation-form_{{ vacaciones.dato_empleado.codigo }}" class="text-center">
+                                                {% csrf_token %}
+    
+                                                <label for="dias-programar" style="color: #2c303f; font-style: italic;">Días a Programar:</label>
+                                                <input type="number" style="border:solid 3px #D4E6F1; border-radius: 25px;" class="form-control" id="dias-programar" name="diasProgramar" value="{{ vacaciones.saldo_final }}" readonly>
+                                                
+                                                <hr>
+                                                <label for="saldo-final" class="fw-medium " style="text-transform: uppercase;">Por favor, selecciona los días que deseas programar:</label>
+                                                <hr>
+    
+                                                <div class="mb-3">
+                                                    <label for="fechaInicio_{{ vacaciones.dato_empleado.codigo }}" class="form-label" style="color: #2c303f; font-style: italic;">Fecha de Inicio:</label>
+                                                    <input type="date" style="border:solid 3px #D4E6F1; border-radius: 25px;" class="form-control" id="fechaInicio_{{ vacaciones.dato_empleado.codigo }}" name="fecha_inicio" required onchange="copiarFechaInicio('{{ vacaciones.dato_empleado.codigo }}')">
+                                                </div>
+    
+                                                <div class="mb-3">
+                                                    <label for="fechaFin_{{ vacaciones.dato_empleado.codigo }}" class="form-label" style="color: #2c303f; font-style: italic;">Fecha Final:</label>
+                                                    <input type="date" style="border:solid 3px #D4E6F1; border-radius: 25px;" class="form-control" id="fechaFin_{{ vacaciones.dato_empleado.codigo }}" name="fecha_final" required>
+                                                </div>
+    
+                                                <input type="hidden" id="scroll-position_{{ vacaciones.dato_empleado.codigo }}" name="scroll_position_{{ vacaciones.dato_empleado.codigo }}" value="0">
+                                                <button type="submit" class="btn btn-primary btn-lg mt-2 mb-3" style="border-radius: 25px;">Registrar Fechas</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                            
+                                    <div class="col-md-8">
+                                        <!-- Contenido de la parte derecha -->
+                                        <div id="right-section">
+                                            <h2 class="text-center mt-3" style="color: #2980B9; text-transform: uppercase;">Fechas programadas</h2>
+                                            <table class="table table-hover table-responsive table-borderless table-secondary table-sm">
+                                                <thead class="text-center table-primary ">
+                                                <tr>
+                                                    <th class="fw-semibold  " scope="col" style="color: #002244; text-transform: uppercase;">Fecha de Inicio</th>
+                                                    <th class="fw-semibold  " scope="col" style="color: #002244; text-transform: uppercase;">Fecha de Fin</th>
+                                                    <th class="fw-medium " scope="col" style="color: #002244; text-transform: uppercase;"></th>
+                                                    <th class="fw-medium " scope="col" style="color: #002244; text-transform: uppercase;"></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for item_j in programados %}
+                                                        <tr class="text-center">
+                                                            <th class="fw-medium ">{{ item_j.fecha_inicio }}</th>
+                                                            <th class="fw-medium ">{{ item_j.fecha_final }}</th>
+                                                            <th>
+                                                                <form method="POST" action="{% url 'eliminar_programacion' item_j.id %}" id="vacation-form_eli">
+                                                                    {% csrf_token %}
+                                                                    <!--<button type="submit" class="btn btn-danger btn-sm" style="border-radius: 25px;">Eliminar</button>-->
+                                                                </form>                                                                        
+                                                            </th>
+                                                            <th>
+                                                                <form method="POST" action="{% url 'descarga_pdf' item_j.id %}" id="vacation-form_formato">
+                                                                    {% csrf_token %}
+                                                                    <button type="submit" class="btn btn-info btn-sm" style="border-radius: 25px;">Descargar Formato</button>
+                                                                </form>
+                                                            </th>
+                                                        </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                {% for item in col_vacaciones_list %}
+                    <hr>
+                    <div class="accordion-item" style="background: linear-gradient(to left,#eaf2f8 , #d4e6f1,#85c1e9); border-radius: 25px; border:solid 7px #002d72;">
+                        <h1 class="accordion-header" id="flush-heading{{ item.dato_empleado.codigo }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ item.dato_empleado.codigo }}" aria-expanded="false" aria-controls="flush-collapse{{ item.dato_empleado.codigo }}" style="border-radius: 25px; background-color: #85c1e9;">
+                                <strong>{{ item.dato_empleado.apellido_paterno }} {{ item.dato_empleado.apellido_materno }} {{ item.dato_empleado.nombre }}</strong>
+                            </button>
+                        </h1>
+                        <div id="flush-collapse{{ item.dato_empleado.codigo }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ item.dato_empleado.codigo }}" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <table class="table table-hover table-secondary table-bordered table-striped table-responsive table-sm">
+                                    <thead class="table table-primary text-center fw-lighter ">
+                                        <tr>
+                                            <th class="fw-semibold" scope="col" style="color: #002244; text-transform: uppercase;">CODIGO COLABORADOR</th>
+                                            <th class="fw-medium  " scope="col" style="color: #002244; text-transform: uppercase;">SALDO VACACIONES 2023</th>
+                                            <th class="fw-medium  " scope="col" style="color: #002244; text-transform: uppercase;">VACACIONES 2024</th>
+                                            <th class="fw-medium " scope="col" style="color: #002244; text-transform: uppercase;">SEMANA SANTA 2024</th>
+                                            <th class="fw-medium  " scope="col" style="color: #002244; text-transform: uppercase;">PROGRAMADOS 2024</th>
+                                            <th class="fw-medium  " scope="col" style="color: #002244; text-transform: uppercase;">TOMADOS EN 2024</th>
+                                            <th class="fw-semibold" scope="col" style="color: #002244; text-transform: uppercase;">SALDO DE VACACIONES 2024</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        <tr>
+                                            <td class="fw-bold ">{{ item.dato_empleado.codigo }}</td>
+                                            <td>{{ item.saldo_anterior }}</td>
+                                            <td>{{ item.dias_vacaciones }}</td>
+                                            <td class="fw-bold" style="color: #ff7900;">{{ item.semana_santa }}</td>
+                                            <td>{{ item.programados }}</td>
+                                            <td>{{ item.dias_tomados }}</td>
+                                            <td class="fw-bold" style="color: #028090;">{{ item.saldo_final }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+    
+                                <hr class="container-fluid">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <!-- Contenido de la parte izquierda -->
+                                            <div id="left-section">
+                                                <h2 class="text-center mb-4 mt-3" style="color: #2980B9; text-transform: uppercase;">Programa tus vacaciones:</h2>
+                                                <form method="POST" action="{% url 'programar_dias' item.dato_empleado.id %}" id="vacation-form_{{ item.dato_empleado.codigo }}" class="text-center">
+                                                    {% csrf_token %}
+    
+                                                    <label for="dias-programar" style="color: #2c303f; font-style: italic;">Días a Programar:</label>
+                                                    <input type="number" style="border: solid 3px #D4E6F1; border-radius: 25px;" class="form-control" id="dias-programar_{{ item.dato_empleado.codigo }}" name="diasProgramar" value="{{ item.saldo_final }}" readonly>
+    
+                                                    <hr>
+                                                    <label for="saldo-final" class="fw-medium" style="text-transform: uppercase;">Por favor, selecciona los días que deseas programar:</label>
+                                                    <hr>
+                                                    <div class="mb-3">
+                                                        <label for="fechaInicio_{{ item.dato_empleado.codigo }}" class="form-label" style="color: #2c303f; font-style: italic;">Fecha de Inicio:</label>
+                                                        <input type="date" style="border: solid 3px #D4E6F1; border-radius: 25px;" class="form-control" id="fechaInicio_{{ item.dato_empleado.codigo }}" name="fecha_inicio" required onchange="copiarFechaInicio('{{ item.dato_empleado.codigo }}')">
+                                                    </div>
+    
+                                                    <div class="mb-3">
+                                                        <label for="fechaFin_{{ item.dato_empleado.codigo }}" class="form-label" style="color: #2c303f; font-style: italic;">Fecha Final:</label>
+                                                        <input type="date" style="border: solid 3px #D4E6F1; border-radius: 25px;" class="form-control" id="fechaFin_{{ item.dato_empleado.codigo }}" name="fecha_final" required>
+                                                    </div>
+    
+                                                    <button type="submit" class="btn btn-primary btn-lg mt-2 mb-3" style="border-radius: 25px;">Programar Días</button>
+                                                </form>
+                                            </div>
+                                        </div>
+    
+                                        <div class="col-md-8">
+                                            <!-- Contenido de la parte derecha -->
+                                            <div id="right-section">
+                                                <h2 class="text-center mt-3" style="color: #2980B9; text-transform: uppercase;">Fechas programadas</h2>
+                                                <table class="table table-hover table-responsive table-borderless table-secondary table-sm">
+                                                    <thead class="text-center table-primary">
+                                                        <tr>
+                                                            <th class="fw-semibold " scope="col" style="color: #002244; text-transform: uppercase;">Fecha de Inicio</th>
+                                                            <th class="fw-semibold " scope="col" style="color: #002244; text-transform: uppercase;">Fecha de Fin</th>
+                                                            <th class="fw-medium " scope="col" style="color: #002244; text-transform: uppercase;"></th>
+                                                            <th class="fw-medium " scope="col" style="color: #002244; text-transform: uppercase;"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for item_c in col_programados_list %}
+                                                            {% for prog in item_c %}
+                                                                {% if item.dato_empleado.codigo == prog.prog_empleado.codigo %}
+                                                                    <tr class="text-center ">
+                                                                        <th class="fw-medium ">{{ prog.fecha_inicio }}</th>
+                                                                        <th class="fw-medium ">{{ prog.fecha_final }}</th>
+                                                                        <th>
+                                                                            <form method="POST" action="{% url 'eliminar_programacion' prog.id %}" id="vacation-form_eli">
+                                                                                {% csrf_token %}
+                                                                               <!-- <button type="submit" class="btn btn-danger">Eliminar</button> -->
+                                                                            </form>                                                                        
+                                                                        </th>
+                                                                        <th>
+                                                                            <form method="POST" action="{% url 'descarga_pdf' prog.id %}" id="vacation-form_formato">
+                                                                                {% csrf_token %}
+                                                                                <button type="submit" class="btn btn-info btn-sm" style="border-radius: 25px;">Descargar Formato</button>
+                                                                            </form>
+                                                                        </th>
+                                                                    </tr>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+<!--FIN DIV FORM PARA COLABORADOR-->
+
+<header class="pb-3" style="background: linear-gradient(to right, #0B2265, #03202f, #03202f, #0B2265); padding: 25px;">
+    <span class="display-1 fw-semibold" style="color:  #fdfefe ; "></span>
+</header>
+<header class="pb-3" style="background: linear-gradient(to right, #0B2265, #03202f, #03202f, #0B2265); padding: 25px;">
+    <span class="display-1 fw-semibold" style="color:  #fdfefe ; "></span>
+</header>
+<header class="pb-3" style="background: linear-gradient(to right, #0B2265, #03202f, #03202f, #0B2265); padding: 25px;">
+    <span class="display-1 fw-semibold" style="color:  #fdfefe ; "></span>
+</header>
+
+
+<!--FOOTER-->
+<footer class="text-white text-center p-3 " style="background: linear-gradient(to top, #0B2265, #0c2340, #0c2340);">
+    <p class="mt-3">&copy; 2024 - Con tecnologia de Lazzar IT</p>
+</footer>
+<!--FIN FOOTER-->
+
+<script>
+        function copiarFechaInicio(codigoEmpleado) {
+            var fechaInicio = document.getElementById('fechaInicio_' + codigoEmpleado).value;
+            document.getElementById('fechaFin_' + codigoEmpleado).value = fechaInicio;
+        }
+
+        $(document).ready(function() {
+    // Función para manejar el desplazamiento suave al hacer clic en el botón "Explorar"
+    $('.btn-warning').on('click', function(event) {
+        // Previene el comportamiento predeterminado del enlace
+        event.preventDefault();
+
+        // Obtiene la posición de la sección "mas_informacion"
+        var target = $('#mas_informacion');
+        var offset = target.offset().top;
+
+        // Desplazamiento suave hacia la sección
+        $('html, body').animate({
+            scrollTop: offset
+        }, 900); // Ajusta la duración según tus preferencias
+    });
+});
+
+</script>
+
+{% endblock %}

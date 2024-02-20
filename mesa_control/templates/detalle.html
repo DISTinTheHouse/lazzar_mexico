@@ -1,0 +1,658 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<style>
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center; 
+  }
+  .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+
+  .material-icons-round {
+    margin-right: 5px;
+  }
+</style>
+<h1 class="text-center display-1 fw-bold title subtitulos" style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;">{{ title }}</h1>
+<p class="display-4 text-left fw-bold text-center title subtitulos" style="color: #a71930; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); padding: 15px; background: linear-gradient(to bottom, #2586a6, #f8f7f6);">Mesa de control</p>
+
+<div class="container mt-3">
+  <div class="row">
+      <div class="col-12">
+          <div class="p-3 shadow rounded">
+              <h1 class="mb-4 text-center titulos" style="color: #566573; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2)">Detalles de Fechas</h1>
+              <table class="table table-striped table-secondary">
+                  <thead>
+                      <tr>
+                          <th style="color: #2C3E50; font-weight: bold" class="text-center">Fecha</th>
+                          <th style="color: #2C3E50; font-weight: bold" class="text-center">Fecha de Entrega</th>
+                          <th style="color: #2C3E50; font-weight: bold" class="text-center">Nueva Fecha</th>
+                          <th style="color: #2C3E50; font-weight: bold" class="text-center">Fecha Parcialidad</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for fila in fecha %}
+                      <tr>
+                          <td class="text-center">{{ fila.0|date:"d/m/y" }}</td>
+                          <td class="text-center">{{ fila.2|date:"d/m/y" }}</td>
+                          <td class="text-center">{{ fila.3|date:"d/m/y" }}</td>
+                          <td class="text-center">
+                              {% if fila.1|date:"Y-m-d" == "1900-12-31" %}
+                                  -
+                              {% else %}
+                                  {{ fila.1|date:"d/m/y" }}
+                              {% endif %}
+                          </td>
+                      </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+
+<main class="container-fluid mt-5">
+
+
+  <div class="row">
+
+    {% if leyenda %}
+      <div class="card" style="border:solid 8px #D6EAF8; padding: 15px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.5);">
+
+        <table class="table table-striped table-borderless table-primary table-responsive table-hover mt-2 mb-2" style="border:solid 9px #7FB3D5;">
+          <h3 class="text-center display-4 mt-3 fw-bold subtitulos" style="color: #0B2265; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2)">Códigos pendientes de surtir</h3>
+          <thead>
+            <tr class="table-primary">
+              <th class="text-center" style="font-weight: bolder;">CÓDIGO</th>
+              <th class="text-center" style="font-weight: bolder;">DESCRIPCIÓN</th>
+              <th class="text-center" style="font-weight: bolder;">PENDIENTE POR ENTREGAR</th>
+              <th class="text-center" style="font-weight: bolder;">EXISTENCIA</th>
+              <th class="text-center" style="font-weight: bolder;">EN PRODUCCIÓN</th>
+              <th class="text-center" style="font-weight: bolder;">ÓRDEN</th>
+              <th class="text-center" style="font-weight: bolder;">FECHA DE ENTREGA</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for existencia in existencias %}
+              <tr>
+                <td class="text-center" style="font-weight: bold;">{{ existencia.codigo }}</td>
+                <td class="text-center" style="font-style: italic;">{{ existencia.descripcion }}</td>
+                <td class="text-center">{{ existencia.pendiente|floatformat:0 }}</td>
+                {% if existencia.existencia < existencia.pendiente %}
+                  <td style="color: red;" class="text-center">{{ existencia.existencia|floatformat:0 }}</td>
+                  {% if existencia.pendiente_produccion is None %}
+                    <td></td>
+                  {% else %}
+                    <td style="color: red;" class="text-center">{{ existencia.pendiente_produccion|floatformat:0 }}</td>
+                  {% endif %}
+                  {% if existencia.oren is None %}
+                    <td></td>
+                  {% else %}
+                    <td style="color: red;" class="text-center">{{ existencia.oren }}</td>
+                  {% endif %}
+                  {% if existencia.fecha is None %}
+                    <td></td>
+                  {% else %}
+                    <td style="color: red;" class="text-center">{{ existencia.fecha|date:"d/m/y" }}</td>
+                  {% endif %}
+                {% else %}
+                  <td style="color: green;" class="text-center">{{ existencia.existencia|floatformat:0 }}</td>
+                  {% if existencia.pendiente_produccion is None %}
+                    <td></td>
+                  {% else %}
+                    <td class="text-center">{{ existencia.pendiente_produccion|floatformat:0 }}</td>
+                  {% endif %}
+                  {% if existencia.oren is None %}
+                    <td></td>
+                  {% else %}
+                    <td class="text-center">{{ existencia.oren }}</td>
+                  {% endif %}
+                  {% if existencia.fecha is None %}
+                    <td></td>
+                  {% else %}
+                    <td class="text-center">{{ existencia.fecha|date:"d/m/y" }}</td>
+                  {% endif %}
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot >
+            <tr>
+              <th colspan="2" style="text-transform: uppercase; background-color: #9dcfee;" class="text-center fw-bold">Total</th>
+              <th style="background-color: #9dcfee;" class="text-center fw-bold">{{ total_pendiente|floatformat:0 }}</th>
+              <th colspan="4"></th>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    {% endif %}
+
+    {% if leyenda %}
+    <div class="card mt-5" style="border:solid 9px #FCF3CF; padding: 15px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.5); margin-bottom: 30px;">
+      <!-- ... Contenido de la tarjeta Almacén ... -->
+        <table class="table table-striped table-borderless table-responsive table-hover table-sm table-warning mt-4" style="border:solid 9px #F7DC6F;">
+          <h2 class="text-center display-2 mt-3 fw-bold subtitulos" style="color: #7D6608; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2)">Almácen</h1>
+          <thead>
+            <tr class="table-warning">
+              <th></th>
+              <th>COMENTARIOS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for fila_alm in almacen %}
+              <tr>
+                <td> <!-- Button trigger modal -->
+                  <button type="submit" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{ forloop.counter }}_a" style="border-radius: 25px;">
+                    <span class="material-symbols-rounded">data_info_alert</span>
+                    Detalle
+                  </button>
+                  <!-- Modal -->
+                  <div class="modal fade modal-xl" id="exampleModal{{ forloop.counter }}_a" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title display-6 fw-bold subtitulos" id="exampleModalLabel">{{ fila_alm.0 }}</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="border-radius: 25px;"></button>
+                        </div>
+                        <div class="modal-body">
+                          <table class="table table-striped table-borderless table-sm table-warning table-hover mt-3" style="border:solid 6px #F7DC6F;">
+                            <thead>
+                              <tr class="table-warning">
+                                  <th class="text-center">CÓDIGO</th>
+                                  <th class="text-center">DESCRIPCIÓN</th>
+                                  <th class="text-center">CANTIDAD</th>
+                                  <th class="text-center">SURTIDO</th>
+                                  <th class="text-center">PENDIENTE</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            {% for item_alm in detalle_alm %}
+                                <tr>
+                                  <td class="text-center" style="font-weight: bold;">{{ item_alm.1 }}</td>
+                                  <td class="text-center" style="font-style: italic;">{{ item_alm.2 }}</td>
+                                  <td class="text-center">{{ item_alm.3|floatformat:0|floatformat }}</td>
+                                  <td class="text-center" style="font-weight: bold;">{{ item_alm.4|floatformat:0|floatformat }}</td>                                  
+                                  <td class="text-center">{{ item_alm.5|floatformat:0|floatformat }}</td>                               
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                            <tfoot>
+                              <tr>
+                                <th colspan="2" style="text-transform: uppercase; background-color:#FCF3CF;" class="text-center fw-bold">Total</th>
+                                <th style="background-color: #FCF3CF;" class="text-center fw-bold">{{ total_alm|floatformat:0 }}</th>
+                                <th style="background-color: #FCF3CF;" class="text-center fw-bold">{{ total_surt|floatformat:0 }}</th>
+                                <th style="background-color: #FCF3CF;" class="text-center fw-bold">{{ total_pendi|floatformat:0 }}</th>
+                              </tr>
+                            </tfoot>
+                          </table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="border-radius: 25px;">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>{{ fila_alm.1 }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+
+    {% if leyenda %}
+    <div class="card" style="border:solid 9px #D6EAF8; padding: 15px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.5);">
+      <!-- ... Contenido de la tarjeta Producción ... -->
+
+        <table class="table table-primary table-striped table-borderless table-hover mt-4" style="border:solid 9px #7FB3D5;">
+          <h1 class="text-center display-2 mt-3 fw-bold subtitulos" style="color: #0B2265; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2)">Producción</h1>
+          <thead>
+            <tr class="table-primary">
+              <th class="text-center">ÓRDEN</th>
+              <th class="text-center">PEDIDOS</th>
+              <th class="text-center">FECHA ÓRDEN</th>
+              <th class="text-center">FECHA DISEÑO</th>
+              <th class="text-center">FECHA TRAZO</th>
+              <th class="text-center">FECHA AVÍOS</th>
+              <th class="text-center">FECHA TELA</th>
+              <th class="text-center">FECHA CORTE</th>
+              <th class="text-center">FECHA ENTREGA</th>
+              <th class="text-center">COMENTARIOS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for fila in resultado %}
+              <tr>
+                <td> <!-- Button trigger modal -->
+                  <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ forloop.counter }}" style="border-radius: 25px;">
+                    <span class="material-symbols-rounded">local_mall</span>
+                    {{ fila.0 }}
+                  </button>
+                  <!-- Modal -->
+                  <div class="modal fade modal-xl" id="exampleModal{{ forloop.counter }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title display-6 fw-bold subtitulos" id="exampleModalLabel">{{ fila.0 }}</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="border-radius: 25px;"></button>
+                        </div>
+                        <div class="modal-body">
+                          <table class="table table-striped table-borderless table-sm table-hover table-primary mt-4" style="border:solid 6px #7FB3D5;">
+                            <thead>
+                              <tr class="table-primary">
+                                  <th class="text-center">CÓDIGO</th>
+                                  <th class="text-center" style="font-style: italic;">DESCRIPCIÓN</th>
+                                  <th class="text-center">CANTIDAD</th>
+                                  <th class="text-center">SURTIDO</th>
+                                  <th class="text-center">PENDIENTE</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for item in detalle_ops %}
+                                {% if item.0 == fila.0 %}
+                                  <tr>
+                                    <td class="text-center" style="font-weight: bold;">{{ item.1 }}</td>
+                                    <td class="text-center" style="font-style: italic;">{{ item.2 }}</td>
+                                    <td class="text-center">{{ item.3|floatformat:0|floatformat }}</td>
+                                    <td class="text-center" style="font-weight: bold;">{{ item.4|floatformat:0|floatformat }}</td>                                  
+                                    <td class="text-center">{{ item.5|floatformat:0|floatformat }}</td> 
+                                  </tr>
+                                {% endif %}
+                              {% endfor %}
+                              {% for item in totales_ops %}
+                                {% if item.0 == fila.0 %}
+                                  <tfoot>
+                                    <th colspan="2" style="text-transform: uppercase; background-color: #EBF5FB;" class="text-center fw-bold">Total</th>
+                                    <th style="background-color: #EBF5FB;" class="text-center fw-bold">{{ item.1|floatformat:0|floatformat }}</th>
+                                    <th style="background-color: #EBF5FB;" class="text-center fw-bold">{{ item.2|floatformat:0|floatformat }}</th>
+                                    <th style="background-color: #EBF5FB;" class="text-center fw-bold">{{ item.3|floatformat:0|floatformat }}</th>
+                                  </tfoot>
+                                {% endif %}
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="border-radius: 25px;">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center" style="font-weight: bold;">{{ fila.1 }}</td>
+                <td class="text-center">
+                  {% if fila.2 != None %}
+                    {{ fila.2 }}
+                  {% endif %}
+                </td>
+                <td class="text-center">
+                  {% if fila.3 != None %}
+                    {{ fila.3 }}
+                  {% endif %}
+                </td>
+                <td class="text-center">
+                  {% if fila.4 != None %}
+                    {{ fila.4 }}
+                  {% endif %}
+                </td>
+                <td class="text-center">
+                  {% if fila.5 != None %}
+                    {{ fila.5 }}
+                  {% endif %}
+                </td>
+                <td class="text-center">
+                  {% if fila.6 != None %}
+                    {{ fila.6 }}
+                  {% endif %}
+                </td>
+                <td class="text-center">
+                  {% if fila.7 != None %}
+                    {{ fila.7 }}
+                  {% endif %}
+                </td>
+                <td class="text-center">
+                  {% for itemf in fechas_list %}
+                    {% if itemf.0 == fila.0 %}
+                      {{ itemf.1|date:"d/m/y" }}
+                    {% endif %}
+                  {% endfor %}
+                </td>
+                <td class="text-center" style="font-style: italic;">
+                  {% if fila.9 != None %}
+                    *Tela: {{ fila.9 }}.
+                    {% if fila.10 != None %}
+                      * Producción:{{ fila.10 }}.
+                    {% endif %}
+                  {% else %}
+                    {% if fila.10 != None %}
+                      * Producción:{{ fila.10 }}.
+                    {% endif %}
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+
+    {% if leyenda %}
+      <div class="card mt-5" style="border:solid 9px #FCF3CF; padding: 15px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.5);">
+        <table class="table table-striped table-borderless table-sm table-warning table-hover mt-4" style="border:solid 9px #F7DC6F;">
+          <h2 class="text-center display-2 mt-3 fw-bold subtitulos" style="color: #7D6608; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2)">Bordados</h1>
+          <thead>
+            <tr class="table-warning">
+              <th class="text-center">ORDEN</th>
+              <th class="text-center">FECHA DE SURTIDO</th>
+              <th class="text-center">FECHA RECEPCIÓN</th>
+              <th class="text-center">FECHA DE ENTREGA</th>
+              <th class="text-center">SURTIDO</th>
+              <th class="text-center">ESTATUS</th>
+              <th class="text-center">QUIEN RECIBE</th>
+              <th class="text-center">DESEBRÓ</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for fila_bord in segresultado %}
+              <tr>
+                <td> <!-- Button trigger modal -->
+                  <button type="submit" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{ forloop.counter }}_b" style="border-radius: 25px;">
+                    <span class="material-symbols-rounded">local_mall</span>
+                    {{ fila_bord.0 }}
+                  </button>
+                  <!-- Modal -->
+                  <div class="modal fade modal-xl" id="exampleModal{{ forloop.counter }}_b" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title display-6 fw-bold subtitulos" id="exampleModalLabel">{{ fila_bord.0 }}</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="border-radius: 25px;"></button>
+                        </div>
+                        <div class="modal-body">
+                          <table class="table table-striped table-borderless table-warning table-responsive table-hover table-sm mt-2" style="border:solid 6px #F7DC6F;">
+                            <thead>
+                              <tr class="table-warning">
+                                  <th class="text-center">CÓDIGO</th>
+                                  <th class="text-center">DESCRIPCIÓN</th>
+                                  <th class="text-center">CANTIDAD</th>
+                                  <th class="text-center">SURTIDO</th>
+                                  <th class="text-center">PENDIENTE</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for item_bord in detalle_bordados %}
+                                {% if item_bord.0 == fila_bord.0 %}
+                                  <tr>
+                                    <td class="text-center" style="font-weight: bold;">{{ item_bord.1 }}</td>
+                                    <td class="text-center" style="font-style: italic;">{{ item_bord.2 }}</td>
+                                    <td class="text-center">{{ item_bord.3|floatformat:0|floatformat }}</td>
+                                    <td class="text-center" style="font-weight: bold;">{{ item_bord.4|floatformat:0|floatformat }}</td>                                  
+                                    <td class="text-center">{{ item_bord.5|floatformat:0|floatformat }}</td>                               
+                                  </tr>
+                                {% endif %}
+                              {% endfor %}
+                              {% for item_bord in totales_bor %}
+                              {% if item_bord.0 == fila_bord.0 %}
+                              <tfoot>
+                                <th colspan="2" style="text-transform: uppercase; background-color: #FCF3CF;" class="text-center fw-bold">Total</th>
+                                <th style="background-color: #FCF3CF;" class="text-center fw-bold">{{ item_bord.1|floatformat:0|floatformat }}</th>
+                                <th style="background-color: #FCF3CF;" class="text-center fw-bold">{{ item_bord.2|floatformat:0|floatformat }}</th>
+                                <th style="background-color: #FCF3CF;" class="text-center fw-bold">{{ item_bord.3|floatformat:0|floatformat }}</th>
+                              </tfoot>
+                              {% endif %}
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="border-radius: 25px;">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">{{ fila_bord.1 | date:"d/m/y" }}</td>
+                <td class="text-center">{{ fila_bord.2 | date:"d/m/y" }}</td>
+                {% if fila_bord.3|date:"Y-m-d" == "1900-12-31" %}
+                  <td></td>
+                {% else %}
+                  <td class="text-center">{{ fila_bord.3 | date:"d/m/y" }}</td>
+                {% endif %}
+                {% if fila_bord.4 is None %}
+                  <td></td>
+                {% else %}
+                  <td class="text-center">{{ fila_bord.4 }}</td>
+                {% endif %}
+
+                {% if fila_bord.5 is None %}
+                  <td></td>
+                {% else %}
+                  <td class="text-center">{{ fila_bord.5 }}</td>
+                {% endif %}
+
+                {% if fila_bord.6 is None %}
+                  <td></td>
+                {% else %}
+                  <td class="text-center">{{ fila_bord.6 }}</td>
+                {% endif %}
+
+                {% if fila_bord.7 is None %}
+                  <td></td>
+                {% else %}
+                  <td class="text-center">{{ fila_bord.7 }}</td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+
+    {% if leyenda %}
+      <div class="card mt-5" style="border:solid 9px #D6EAF8; padding: 15px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.5);">
+        <table class="table table-striped table-borderless table-hover table-sm table-primary mt-4" style="border:solid 9px #7FB3D5;">
+          <h2 class="text-center display-2 mt-3 fw-bold subtitulos" style="color: #0B2265; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2)">Compras</h1>
+          <thead>
+            <tr class="table-primary">
+              <th class="text-center">ORDEN</th>
+              <th class="text-center">FECHA ÓRDEN</th>
+              <th class="text-center">FECHA DE ENTREGA</th>
+              <th class="text-center">COMENTARIOS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for fila_com in orden_com %}
+              <tr>
+                <td> <!-- Button trigger modal -->
+                  <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{ forloop.counter }}_c" style="border-radius: 25px;">
+                    <span class="material-symbols-rounded">local_mall</span>
+                    {{ fila_com.0 }}
+                  </button>
+                  <!-- Modal -->
+                  <div class="modal fade modal-xl" id="exampleModal{{ forloop.counter }}_c" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title display-6 fw-bold subtitulos" id="exampleModalLabel">{{ fila_com.0 }}</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="border-radius: 25px;"></button>
+                        </div>
+                        <div class="modal-body">
+                          <table class="table table-striped table-borderless table-sm table-primary table-hover mt-4" style="border:solid 6px #7FB3D5;">
+                            <thead>
+                              <tr class="table-primary">
+                                  <th class="text-center">CÓDIGO</th>
+                                  <th class="text-center">DESCRIPCIÓN</th>
+                                  <th class="text-center">CANTIDAD</th>
+                                  <th class="text-center">SURTIDO</th>
+                                  <th class="text-center">PENDIENTE</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for item_com in detalle_compra %}
+                                {% if item_com.0 == fila_com.0 %}
+                                  <tr>
+                                    <td class="text-center" style="font-weight: bold;">{{ item_com.1 }}</td>
+                                    <td class="text-center" style="font-style: italic;">{{ item_com.2 }}</td>
+                                    <td class="text-center">{{ item_com.3|floatformat:0|floatformat }}</td>
+                                    <td class="text-center" style="font-weight: bold;">{{ item_com.4|floatformat:0|floatformat }}</td>                                  
+                                    <td class="text-center">{{ item_com.5|floatformat:0|floatformat }}</td>                               
+                                  </tr>
+                                {% endif %}
+                              {% endfor %}
+                              {% for item_com in totales_comp %}
+                              {% if item_com.0 == fila_com.0 %}
+                              <tfoot>
+                                <th colspan="2" style="text-transform: uppercase; background-color: #EBF5FB;" class="text-center fw-bold">Total</th>
+                                <th style="background-color: #EBF5FB;" class="text-center fw-bold">{{ item_com.1|floatformat:0|floatformat }}</th>
+                                <th style="background-color: #EBF5FB;" class="text-center fw-bold">{{ item_com.2|floatformat:0|floatformat }}</th>
+                                <th style="background-color: #EBF5FB;" class="text-center fw-bold">{{ item_com.3|floatformat:0|floatformat }}</th>
+                              </tfoot>
+                              {% endif %}
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="border-radius: 25px;">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">{{ fila_com.1 | date:"d/m/y" }}</td>
+                <td class="text-center">{{ fila_com.2 | date:"d/m/y" }}</td>
+                <td class="text-center">{{ fila_com.3 }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+
+    {% if leyenda %}
+      <div class="card mt-5" style="border:solid 9px #FCF3CF; padding: 15px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.5); margin-bottom: 30px;">
+        <table class="table table-striped table-borderless table-sm table-hover table-warning mt-4" style="border:solid 9px #F7DC6F;">
+          <h2 class="text-center display-1 mt-3 fw-bold subtitulos" style="color: #7D6608; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2)">Facturación</h1>
+          <thead>
+            <tr class="table-warning">
+              <th class="text-center">FACTURA</th>
+              <th class="text-center">FECHA</th>
+              <th class="text-center">PIEZAS</th>
+              <th class="text-center">SERVICIOS</th>
+              <th class="text-center">PAQUETERIA</th>
+              <th class="text-center">GUIA</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for fila_fac in facturas %}
+              <tr>
+                <td> <!-- Button trigger modal -->
+                  <button type="submit" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal{{ forloop.counter }}_f" style="border-radius: 25px;">
+                    <span class="material-symbols-rounded">local_mall</span>
+                    {{ fila_fac.0 }}
+                  </button>
+                  <!-- Modal -->
+                  <div class="modal fade modal-xl" id="exampleModal{{ forloop.counter }}_f" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title display-6 fw-bold subtitulos" id="exampleModalLabel">{{ fila_fac.0 }}</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="border-radius: 25px;"></button>
+                        </div>
+                        <div class="modal-body">
+                          <table class="table table-striped table-borderless table-sm table-hover table-warning mt-4" style="border:solid 6px #F7DC6F;">
+                            <thead>
+                              <tr class="table-warning">
+                                  <th class="text-center">CÓDIGO</th>
+                                  <th class="text-center">DESCRIPCIÓN</th>CO
+                                  <th class="text-center">CANTIDAD</th>                                  
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for item_fac in detalle_facturas %}
+                                {% if item_fac.0 == fila_fac.0 %}
+                                  <tr>
+                                    <td class="text-center" style="font-weight: bold;">{{ item_fac.1 }}</td>
+                                    <td class="text-center" style="font-style: italic;">{{ item_fac.2 }}</td>
+                                    <td class="text-center">{{ item_fac.3|floatformat:0|floatformat }}</td>                            
+                                  </tr>
+                                {% endif %}
+                              {% endfor %}
+                              {% for item_fac in totales_fac %}
+                          {% if item_fac.0 == fila_fac.0 %}
+                          <tfoot>
+                            <th colspan="2" style="text-transform: uppercase; background-color: #FCF3CF;" class="text-center fw-bold">Total</th>
+                            <th style="background-color: #FCF3CF;" class="text-center fw-bold">{{ item_fac.1|floatformat:0|floatformat }}</th>
+                          </tfoot>
+                          {% endif %}
+                          {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="border-radius: 25px;">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">{{ fila_fac.1|date:"d/m/y" }}</td>
+                <td class="text-center">{{ fila_fac.2|floatformat:0 }}</td>
+                <td class="text-center">{{ fila_fac.3|floatformat:0 }}</td>
+                <td class="text-center">{{ fila_fac.4 }}</td>
+                <td class="text-center">{{ fila_fac.5 }}</td>
+                {% if fila_fac.6 == 1 %}
+                  <td class="text-center">Cancelada</td>
+                {% else %}
+                  <td></td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+  </div>
+
+</main>
+
+
+<footer class=" text-center mt-4" style="background-color: #f2f2f2;">
+  <div class="row">
+
+    <section style="padding: 23px;" class="titulos">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/" class="titulos">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center titulos p-4 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px; background: linear-gradient(to top, #0B2265, #2586a6);">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+</footer>
+{% endblock %}

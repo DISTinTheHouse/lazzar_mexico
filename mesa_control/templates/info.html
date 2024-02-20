@@ -1,0 +1,305 @@
+{% extends 'layouts/layout.html' %}
+{% load humanize %}
+{% block content %}
+<style>
+.carta__1 {
+    background: linear-gradient(10deg, #64E9FF, #103CE7);
+    } 
+.carta__2 {
+    background: linear-gradient(45deg, #6157FF, #EE49FD);
+    } 
+.carta__3 {
+    background: linear-gradient(10deg, #3bb2b8, #42e695);
+}
+.carta__4 {
+    background: linear-gradient(45deg, #FF8473, #FFF9D2);
+}
+.icon-above-text {
+    align-items: center; 
+    text-align: center; 
+  }
+  .icon-above-text .material-icons {
+    margin-bottom: 1px;
+  }
+  .btn {
+  display: flex;
+  align-items: center;
+  }
+  .material-icons-round {
+      margin-right: 5px;
+  }
+</style>
+<h1 class="text-center display-1 fw-bold title" style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;" >Dashboard</h1>   
+<h2 class="text-center display-2 title subtitulos" style="color: #fccc0a; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5); background: linear-gradient(to bottom, #2586a6, #f2f2f2); padding: 23px;">Info</h3>
+<!-- 
+<section class="container-fluid" style="background-color: #f2f2f2; padding: 25px;">
+    <div class="card text-dark bg-warning " style="max-width: 18rem; border:solid 5px #F1C40F; padding: 3px;">
+        <div class="card-header">Pedidos del día</div>
+        <div class="card-body">
+        <h5 class="card-title">Total: 18</h5>
+        <p class="card-text">Muestra la cantidad de pedidos que van en el día de hoy.</p>
+        </div>
+    </div>
+
+    <div class="card text-white bg-dark mt-2" style="max-width: 18rem; border:solid 5px black">
+        <div class="card-header">Pedidos Vencidos</div>
+        <div class="card-body">
+            <h5 class="card-title">Total: 9</h5>
+            <p class="card-text">Estos pedidos no se cumplio con la fecha compromiso de entrega al cliente.</p>
+        </div>
+    </div>
+</section> -->
+
+<!--<div class="container" style="display: flex; justify-content: center; height: min-content;">
+    <canvas id="myChart"></canvas>
+</div>-->
+
+<div class="row justify-content-center" style="background-color: #f2f2f2;"> <!-- Se Reemplazo box -->
+    <div class="col-md-4 col-lg-4 mt-3 mb-5 text-center" style="border:solid 9px #b9cfd4; padding: 15px; border-radius: 30px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.6);">
+
+      <form action="{% url 'info' %}" method="POST" class="card card-body text-center mt-5" style="border:solid 6px #e8e9ed; border-radius: 30px; margin-bottom: 25px;">
+      {% csrf_token %}
+
+      <p class="fs-4">Rango de fechas</p>
+      <label for="title" style="color: #808B96;">Primera Fecha :</label>
+      <input type="date" name="primera_fecha" style="border:solid 3px #ABB2B9; padding: 5px; border-radius: 15px; color: #772432;" min="2023-11-01"/>
+  
+      <label for="content" style="color: #808B96;">Fecha Final:</label>
+      <input type="date" name="fecha_final" style="border:solid 3px #ABB2B9; padding: 5px; border-radius: 15px; color: #772432;" />
+  
+      <hr>
+  
+      <button type="submit button" class="btn btn-danger pd-3 justify-content-center" value="buscar" style="border-radius: 15px; box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);">
+        <span class="material-symbols-rounded">manage_search</span>
+        BUSCAR
+      </button>
+      </form>
+  
+    </div>
+</div> 
+
+
+{% if leyenda %}
+
+                <div style="padding: 20px; background-color: #f2f2f2; display: flex; justify-content: center;" class="row">
+
+                        <div class="col-xl-3 col-md-3 mb-3 ">
+                            <div class="card border-left-primary shadow h-80 py-2 carta__1">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1 titulos" style="font-size: 15px; color: #184e68;">
+                                                Pedidos:</div>
+                                            {% if resultado %}
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 24px;">{{ resultado.0.0|floatformat:0 }} pedidos  </div>
+                                            {% else %}
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Sin pedidos</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-3 mb-3 ">
+                            <div class="card border-left-warning shadow h-80 py-2 carta__1">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1 titulos" style="font-size: 15px; color: #f2c14e;">
+                                                Ingresos:</div>
+                                            {% if resultado_ingresos %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 24px;">{{ resultado_ingresos.0.0 }}</div>
+                                            {% else %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">No hay facura.</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xl-3 col-md-3 mb-3 "> ELIMINAR COMENTARIO PARA UTILIZAR PROXIMAMENTE ********************************
+                            <div class="card border-left-primary shadow h-80 py-2 carta__1">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1 titulos" style="font-size: 15px; color: #184e68;">
+                                                Pedidos del Mes:</div>
+                                            {% if resultado_mes %}
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 24px;">{{ resultado_mes.0.0|floatformat:0 }} pedidos</div>
+                                            {% else %}
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Sin pedidos</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> ******************************* --> 
+                </div>
+                
+                <div style="padding: 20px; background-color: #f2f2f2; display: flex; justify-content: center;" class="row">
+
+                        <!-- <div class="col-xl-3 col-md-3 mb-3 ">
+                            <div class="card border-left-success shadow h-80 py-2 carta__3">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1 titulos" style="font-size: 15px;">
+                                                Ingresos del día</div>
+                                            {% if resultado_ingresos %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 24px;">{{ resultado_ingresos.0.0 }}</div>
+                                            {% else %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">No hay facura.</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                       <div class="col-xl-3 col-md-3 mb-3 ">
+                            <div class="card border-left-danger shadow h-80 py-2 carta__3">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1 titulos" style="font-size: 15px; color: #700548;">
+                                                Pedidos embarcados</div>
+                                            {% if resultado_embarque_now %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 24px;">{{ resultado_embarque_now.0.0 }}</div>
+                                            {% else %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Aun no hay Pedidos embarcados capturados :c</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-3 mb-3 ">
+                            <div class="card border-left-danger shadow h-80 py-2 carta__3">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-uppercase mb-1 titulos" style="font-size: 15px; color: #700548;">
+                                                Total de piezas enviadas:</div>
+                                            {% if resultado_piezas_envios %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 24px;">{{ resultado_piezas_envios.0.0|floatformat:0 }}</div>
+                                            {% else %}
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Aun no se capturas piezas enviadas. :c</div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>    
+
+                <div style="padding: 20px; background-color: #f2f2f2; display: flex; justify-content: center;" class="row">
+
+                    
+                    <div class="col-xl-3 col-md-3 mb-3 ">
+                        <div class="card border-left-warning shadow h-80 py-2 carta__2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-uppercase mb-1 titulos" style="font-size: 15px; color: #f2c14e;">
+                                            Total Usuarios del Portal:</div>
+                                        {% if total_usuarios %}
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" style="font-size: 24px;">{{ total_usuarios }} </div>
+                                        {% else %}
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">No hay usuarios</div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            </div>
+
+{% endif %}
+            
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6568433500222973"
+     crossorigin="anonymous"></script>
+
+
+                <footer class="p-2 d-flex flex-wrap justify-content-center" style="background-color: #f2f2f2;">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <script src="https://cdn.commoninja.com/sdk/latest/commonninja.js" defer></script>
+                        <div class="commonninja_component pid-2c876537-e3fa-4f96-86ec-53cb79d124eb"></div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <script src="https://cdn.commoninja.com/sdk/latest/commonninja.js" defer></script>
+                        <div class="commonninja_component pid-c1bd6db3-d638-4051-871d-76bce2c5d46e"></div>
+                    </div>
+                </footer>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <script>
+                  document.addEventListener('DOMContentLoaded', function () {
+                    // Obtiene los valores desde el contexto de Django
+                    const fecha_actual = '{{ resultado.0.0|default:"" }}';
+                    const fecha_año = '{{ resultado_year.0.0|default:"" }}';
+                
+                    // Configura el gráfico con los datos
+                    const labels = ['Pedidos del día de hoy:', 'Pedidos del día de hoy pero del año anterior:'];
+                    const data = {
+                      labels: labels,
+                      datasets: [{
+                        label: 'Total de Pedidos del día',
+                        backgroundColor: [
+                          'rgba(117, 221, 221, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                        ],
+                        borderColor: [
+                          'rgb(8, 126, 139)',
+                          'rgb(11, 34, 101)',
+                        ],
+                        borderWidth: 1,
+                        data: [fecha_actual, fecha_año],
+                      }]
+                    };
+                
+                    const config = {
+                      type: 'bar',
+                      data,
+                      options: {
+                        indexAxis: 'y',
+                        scales: {
+                          y: {
+                            ticks: {
+                              crossAlign: 'far',
+                            }
+                          }
+                        }
+                      }
+                    };
+                
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    new Chart(ctx, config);
+                  });
+                </script>
+{% endblock %}

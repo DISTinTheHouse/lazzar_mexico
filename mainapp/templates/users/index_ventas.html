@@ -1,0 +1,62 @@
+
+{% block content %}
+{% if is_acceso_total %}
+    {% include 'layouts/layout.html' %}
+{% elif is_ventas %}
+    {% include 'layouts/menuventas.html' %}
+{% endif %}
+
+<h1 class="text-center display-4 mt-3">{{title}}</h1>   
+<hr> <!--................................................-->
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success text-center">
+            {{message}}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if user.email %}
+<h3 class="text-center display-6 mt-4">Bienvenido, {{request.user.first_name}} {{request.user.last_name}}</h3>
+    <p class="text-center pd-5 h5">
+        {{user.email}}
+    </p>
+
+<script language="JavaScript"> //-----------------------------------------------------------
+    function mueveReloj(){
+        momentoActual = new Date()
+        hora = momentoActual.getHours()
+        minuto = momentoActual.getMinutes()
+        segundo = momentoActual.getSeconds()
+            
+        str_segundo = new String (segundo)
+        if (str_segundo.length == 1)
+            segundo = "0" + segundo
+            
+        str_minuto = new String (minuto)
+        if (str_minuto.length == 1)     
+            minuto = "0" + minuto
+            
+        str_hora = new String (hora)
+         if (str_hora.length == 1)
+            hora = "0" + hora
+            
+            horaImprimible = hora + " : " + minuto + " : " + segundo
+            
+            document.form_reloj.reloj.value = horaImprimible
+            
+            setTimeout("mueveReloj()",1000)
+        }
+</script> <!------------------------------------------------------------------------>
+<body onload="mueveReloj()">
+           
+    <div class="d-flex justify-content-center alaign-items-center vh-100 mt-4">
+        <form name="form_reloj"><input type="text" name="reloj" size="10"></form>
+    </div>
+            
+{% else %}
+    <h2 class="text-center display-6 mt-4">Inicia Sesión o registrate para ver mas cosas</h2>
+{% endif %}  
+{% endblock %}
+</body>

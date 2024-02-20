@@ -1,0 +1,140 @@
+{% extends 'layouts/menu_intranet.html' %}
+{% load static %}
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<b><div id="clock" class="mb-3" style="font-size: 2em; text-align: center; color: #ffb612;"></div></b>
+
+<b><div style="text-align: center; font-size: 36px;">MISIÓN Y VISIÓN</div></b>
+
+<section class="container mt-3" style="text-align: justify; font-size: 18px;">
+<div class="mb-3" style="border:solid 3px #0b2265; padding: 25px; border-radius: 30px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.6);">
+        <b>NUESTRA MISIÓN:</b></br>
+"vestir a las mejores empresas del mundo"
+</br>
+</br>
+        <b>NUESTRA VISIÓN:</b></br>
+"Visión 2032 SOMOS una empresa mexicana con presencia en el 
+Continente Americano, con 200 agentes de venta y financieramente 
+sólida. En LAZZAR vendemos en todo México y somos la primera opción 
+de uniforme para los negocios en el país, modelo que replicamos en otros 
+países. SIEMPRE nos mantenemos a la vanguardia innovando en 
+tecnología tanto textil como de máquinas e internet. Contamos con 
+CEDIS en las ciudades más importantes como Monterrey, Ciudad de 
+México y Guadalajara produciendo alrededor de 3.5 millones de prendas 
+anualmente con nuestro equipo de 42 socios productivos a quienes 
+desarrollamos y brindamos la capacitación adecuada. La flotilla que 
+entrega los uniformes de Lazzar es propia. ¡Lazzar es un lugar 
+extraordinario para trabajar! Es un lugar donde hay estabilidad laboral, 
+seguridad, buen ambiente de trabajo con el equipo, flexibilidad en horarios, orden y respeto en todas las áreas, donde hay relaciones ganar / 
+ganar, un lugar donde te apasiona ir y que queda cerca de casa."
+</br></br>
+        <b>NUESTROS PRINCIPIOS:</b></br>
+        <b>EN LAZZAR TRABAJAMOS EN EQUIPO GENERANDO CALIDAD Y EXCELENCIA EN EL SERVICIO DONDE GANAMOS TODOS</b></br>
+(1) Trabajo en equipo;</br>
+(2) Calidad;</br>
+(3) Servicio;</br>
+(4) Ganar - Ganar;</br>
+(5) Organización;</br>
+(6) Comunicación Efectiva;</br>
+(7) Desarrollo y Crecimiento</br>
+</br>
+    <b>NUESTRA CONTRIBUCIÓN:</b></br>
+    <b>Contribución 2027 de Lazzar a la sociedad es ofreciendo;</b></br>
+    (1) 35 Becas Universitarias a hijos de colaboradores de Lazzar en las mejores Universidades;</br>
+    (2) Oportunidad laboral a 35 Personas con Capacidades Diferentes;</br>
+(3) 200 Empleos de Confeccón en zona de Alta Marginación;</br>
+(4) Eco-Lazzar: Hacer Veres (solares) los procesos de producción, empaque de prendas verde.;</br>
+</div>
+</section>
+
+     <!-- Footer -->
+     <footer class="text-center text-white" style="background-color: #0B2265;">
+        <!-- Grid container 
+        <div class="container p-4">
+        
+        <section class="">
+        
+        <div class="row">
+        
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Contacta con tus compañeros</h5>
+        
+        <ul class="list-unstyled mb-0">
+        <li>
+        <a href="{% url 'directorio' %}" class="text-white" style="font-size: 20px;">Directorio Lazzar</a>
+        </li>
+        </ul>
+        </div>
+        
+        
+        
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <a href="{% url 'recursoshumanos' %}"><h5 class="text-uppercase" style="color: white;">Recursos Humanos</h5></a>
+        </div>
+        
+        
+        
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Recursos para colaboradores</h5>
+        
+        <ul class="list-unstyled mb-0">
+        <li>
+        <a href="#!" class="text-white" style="font-size: 20px;">Mi Bono</a>
+        </li>
+        </ul>
+        </div>
+        
+        
+        
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Portales Lazzar</h5>
+        
+        <ul class="list-unstyled mb-0">
+        <li>
+        <a href="https://portal-lazzar.com/inicio" class="text-white" style="font-size: 20px;">Portal Lazzar</a>
+        </li>
+        </ul>
+        </div>
+              
+       
+        </div>
+       
+    
+        </div>-->
+        
+        
+        
+        <div class="text-center p-3" style="background-color: #0B2265;">
+           
+        <a class="text-white" href="https://www.lazzarmexico.com/?gad_source=1&gclid=CjwKCAiA0syqBhBxEiwAeNx9N9qr5NZiQtMzemAF1oxE1KCO3GMdkljiwfnZrojzigeE9L6HeAw61BoCPOMQAvD_BwE" style="font-size: 24px; text-decoration: none;"> ©2024 lazzarmexico.com</a> 
+        <a class="text-white" href="{% url 'nosotros' %}" style="text-decoration: none;">- con tecnologia de Lazzar IT</a>
+        </div>
+        </footer>
+    </section>
+    
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            document.getElementById("clock").innerHTML = timeString;
+        }
+
+        // Actualizar el reloj cada segundo
+        setInterval(updateClock, 1000);
+        
+        // Llamar a la función para mostrar la hora actual de inmediato
+        updateClock();
+    </script>
+{% endblock %}

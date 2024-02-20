@@ -1,0 +1,212 @@
+{% extends 'layouts/menu_intranet.html' %}
+{% load static %}
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+{% csrf_token %}
+
+<body>
+  <section>
+  
+  
+      <div>
+          <h1 style="text-align: center; color: white; font-size: 48px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+              <b>ORGANIZACIÓN</b>
+          </h1>
+      </div>
+  </section>
+  <!-- //reloj// -->
+  <b><p style="font-size: 2em; text-align: center; color: #ffb612;"><span id="fecha"></span></p></b>
+{% comment %} <a href="{% url 'mision_y_vision' %}"> {% endcomment %}
+
+ <!-- //subpaginas// -->
+ <section class="container" style="text-align: center; font-size: 24px;">
+    <b>
+        <div style="display: inline-block; margin-right: 10px;">
+            <a href="{% url 'mision_y_vision' %}" style=" text-decoration: none; color: #5E5E5E;">
+            <div class="d-flex flex-column">
+                <span class="material-symbols-outlined">eyeglasses</span>
+            MISIÓN Y VISIÓN</div></a>
+        </div>
+
+        <div style="display: inline-block; margin-right: 10px; ">
+            <a href="{% url 'valores' %}" style=" text-decoration: none; color: #C60202;">
+            <div class="d-flex flex-column">
+                <span class="material-symbols-outlined">groups</span>
+            VALORES</div></a>
+        </div>
+
+        <div style="display: inline-block; margin-right: 10px;">
+            <a href="{% url 'reglamentoi' %}" style=" text-decoration: none; color: #0DB20D;">
+            <div class="d-flex flex-column">
+                <span class="material-symbols-outlined">demography</span>   
+            REGLAMENTO INTERNO</div></a>
+        </div>
+
+        <div style="display: inline-block; margin-right: 10px;">
+            <a href="{% url 'codigoe' %}" style=" text-decoration: none; color: #0b2265;">
+                <div class="d-flex flex-column">
+                    <span class="material-symbols-outlined">balance</span>
+                    CÓDIGO DE ÉTICA</div></a>
+        </div>
+
+        <!-- <div style="display: inline-block;">
+            <a href="{% url 'organigrama' %}" style=" text-decoration: none; color: #0004FF;">
+            <div class="d-flex flex-column">
+                <span class="material-symbols-outlined">network_node</span>
+            ORGANIGRAMA</div></a>
+        </div> -->
+    </b>
+</section>
+<section class="container mt-5" style="text-align: justify; font-size: 18px;">
+   <div class="mb-3" style="border:solid 3px #ffb612; padding: 25px; border-radius: 30px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.6);">
+        <p>La "organización" puede tener varios significados dependiendo del contexto en el que se utilice. Aquí te proporciono dos definiciones comunes:</p>
+
+        <p>Estructura o Entidad:</p>
+
+        <p>En el ámbito general, una "organización" se refiere a una entidad o estructura conformada por individuos, recursos y procesos con el propósito de alcanzar objetivos específicos.</p>
+        <p>Puede ser una empresa, una institución, una agencia gubernamental, una ONG u otra entidad similar.</p>
+
+        <p>Proceso de Orden y Coordinación:</p>
+
+        <p>También, "organización" se refiere al acto o proceso de planificar, estructurar y coordinar actividades con el fin de lograr un objetivo específico.</p>
+        <p>En este sentido, la organización implica la asignación de roles, la definición de tareas, la gestión de recursos y la creación de un marco de trabajo eficiente.</p>
+
+        <p>En resumen, el término "organización" puede referirse tanto a la entidad en sí misma como a la acción de organizar y coordinar actividades dentro de esa entidad.</p>
+    
+
+</div>
+</section>
+
+
+     <!-- Footer -->
+     <footer class="text-center text-white" style="background-color: #0B2265;">
+        <!-- Grid container 
+        <div class="container p-4">
+        
+        <section class="">
+        
+        <div class="row">
+        
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Contacta con tus compañeros</h5>
+        
+        <ul class="list-unstyled mb-0">
+        <li>
+        <a href="{% url 'directorio' %}" class="text-white" style="font-size: 20px;">Directorio Lazzar</a>
+        </li>
+        </ul>
+        </div>
+        
+        
+        
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <a href="{% url 'recursoshumanos' %}"><h5 class="text-uppercase" style="color: white;">Recursos Humanos</h5></a>
+        </div>
+        
+        
+        
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Recursos para colaboradores</h5>
+        
+        <ul class="list-unstyled mb-0">
+        <li>
+        <a href="#!" class="text-white" style="font-size: 20px;">Mi Bono</a>
+        </li>
+        </ul>
+        </div>
+        
+        
+        
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase">Portales Lazzar</h5>
+        
+        <ul class="list-unstyled mb-0">
+        <li>
+        <a href="https://portal-lazzar.com/inicio" class="text-white" style="font-size: 20px;">Portal Lazzar</a>
+        </li>
+        </ul>
+        </div>
+              
+       
+        </div>
+       
+    
+        </div>-->
+        
+        
+        
+        <div class="text-center p-3" style="background-color: #0B2265;">
+           
+        <a class="text-white" href="https://www.lazzarmexico.com/?gad_source=1&gclid=CjwKCAiA0syqBhBxEiwAeNx9N9qr5NZiQtMzemAF1oxE1KCO3GMdkljiwfnZrojzigeE9L6HeAw61BoCPOMQAvD_BwE" style="font-size: 24px; text-decoration: none;"> ©2024 lazzarmexico.com</a> 
+        <a class="text-white" href="{% url 'nosotros' %}" style="text-decoration: none;">- con tecnologia de Lazzar IT</a>
+        </div>
+        </footer>
+
+      
+
+<script>
+function updateClock() {
+const now = new Date();
+const hours = now.getHours().toString().padStart(2, '0');
+const minutes = now.getMinutes().toString().padStart(2, '0');
+const seconds = now.getSeconds().toString().padStart(2, '0');
+const timeString = `${hours}:${minutes}:${seconds}`;
+document.getElementById("clock").innerHTML = timeString;
+}
+
+// Actualizar el reloj cada segundo
+setInterval(updateClock, 1000);
+        
+// Llamar a la función para mostrar la hora actual de inmediato
+updateClock();
+</script>
+<script>
+function actualizarFecha() {
+var fechaElemento = document.getElementById("fecha");
+var fechaActual = new Date();
+var opciones = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+fechaElemento.textContent = fechaActual.toLocaleDateString('es-ES', opciones);
+}
+  
+// Llama a la función para actualizar la fecha cada segundo
+actualizarFecha();
+setInterval(actualizarFecha, 1000);
+</script>
+<script>
+// Establecer la fecha de finalización
+const fechaFinalizacion = new Date("December 22, 2023 00:00:00").getTime();
+  
+// Actualizar el contador cada segundo
+const x = setInterval(function() {
+// Obtener la fecha y hora actual
+const fechaActual = new Date().getTime();
+  
+// Calcular la diferencia entre la fecha de finalización y la fecha actual
+const diferencia = fechaFinalizacion - fechaActual;
+  
+// Calcular días, horas, minutos y segundos
+const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+  
+// Mostrar el resultado en el elemento con id "countdown"
+document.getElementById("countdown").innerHTML = dias + "d " + horas + "h " + minutos + "m " + segundos + "s ";
+  
+// Si la cuenta regresiva ha terminado, mostrar un mensaje
+if (diferencia < 0) {
+clearInterval(x);
+document.getElementById("countdown").innerHTML = "¡No te preocupes, contamos con un stock!";
+}
+}, 1000);
+</script>
+{% endblock %}

@@ -1,0 +1,122 @@
+{% extends 'layouts/menu.html' %}
+{% load static %}
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+
+<div class="container" style="text-align: center;">
+    <button class="miBoton" style="
+    display: inline-block;
+    margin: 0;
+    padding: 10px 20px;
+    border: 2px solid #0b2265;
+    background-color: transparent;
+    color: #0b2265;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;">Atención a colaboradores</button>
+
+    <button class="miBoton" style="
+    display: inline-block;
+    margin: 0;
+    padding: 10px 20px;
+    border: 2px solid #0b2265;
+    background-color: transparent;
+    color: #0b2265;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;">Buzón de sugerencias (anónimo)</button>
+
+    <button class="miBoton" style="
+    display: inline-block;
+    margin: 0;
+    padding: 10px 20px;
+    border: 2px solid #0b2265;
+    background-color: transparent;
+    color: #0b2265;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;">Faltas y Retardos</button>
+    
+</div>
+
+
+
+<!-- Footer -->
+<footer class="text-center text-white mb-3" style="background: linear-gradient(to bottom, #2586a6, #2586a6);">
+    <!-- Grid container -->
+    <div class="container p-4">
+    <!-- Section: Links -->
+    <section class="">
+    <!--Grid row-->
+    <div class="row">
+    <!--Grid column-->
+    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+    <h5 class="text-uppercase">Contacta con tus compañeros</h5>
+    
+    <ul class="list-unstyled mb-0">
+    <li>
+    <a href="{% url 'directorio' %}" class="text-white" style="font-size: 20px;">Directorio Lazzar</a>
+    </li>
+    </ul>
+    </div>
+    <!--Grid column-->
+    
+    <!--Grid column-->
+    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+    <a href="{% url 'recursoshumanos' %}"><h5 class="text-uppercase" style="color: white;">Recursos Humanos</h5></a>
+    </div>
+    <!--Grid column-->
+    
+    <!--Grid column-->
+    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+    <h5 class="text-uppercase">Recursos para colaboradores</h5>
+    
+    <ul class="list-unstyled mb-0">
+    <li>
+    <a href="#!" class="text-white" style="font-size: 20px;">Mi Bono</a>
+    </li>
+    </ul>
+    </div>
+    <!--Grid column-->
+    
+    <!--Grid column-->
+    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+    <h5 class="text-uppercase">Portales Lazzar</h5>
+    
+    <ul class="list-unstyled mb-0">
+    <li>
+    <a href="https://portal-lazzar.com/inicio" class="text-white" style="font-size: 20px;">Portal Lazzar</a>
+    </li>
+    </ul>
+    </div>
+          
+    <!--Grid column-->
+    </div>
+    <!--Grid row-->
+
+    <!-- Section: Links -->
+    </div>
+    <!-- Grid container -->
+    
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background: linear-gradient(to right, #2586a6, #2586a6);">
+       
+    <a class="text-white" href="https://www.lazzarmexico.com/?gad_source=1&gclid=CjwKCAiA0syqBhBxEiwAeNx9N9qr5NZiQtMzemAF1oxE1KCO3GMdkljiwfnZrojzigeE9L6HeAw61BoCPOMQAvD_BwE" style="font-size: 24px;"> ©2024 lazzarmexico.com</a>
+    </div>
+    </footer>
+{% endblock %}

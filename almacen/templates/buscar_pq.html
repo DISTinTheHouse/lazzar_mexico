@@ -1,0 +1,70 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center display-1 fw-bold title" style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;">Información</h1>
+<p class="display-4 text-left fw-bold text-center title subtitulos" style="color: #fccc0a; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); padding: 15px; background: linear-gradient(to bottom, #2586a6, #f8f7f6);">
+  Buscar Pedido PQ</p>
+<main class="container">
+    <style>
+        .icon-above-text {
+          align-items: center; 
+          text-align: center; 
+        }
+      
+        .icon-above-text .material-icons {
+          margin-bottom: 1px; 
+        }
+        .btn{
+          display: flex;
+          align-items: center;
+        }
+        .material-icons-round{
+          margin-right: 5px;
+        }
+      </style>
+</main>
+<div class="container-fluid">
+    {% if leyenda %}
+    <div class="table-responsive" style="border:solid 6px #A9CCE3; border-radius: 25px; padding: 25px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);">
+
+        <table class="table table-responsive table-hover table-striped table-bordered mt-5" style="border:solid 10px #a54d5f; border-radius: 20px; box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);" id="datatable">
+            <thead class="table table-danger" style="background-color: #D0ECE7;">
+                <tr>
+                    <th class="text-center" style="font-weight: bold;">PEDIDO</th>
+                    <th class="text-center" style="font-weight: bold;">FECHA</th>
+                    <th class="text-center" style="font-weight: bold;">NOMBRE DEL CLIENTE</th>
+                    <th class="text-center" style="font-weight: bold;">FACTURA</th>
+                    <th class="text-center" style="font-weight: bold;">IMPORTE</th>
+                    <th class="text-center" style="font-weight: bold;">PAQUETERIA</th>
+                    <th class="text-center" style="font-weight: bold;">GUIAS</th>
+                    <th class="text-center" style="font-weight: bold;">VENDEDOR</th>
+                    <th class="text-center" style="font-weight: bold;">PIEZAS</th>
+                    <th class="text-center">COMENTARIOS</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in resultado %}
+                    <tr>
+                        <td class="text-center" style="font-weight: bold;">{{ fila.0 }}</td>
+                        <td class="text-center">{{ fila.1|date:"d/m/y" }}</td>
+                        <td class="text-center">{{ fila.2 }}</td>
+                        <td class="text-center" >{{ fila.3 }}</td>
+                        <td class="text-center" style="font-style: italic;">{{ fila.4 }}</td>
+                        <td class="text-center" style="font-weight: bold;">{{ fila.5 }}</td>
+                        <td class="text-center" style="font-weight: bold;">{{ fila.6 }}</td>
+                        <td class="text-center">{{ fila.7 }}</td>
+                        <td class="text-center" style="font-weight: bold;">{{ fila.8 }}</td>
+                        <td class="text-center" style="font-weight: bold;">{{ fila.9 }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

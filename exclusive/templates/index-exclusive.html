@@ -1,0 +1,334 @@
+{% if user.email %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lazzar México - Ropa de Uniformes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>    
+
+    {% load static %}
+    <link rel="stylesheet" href="../../mainapp/static/css/styles.css">
+    <style>
+        body {
+            background-color: #b3b9bc;
+            color: #495057;
+        }
+        .animate-on-hover {
+          transition: transform 0.2s ease-in-out;
+        }
+
+        .animate-on-hover:hover {
+          transform: translateY(-9px);
+        }
+        /* .hidden-content {
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+
+        .visible {
+          opacity: 1;
+          visibility: visible;
+        } */
+    </style>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<body>
+<!--MENÚ-->
+<nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: #0B2265; padding: 25px; font-weight: 600;">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+        <a class="navbar-brand" href="{% url 'inicio_intranet' %}" style="color:  #fdfefe ;">KIOSKO LAZZAR</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav  mb-md-0 mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link fs-5 active" style="color: #ffb612;" aria-current="page" href="{% url 'index-exclusive' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link fs-5" style="color: #ffb612;" href="{% url 'vacation_days' %}">Vacaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5" style="color: #ffb612;" href="{% url 'bono' %}">Bono</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link fs-5" style="color: #ffb612;" href="{% url 'ver_nomina_propuesta' %}">Nómina</a>
+                </li>
+            </ul>
+          <form class="d-flex">
+              <a href="{% url 'logout' %}" class="btn btn-danger me-2" type="submit">Cerrar sesión</a>
+          </form>
+      </div>
+    </div>
+</nav>
+<!--FIN MENÚ-->
+
+<!--HERO-->
+<!-- <div class="px-5 py-5 text-center" style="background: linear-gradient(to bottom, #0B2265, #1E5481, #2586a6); color: #ffb612;">
+  <img class="d-block mx-auto mb-4" src="{% static 'img/icon_logo.jpg' %}" alt="" width="72" height="57">
+  <h1 class="display-4 fw-bold mb-4">INTRANET</h1>
+  <p class="lead">Lazzar México</p>
+  <div class="col-lg-6 mx-auto">
+    <figcaption class="blockquote-footer lead mb-5 mt-5" style="color: #fdfefe ; font-size: large; font-style: italic;">¡Bienvenido! En esta sección del Intranet podrás verificar información adicional sobre tus informes de nomina, horarios, etc..</figcaption>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Más Información</button>
+      <button type="button" class="btn btn-outline-secondary btn-lg px-4">Sobre Nosotros</button>
+    </div>
+  </div>
+</div> -->
+<!--FIN HERO-->
+
+<!--HEADER-->
+<header class="pb-3 border-bottom" style="background: linear-gradient(to right, #0B2265, #0c2340, #0c2340); padding: 25px;">
+        <span class="display-4 fw-lighter " style="color:  #fdfefe ; ">KIOSKO LAZZAR</span>
+</header>
+<!--FIN HEADER-->
+
+<!--BANNER-->
+<div class="p-5 bg-light rounded-3" style="background-color: #f8f7f6;">
+      <div class="container-fluid py-5">
+        <h1 class="display-4 fw-bold" style="color: #495057;">¡Bienvenido!</h1>
+        <p class="col-md-8 fs-4">En KIOSKO LAZZAR podrás verificar información adicional sobre tus informes de nomina, horarios, etc..</p>
+        <button type="button" class="btn btn-warning btn-lg px-4 gap-3" style="border-radius: 20px;">Click Aqui...</button>
+      </div>
+</div>
+<!--FIN BANNER-->
+
+<!--OPCIONES CONTENIDO-->
+<section id="masInformacion" class="mas_informacion container-fluid" style="background-color: #03202f; padding: 10rem;">
+    <div class="row align-items-md-stretch">
+      <div class="col-md-4 mt-4">
+        <div class="h-100 p-5 text-white  rounded-3 animate-on-hover" style="background-color: #0c2340; ">
+          <h2 class="fw-bold ">Nomina:</h2>
+          <p style="color:#808b96; text-align: justify;" >Accede a tu información de nómina y bonificaciones de manera rápida y sencilla. Consulta detalles de tus pagos y beneficios y mantente informado sobre tus pagos.</p>
+          <a href="{% url 'ver_nomina_propuesta' %}" class="btn btn-outline-info ">Ver Nómina</a>
+        </div>
+      </div>
+      <div class="col-md-4 mt-4">
+        <div class="h-100 p-5 text-white  rounded-3 animate-on-hover" style="background-color: #0c2340;">
+          <h2 class="fw-bold  ">Bono:</h2>
+          <p style="color:#808b96; text-align: justify;">Verifica la calificación asiganda por tu jefe inmediato. Recuerda que a esta calificación se le descuenta insidencias como retardos, faltas, etc.</p>
+          <a href="{% url 'bono' %}" class="btn btn-outline-info ">Ver Más</a>
+        </div>
+      </div>
+      <div class="col-md-4 mt-4">
+        <div class="h-100 p-5 text-light  rounded-3 animate-on-hover" style="background-color: #0c2340;">
+          <h2 class="fw-bold  ">Vacaciones:</h2>
+          <p style="color:#808b96; text-align: justify;">Planifica y gestiona tus vacaciones de manera eficiente. Accede a información sobre tus solicitudes de vacaciones y obtén una visión clara de tu historial de vacaciones.</p>
+          <a href="{% url 'vacation_days' %}" class="btn btn-outline-info ">Solicitar</a>
+        </div>
+      </div>
+    </div>
+</section>
+<!--FIN OPCIONES CONTENIDO-->
+
+
+
+<!--FOOTER-->
+<footer class="text-white text-center p-3" style="background: linear-gradient(to top, #0B2265, #0c2340, #0c2340);">
+    <p class="mt-3">&copy; 2024 - Con tecnologia de Lazzar IT</p>
+</footer>
+<!--FIN FOOTER-->
+
+<script>
+  $(document).ready(function() {
+    // Función para manejar el desplazamiento suave al hacer clic en el botón "Más Información"
+    $('.btn-warning').on('click', function(event) {
+      // Previene el comportamiento predeterminado del enlace
+      event.preventDefault();
+
+      // Obtiene la posición de la sección "mas_informacion"
+      var target = $('.mas_informacion');
+      var offset = target.offset().top;
+
+      // Desplazamiento suave hacia la sección
+      $('html, body').animate({
+        scrollTop: offset
+      }, 800); // Ajusta la duración según tus preferencias
+    });
+  });
+</script>
+</body>
+</html>
+
+
+{% else %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lazzar México - Ropa de Uniformes</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>    
+
+    {% load static %}
+    <link rel="stylesheet" href="../../mainapp/static/css/styles.css">
+    <style>
+        body {
+            background-color: #b3b9bc;
+            color: #495057;
+        }
+        .animate-on-hover {
+          transition: transform 0.2s ease-in-out;
+        }
+
+        .animate-on-hover:hover {
+          transform: translateY(-9px);
+        }
+        /* .hidden-content {
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+
+        .visible {
+          opacity: 1;
+          visibility: visible;
+        } */
+    </style>
+</head>
+<body>
+<!--MENÚ-->
+<nav class="navbar navbar-expand-md navbar-dark sticky-top" style="background-color: #0B2265; padding: 25px; font-weight: 600;">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+        <a class="navbar-brand" href="#" style="color:  #fdfefe ;">KIOSKO LAZZAR</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav  mb-md-0 mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link fs-5 active" style="color: #ffb612;" aria-current="page" href="{% url 'index-exclusive' %}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link fs-5" style="color: #ffb612;" href="{% url 'vacation_days' %}">Vacaciones</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link fs-5" style="color: #ffb612;" href="{% url 'bono' %}">Bono</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link fs-5" style="color: #ffb612;" href="{% url 'ver_nomina_propuesta' %}">Nómina</a>
+                </li>
+            </ul>
+          <form class="d-flex">
+              <a href="{% url 'login' %}" class="btn btn-success me-2" type="submit">Iniciar sesión</a>
+              <a href="{% url 'registro' %}" class="btn btn-warning" type="submit">Crear cuenta</a>
+          </form>
+      </div>
+    </div>
+</nav>
+<!--FIN MENÚ-->
+
+<!--HERO-->
+<div class="px-5 py-5 text-center" style="background: linear-gradient(to bottom, #0B2265, #1E5481, #2586a6); color: #ffb612;">
+    <img class="d-block mx-auto mb-4" src="{% static 'img/icon_logo.jpg' %}" alt="" width="72" height="57">
+    <h1 class="display-4 fw-bold mb-4">KIOSKO LAZZAR</h1>
+    <p class="lead">Lazzar México</p>
+    <div class="col-lg-6 mx-auto">
+      <figcaption class="blockquote-footer lead mb-5 mt-5" style="color: #fdfefe ; font-size: large; font-style: italic;">¡Bienvenido! En esta sección del Intranet podrás verificar información adicional sobre tus informes de nomina, horarios, etc..</figcaption>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <button type="button" class="btn btn-primary btn-lg px-4 gap-3" style="border-radius: 25px;">Más Información</button>
+        <!-- <button type="button" class="btn btn-outline-secondary btn-lg px-4">Sobre Nosotros</button> -->
+      </div>
+    </div>
+</div>
+<!--FIN HERO-->
+
+<!--HEADER-->
+<header class="pb-3 border-bottom" style="background: linear-gradient(to right, #0B2265, #0c2340, #0c2340); padding: 25px;">
+        <span class="display-1 fw-semibold" style="color:  #fdfefe ; ">Contenido</span>
+</header>
+<!--FIN HEADER-->
+
+<!--BANNER-->
+<div class="p-5 bg-light rounded-3" style="background-color: #f8f7f6;">
+      <div class="container-fluid py-5">
+        <h1 class="display-4 fw-bold" style="color: #495057;">RH-Track</h1>
+        <p class="col-md-8 fs-4">RH-Track Horarios: En esta sección Gestiona tus horarios de manera eficiente.</p>
+        <a href="{% url 'horarios' %}" class="btn btn-warning" style="font-size: 28px;">Explorar</a>
+      </div>
+</div>
+<!--FIN BANNER-->
+
+<!--OPCIONES CONTENIDO-->
+<section id="masInformacion" class="mas_informacion container-fluid" style="background-color: #03202f; padding: 10rem;">
+    <div class="row align-items-md-stretch">
+      <div class="col-md-4 mt-4">
+        <div class="h-100 p-5 text-white  rounded-3 animate-on-hover" style="background-color: #0c2340; ">
+          <h2 class="fw-bold ">Nomina:</h2>
+          <p style="color:#808b96; text-align: justify;" >Accede a tu información de nómina y bonificaciones de manera rápida y sencilla. Consulta detalles de tus pagos y beneficios y mantente informado sobre tus pagos.</p>
+          <a href="{% url 'ver_nomina_propuesta' %}" class="btn btn-outline-info ">Ver Nómina</a>
+        </div>
+      </div>
+      <div class="col-md-4 mt-4">
+        <div class="h-100 p-5 text-white  rounded-3 animate-on-hover" style="background-color: #0c2340;">
+          <h2 class="fw-bold  ">Bono:</h2>
+          <p style="color:#808b96; text-align: justify;">Solicita tus permisos de menera eficiente y sin complicaciones. Con nuestra plataforma, puedes enviar y gestionar tus solicitudes de permisos de forma transparente.</p>
+          <a href="{% url 'bono' %}" class="btn btn-outline-info ">Ver Más</a>
+        </div>
+      </div>
+      <div class="col-md-4 mt-4">
+        <div class="h-100 p-5 text-light  rounded-3 animate-on-hover" style="background-color: #0c2340;">
+          <h2 class="fw-bold  ">Vacaciones:</h2>
+          <p style="color:#808b96; text-align: justify;">Planifica y gestiona tus vacaciones de manera eficiente. Accede a información sobre tus solicitudes de vacaciones y obtén una visión clara de tu historial de vacaciones.</p>
+          <a href="{% url 'vacation_days' %}" class="btn btn-outline-info ">Solicitar</a>
+        </div>
+      </div>
+    </div>
+</section>
+<!--FIN OPCIONES CONTENIDO-->
+
+<!--BANNER DOS-->
+<!-- <div class="p-5 bg-light rounded-3" style="background-color: #f8f7f6;">
+  <div class="container-fluid py-5">
+    <h1 class="display-4 fw-bold" style="color: #495057;">RH-Track</h1>
+    <p class="col-md-8 fs-4">RH-Track Horarios: En esta sección Gestiona tus horarios de manera eficiente.</p>
+    <button class="btn btn-warning btn-lg" type="button">Explorar</button>
+  </div>
+</div> -->
+<!--FIN BANNER DOS-->
+
+<!--FOOTER-->
+<footer class="text-white text-center p-3" style="background: linear-gradient(to top, #0B2265, #0c2340, #0c2340);">
+    <p class="mt-3">&copy; 2024 - Con tecnologia de Lazzar IT</p>
+</footer>
+<!--FIN FOOTER-->
+
+<script>
+  $(document).ready(function() {
+    // Función para manejar el desplazamiento suave al hacer clic en el botón "Más Información"
+    $('.btn-primary').on('click', function(event) {
+      // Previene el comportamiento predeterminado del enlace
+      event.preventDefault();
+
+      // Obtiene la posición de la sección "mas_informacion"
+      var target = $('.mas_informacion');
+      var offset = target.offset().top;
+
+      // Desplazamiento suave hacia la sección
+      $('html, body').animate({
+        scrollTop: offset
+      }, 800); // Ajusta la duración según tus preferencias
+    });
+  });
+</script>
+</body>
+</html>
+
+{% endif %}

@@ -1,0 +1,52 @@
+{% extends 'layouts/layout.html' %}
+
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+  <h2>Agregar Respuesta al Ticket - {{ ticket.asunto }}</h2>
+  <form method="post" action="{% url 'agregar_respuesta' ticket.folio %}">
+    {% csrf_token %}
+    <label for="respuesta_texto">Respuesta:</label>
+    <textarea name="respuesta_texto" rows="4" cols="50"></textarea>
+    <br>
+    <input type="submit" value="Enviar Respuesta">
+  </form>
+
+<script>
+    // Preload
+  const loader = document.querySelector(".loader");
+  
+  // Mostrar el preload al hacer clic en un enlace, excluyendo elementos dentro de la barra de navegación
+  document.addEventListener("click", (event) => {
+  const target = event.target;
+  
+  // Verificar si el elemento clickeado es un enlace o parte del menú desplegable
+  const isLink = target.tagName === "A";
+  const isDropdownItem = target.classList.contains("dropdown-item");
+  
+  // Verificar si el elemento clickeado o sus ancestros contienen una clase específica
+  // que identifique la barra de navegación (en este caso, usaremos "navbar-nav")
+  const isNavbarItem = target.closest(".navbar-nav");
+  
+  // Si el elemento clickeado es un enlace, no es parte del menú desplegable,
+  // y no se encuentra dentro de la barra de navegación, mostrar preload
+  if (isLink && !isDropdownItem && !isNavbarItem) {
+  loader.classList.remove("loader-hidden");
+  }
+  });
+  
+  // Ocultar el preload una vez que la página haya cargado completamente
+  window.addEventListener("load", () => {
+  loader.classList.add("loader-hidden");
+  });
+  </script>
+  {% endblock %}

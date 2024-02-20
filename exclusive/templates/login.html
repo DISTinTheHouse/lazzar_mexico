@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="display-5">Iniciar Sesión</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {%csrf_token%}
+                        <div class="mb-3">
+                            <label for="formGroupExampleInput" class="form-label fs-5">Usuario:</label>
+                            <input type="text" class="form-control text-center " id="username" placeholder="Usuario" name="username">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="formGroupExampleInput2" class="form-label fs-5">Contraseña:</label>
+                            <input type="password" class="form-control text-center " id="password" placeholder="Contraseña" name="password">
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit button" class="btn btn-primary fs-5">Iniciar Sesión</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

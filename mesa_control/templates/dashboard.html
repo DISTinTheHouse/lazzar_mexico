@@ -1,0 +1,314 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}
+    {{title}}
+{% endblock %}
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<style>
+  .icon-above-text {
+    align-items: center; 
+    text-align: center; 
+  }
+
+  .icon-above-text .material-icons {
+    margin-bottom: 1px; 
+  }
+</style>
+<h1 class="text-center display-1 fw-bold title" style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;">Estatus de pedidos</h1>
+<p class="display-4 text-left fw-bold text-center title subtitulos" style="color: #fccc0a; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); padding: 15px; background: linear-gradient(to bottom, #2586a6, #f8f7f6);"> Dashboard</p>
+<div class="loader"></div>
+<main class="container-fluid mt-2">
+
+<section style="padding: 15px; display: flex; justify-content: center; align-items: center; padding: 25px; background-color: #f8f7f6;">
+    <ul class="nav nav-tabs flex-column flex-sm-row mx-auto" id="ex-with-icons" role="tablist">
+        <li class="nav-item" role="presentation">
+         <a class="nav-link " aria-current="page" href="http://bodegalazzar.ddns.net:3000/envios" style="color: #6c8ead; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+           <div class="d-flex flex-column icon-above-text">
+             <span class="material-symbols-outlined" style="font-size: 35px;">local_shipping</span>
+             Rastreo Lazzar
+           </div>
+         </a>
+       </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link " aria-current="page" href="{% url 'pedidos-activos' %}" style="color: #087e8b; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded" style="font-size: 35px;">fast_forward</span>
+            Pedidos Activos
+          </div>
+        </a>
+      </li>
+      <!--<li class="nav-item">
+        <a class="nav-link " aria-current="page" href="{% url 'procesos' %}" style="color: #5DADE2; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);"">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded">running_with_errors</span>
+            Procesos
+          </div>
+        </a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link " aria-current="page" href="{% url 'vencidos' %}" style="color: #f82f2f; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded" style="font-size: 35px;">gpp_bad</span>
+            Pedidos Vencidos
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " aria-current="page" href="{% url 'vencidos_semana' %}" style="color: #fb8b24; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded" style="font-size: 35px;">quick_reference</span>
+            Prox. A Vencer
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{% url 'dashboard' %}" style="color: #ffc354; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded" style="font-size: 35px;">donut_small</span>
+            Dashboard
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " aria-current="page" href="{% url 'factura' %}" style="color: #07bca7; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-outlined" style="font-size: 35px;">task</span>
+            Facturación
+          </div>
+        </a>
+      </li>
+      <!--<li class="nav-item">
+        <a class="nav-link " aria-current="page" href="{% url 'search_pedido' %}" style="color: #0B2265; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);" >
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-outlined">manage_search</span>
+            Buscar Pedido
+          </div>
+        </a>
+      </li> -->
+        <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="{% url 'programacion' %}" style="color: #0b2265; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+              <div class="d-flex flex-column icon-above-text">
+                <span class="material-symbols-outlined" style="font-size: 35px;">edit_calendar</span>
+                Programación
+              </div>
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
+        <a class="nav-link " aria-current="page" href="{% url 'muestras' %}" style="color: #345995; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded" style="font-size: 35px;">shopping_cart_checkout</span>
+            Muestras
+          </div>
+        </a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link " download="Existencias.xlsx" aria-current="page" href="https://www.lazzarmexico.com/archivos/existencias/Existencias_Lazzar.xlsx" style="color: #00a9db; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-outlined" style="font-size: 35px;">download</span>
+            Existencias
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<body>
+  <div class="program-stats mt-4">
+    <h4 class="display-6 text-center fw-bold" style="color: #566573; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);">PEDIDOS VENCIDOS POR CLASIFICACIÓN  ⬇➡</h4>
+    <div class="chart-container">
+      <canvas class="my-chart"></canvas>
+    </div>
+
+    <div class="details">
+      <table>
+        <thead>
+            <tr>
+                <th class="titles">CLASIFICACION</th>
+                <th class="titles">CANTIDAD</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">A</td>
+                <td class="text-center">{{ clasA }}</td>
+            </tr>
+            <tr>
+                <td class="text-center">B</td>
+                <td class="text-center">{{ clasB }}</td>
+            </tr>
+            <tr>
+                <td class="text-center">C</td>
+                <td class="text-center">{{ clasC }}</td>
+            </tr>
+            <tr>
+                <td class="text-center">D</td>
+                <td class="text-center">{{ clasD }}</td>
+            </tr>
+            <tr>
+                <td class="text-center">E</td>
+                <td class="text-center">{{ clasE }}</td>
+            </tr>
+            <tr>
+                <td class="text-center">F</td>
+                <td class="text-center">{{ clasF }}</td>
+            </tr>
+            <tr>
+                <td class="text-center">X</td>
+                <td class="text-center">{{ clasX }}</td>
+            </tr>
+            {% if clas != 0 %}
+                <tr>
+                    <td class="text-center">SIN CLASIFICACION</td>
+                    <td class="text-center">{{ clas }}</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+<div style="width: 80%; margin: auto;" class="mt-5 mb-5">
+  <canvas class="my-bar-chart"></canvas>
+</div>
+ 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var texto = [{{ clasA }}, {{ clasB }}, {{ clasC }}, {{ clasD }}, {{ clasE }}, {{ clasF }}, {{ clasX }}, {{ clas }}]
+        console.log(texto);
+        const chartData = {
+          labels: ["A", "B", "C", "D", "E", "F", "X", "S/C"],
+          data: texto,
+        };
+      
+        const myChart = document.querySelector(".my-chart");
+      
+        new Chart(myChart, {
+          type: "doughnut",
+          data: {
+            labels: chartData.labels,
+            datasets: [
+              {
+                label: "Cantidad por clasificación",
+                data: chartData.data,
+              },
+            ],
+          },
+          options: {
+          borderWidth: 5,
+          borderRadius: 1,
+          hoverBorderWidth: 0,
+          legend: {
+            display: false,
+        },
+      }
+      });
+
+      const labels = ["A", "B", "C", "D", "E", "F", "X", "S/C"];
+      const data = {
+      labels: labels,
+      datasets: [{
+      label: 'TABLA DE: Pedidos Vencidos Por Clasificación ',
+      data: [{{ clasA }}, {{ clasB }}, {{ clasC }}, {{ clasD }}, {{ clasE }}, {{ clasF }}, {{ clasX }}, {{ clas }}],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.5)',
+        'rgba(255, 159, 64, 0.5)',
+        'rgba(255, 205, 86, 0.5)',
+        'rgba(75, 192, 192, 0.5)',
+        'rgba(54, 162, 235, 0.5)',
+        'rgba(153, 102, 255, 0.5)',
+        'rgba(201, 203, 207, 0.5)'
+      ],
+      borderColor: [
+        'rgb(255, 99, 132)',
+        'rgb(255, 159, 64)',
+        'rgb(255, 205, 86)',
+        'rgb(75, 192, 192)',
+        'rgb(54, 162, 235)',
+        'rgb(153, 102, 255)',
+        'rgb(201, 203, 207)'
+      ],
+      borderWidth: 3,
+    }]
+  };
+
+  const myBarChart = document.querySelector(".my-bar-chart");
+
+  new Chart(myBarChart, {
+    type: "bar",
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      borderWidth: 20,
+      borderRadius: 8,
+      hoverBorderWidth: 6,
+      legend: {
+        display: true,
+        text: 'TABLA DE: Pedidos Vencidos Por Clasificación'
+      }
+    }
+  });
+
+      // Preload
+  const loader = document.querySelector(".loader");
+
+// Mostrar el preload al hacer clic en un enlace, excluyendo elementos dentro de la barra de navegación
+document.addEventListener("click", (event) => {
+  const target = event.target;
+
+  // Verificar si el elemento clickeado es un enlace o parte del menú desplegable
+  const isLink = target.tagName === "A";
+  const isDropdownItem = target.classList.contains("dropdown-item");
+
+  // Verificar si el elemento clickeado o sus ancestros contienen una clase específica
+  // que identifique la barra de navegación (en este caso, usaremos "navbar-nav")
+  const isNavbarItem = target.closest(".navbar-nav");
+
+  // Si el elemento clickeado es un enlace, no es parte del menú desplegable,
+  // y no se encuentra dentro de la barra de navegación, mostrar preload
+  if (isLink && !isDropdownItem && !isNavbarItem) {
+    loader.classList.remove("loader-hidden");
+  }
+});
+
+// Ocultar el preload una vez que la página haya cargado completamente
+window.addEventListener("load", () => {
+  loader.classList.add("loader-hidden");
+});
+    </script>
+
+</body>
+</main>
+
+<footer class=" text-center mt-4" style="background-color: #f2f2f2;">
+  <div class="row">
+
+    <section style="padding: 23px;" class="titulos">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/" class="titulos">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center titulos p-4 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px; background: linear-gradient(to top, #0B2265, #2586a6);">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+</footer>
+{% endblock %}

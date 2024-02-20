@@ -1,0 +1,65 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}
+    {{title}}
+{% endblock %}
+{% block content %}
+<style>
+  .icon-above-text {
+    align-items: center; 
+    text-align: center; 
+  }
+
+  .icon-above-text .material-icons {
+    margin-bottom: 1px; 
+  }
+</style>
+<h1 class="text-center display-1 fw-bold title" style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;">Almacén</h1>
+<p class="fs-1 text-left fw-bold text-center title" style=" color: #566573; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); padding: 15px; background-color: #f2f2f2;">Materiales</p>
+
+<main class="container-fluid mt-5">
+
+<section style="display: flex; justify-content: center; align-items: center;">
+  <ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'stock_alm' %}" style="color: #566573; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">edit_square</span>
+          Stock
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'ordenes_e' %}" style="color: #16A085; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">package_2</span>
+          Ordenes + E 
+        </div>
+      </a>
+    </li>
+    <!--<li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'pedidos_q' %}" style="color: #D4AC0D; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-outlined">inbox_customize</span>
+          Pedidos + Q
+        </div>
+      </a>
+    </li>-->
+  </ul>
+</section>
+</main>
+<footer class=" text-center mt-4 fixed-bottom" style="background-color: #f2f2f2;">
+  <div class="row">
+
+    <section style="padding: 23px;" class="titulos">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/" class="titulos">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center titulos p-4 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px; background: linear-gradient(to top, #0B2265, #2586a6);">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+</footer>
+{% endblock %}

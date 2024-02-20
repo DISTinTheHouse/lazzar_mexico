@@ -1,0 +1,133 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}
+    {{title}}
+{% endblock %}
+{% block content %}
+<style>
+  .icon-above-text {
+    align-items: center; 
+    text-align: center; 
+  }
+
+  .icon-above-text .material-icons {
+    margin-bottom: 1px; 
+  }
+  .btn{
+    display: flex;
+    align-items: center;
+  }
+  .material-icons-round{
+    margin-right: 5px;
+  }
+</style>
+<h1 class="text-center display-1 fw-bold title" style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;" >Programación</h1>
+<p class="fs-1 text-left fw-bold text-center title subtitulos" style=" color:#fccc0a; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); padding: 15px; background: linear-gradient(to bottom, #2586a6, #f8f7f6);">Historial de muestras</p>
+
+<section class="container-fluid mb-3" style="display: flex; justify-content: center; align-items: center; padding: 25px;">
+  <ul class="nav nav-tabs flex-column flex-sm-row mx-auto" id="ex-with-icons" role="tablist">
+      <li class="nav-item" role="presentation">
+       <a class="nav-link active" aria-current="page" href="{% url 'historial_programacion' %}" style="color: #005499; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 17px;">
+         <div class="d-flex flex-column icon-above-text">
+           <span class="material-symbols-outlined" style="font-size: 35px;">history</span>
+           Historial
+         </div>
+       </a>
+     </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" aria-current="page" href="{% url 'programacion' %}" style="color: #ffb612; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 17px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">fast_forward</span>
+          Pedidos Activos
+        </div>
+      </a>
+    </li>
+  </ul>
+</section>
+
+<div class="container-fluid">
+    
+  {% if leyenda %}
+  <section class="mt-3 p-3 bg-light rounded shadow" style="display:flex;">
+    <input class="form-control me-2" placeholder="Filtrar por # de Pedido:" type="text" id="filtro_pedido" oninput="filtrarTabla()">
+    <input class="form-control me-2" placeholder="Filtrar por Fecha:" type="text" id="filtro_fecha" oninput="filtrarTabla()">
+    <input class="form-control me-2" placeholder="Comentario Alm:" type="text" id="filtro_almacen" oninput="filtrarTabla()">
+    <input class="form-control me-2" placeholder="Comentario Bordados:" type="text" id="filtro_bordados" oninput="filtrarTabla()">
+  </section>
+  
+
+    <table class="table table-striped table-sm table-responsive table-info table-bordered table-hover" style="border:solid 10px #0076b6; box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);" id="miTabla">
+      <thead class="table table-primary sticky-top" style="background-color: #C5CAE9; position: sticky; top:0; z-index:1000;">
+        <tr>
+          <th class="text-center">PEDIDO</th>
+          <th class="text-center">FECHA ENTREGA</th>
+          <th class="text-center">COMENT. ALM.</th>
+          <th class="text-center">COMENT. BORD.</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for fila in resultado %}
+        <tr>
+          <td class="text-center" style="font-weight: bold;">{{ fila.0 }}</td>
+          <td class="text-center">{{ fila.1|date:"d/m/y" }}</td>
+          <td class="text-center" style="font-weight: bold;">{{ fila.2 }}</td>
+          <td class="text-center" style="font-style: italic;">{{ fila.3 }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script>
+function filtrarTabla() {
+        var filtroPedido = document.getElementById("filtro_pedido").value.toUpperCase();
+        var filtroFecha = document.getElementById("filtro_fecha").value.toUpperCase();
+        var filtroAlm = document.getElementById("filtro_almacen").value.toUpperCase();
+        var filtroBordados = document.getElementById("filtro_bordados").value.toUpperCase();
+        var tabla = document.getElementById("miTabla");
+        var filas = tabla.getElementsByTagName("tr");
+
+        for (var i = 0; i < filas.length; i++) {
+            var celdaPedido = filas[i].getElementsByTagName("td")[0]; 
+            var celdaFecha = filas[i].getElementsByTagName("td")[1]; 
+            var celdaAlm = filas[i].getElementsByTagName("td")[2]; 
+            var celdaBordados = filas[i].getElementsByTagName("td")[3]; 
+            if (celdaPedido && celdaFecha && celdaAlm && celdaBordados) {
+                var textoPedido = celdaPedido.textContent || celdaPedido.innerText;
+                var textoFecha = celdaFecha.textContent || celdaFecha.innerText;
+                var textoAlm = celdaAlm.textContent || celdaAlm.innerText;
+                var textoBordados = celdaBordados.textContent || celdaBordados.innerText;
+
+                // Solo considera la columna de fecha y proveedor para el filtrado
+                if (textoPedido.toUpperCase().indexOf(filtroPedido) > -1 &&
+                    textoFecha.toUpperCase().indexOf(filtroFecha) > -1 &&
+                    textoAlm.toUpperCase().indexOf(filtroAlm) > -1 &&
+                    textoBordados.toUpperCase().indexOf(filtroBordados) > -1) {
+                    filas[i].style.display = "";
+                } else {
+                    filas[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+<footer class=" text-center mt-4" style="background-color: #f2f2f2;">
+  <div class="row">
+
+    <section style="padding: 23px;" class="titulos">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/" class="titulos">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center titulos p-4 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px; background: linear-gradient(to top, #0B2265, #2586a6);">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+</footer>
+{% endif %}
+{% endblock %}

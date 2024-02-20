@@ -1,0 +1,197 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}
+    {{title}}
+{% endblock %}
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<style>
+  .icon-above-text {
+    align-items: center; 
+    text-align: center; 
+  }
+
+  .icon-above-text .material-icons {
+    margin-bottom: 1px; 
+  }
+  .btn {
+  display: flex;
+  align-items: center;
+  }
+      
+  .material-icons-round {
+      margin-right: 5px;
+  }
+</style>
+<h1 class="text-center display-1 fw-bold title" style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;">Producción</h1>
+<p class="display-4 text-left fw-bold text-center title subtitulos" style=" color: #a71930; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); padding: 15px; background: linear-gradient(to bottom, #2586a6, #f8f7f6);">+ E</p>
+
+<main class="container-fluid ">
+
+<section class="containter-fluid" style="display: flex; justify-content: center; align-items: center; padding: 25px;">
+  <ul class="nav nav-tabs flex-column flex-sm-row mx-auto" id="ex-with-icons" role="tablist">
+    <li class="nav-item" role="presentation">
+         <a class="nav-link " aria-current="page" href="http://bodegalazzar.ddns.net:3000/envios" style="color: #6c8ead; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+           <div class="d-flex flex-column icon-above-text">
+             <span class="material-symbols-outlined" style="font-size: 35px;">local_shipping</span>
+             Rastreo Lazzar
+           </div>
+         </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'stock_alm' %}" style="color: #566573; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">edit_square</span>
+          Stock
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{% url 'ordenes_e' %}" style="color: #16A085; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;" >
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">package_2</span>
+          Ordenes + E
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'pedidos_pq' %}" style="color: #a71930; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;" >
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">package</span>
+          Pedidos PQ
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{% url 'pedidos_q' %}" style="color: #D4AC0D; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;" >
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">inbox_customize</span>
+          Pedidos Q
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'orden_e_vencido' %}" style="color: #ff3c38; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;" >
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">remove_done</span>
+          Orden E Vencidos
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " download="Existencias.xlsx" aria-current="page" href="https://www.lazzarmexico.com/archivos/existencias/Existencias_Lazzar.xlsx" style="color: #00a9db; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;"> 
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">download</span>
+          Existencias
+        </div>
+      </a>
+    </li>
+    <!--<li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'pedidos_q' %}" style="color: #D4AC0D; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-outlined">inbox_customize</span>
+          Pedidos + Q
+        </div>
+      </a>
+    </li>-->
+  </ul>
+</section>
+
+<div class="d-flex justify-content-center align-items-center mb-2">
+  <div class="me-3 border p-3">
+      <form class="d-flex flex-column align-items-center" role="search" action="{% url 'search_e' %}" method="POST" target="_blank">
+          {% csrf_token %}
+          <input class="form-control me-2 titulos mb-2" type="text" placeholder="Buscar Orden E..." aria-label="Search" name="encontrar_e">
+          <button class="btn btn-success titulos" type="submit button">Buscar E</button>
+      </form>
+  </div>
+
+  <div class="me-3 border p-3">
+      <form class="d-flex flex-column align-items-center" role="search" action="{% url 'search_pq' %}" method="POST" target="_blank">
+          {% csrf_token %}
+          <input class="form-control me-2 titulos mb-2" type="text" placeholder="Buscar Pedido PQ..." aria-label="Search" name="encontrar_pq">
+          <button class="btn btn-danger titulos" type="submit button">Buscar PQ</button>
+      </form>
+  </div>
+
+  <div class="border p-3">
+      <form class="d-flex flex-column align-items-center" role="search" action="{% url 'search_q' %}" method="POST" target="_blank">
+          {% csrf_token %}
+          <input class="form-control me-2 titulos mb-2" type="text" placeholder="Buscar pedido Q..." aria-label="Search" name="encontrar_p">
+          <button class="btn btn-warning titulos" type="submit button">Buscar Q</button>
+      </form>
+  </div>
+</div>
+</main>
+
+<div class="container-fluid">
+    
+    <table class="table table-hover table-sm table-secondary table-striped table-borderless mt-5" style="border:solid 10px #8b0426; border-radius: 20px; box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);" id="datatable">
+        <thead class="table table-danger" style="background-color: #D0ECE7;">
+            <tr>
+                <th class="text-center"></th>
+                <th class="text-center">FECHA</th>
+                <th class="text-center">ORDEN</th>
+                <th class="text-center">PEDIDO</th>
+                <th class="text-center">DESDE</th>
+                <th class="text-center">HASTA</th>
+                <th class="text-center">PROVEEDOR</th>
+                <th class="text-center">DESCRIPCIÓN</th>
+                <th class="text-center">CANTIDAD</th>
+                <th class="text-center">DETALLE</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in vencidos_orden_e %}
+                <tr>
+                    <td class="text-center">
+                        <input type="checkbox" name="completado">
+                    </td>
+                    <td class="text-center">{{ fila.0|date:"d/m/y" }}</td>
+                    <td class="text-center" style="font-weight: bold;">{{ fila.1 }}</td>
+                    <td class="text-center" style="font-weight: bold;">{{ fila.2 }}</td>
+                    <td class="text-center" style="font-style: italic;">{{ fila.3|date:"d/m/y" }}</td>
+                    <td class="text-center">{{ fila.4|date:"d/m/y" }}</td>
+                    <td class="text-center" style="font-weight: bold;">{{ fila.5 }}</td>
+                    <td class="text-center" style="font-style: italic;">{{ fila.6 }}</td>
+                    <td class="text-center" style="font-style: italic;">{{ fila.7|floatformat:"0" }}</td>
+                    <td class="text-center">
+                        <form id="myForm" method="POST" action="{% url 'produccion' %}" target="_blank" style="display:flex; align-items:center; justify-content:center;">
+                            {% csrf_token %}
+                            <input type="hidden" name="variable" value="{{ fila.2 }}">
+                            <button type="submit" class="btn btn-dark" style="border-radius: 25px;">
+                                <span class="material-symbols-rounded">data_info_alert</span>
+                                Detalle
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<footer class=" text-center mt-4" style="background-color: #f2f2f2;">
+  <div class="row">
+
+    <section style="padding: 23px;" class="titulos">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/" class="titulos">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center titulos p-4 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px; background: linear-gradient(to top, #0B2265, #2586a6);">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+</footer>
+{% endblock %}

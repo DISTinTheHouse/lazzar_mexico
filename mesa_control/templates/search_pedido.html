@@ -1,0 +1,114 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<h1 class="text-center display-1 fw-bold title" style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;">Información</h1>
+<p class="display-4 text-left fw-bold text-center title subtitulos" style="color: #fccc0a; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); padding: 15px; background: linear-gradient(to bottom, #2586a6, #f8f7f6);">
+  Buscar Pedido</p>
+<main class="container">
+    <style>
+        .icon-above-text {
+          align-items: center; 
+          text-align: center; 
+        }
+      
+        .icon-above-text .material-icons {
+          margin-bottom: 1px; 
+        }
+        .btn{
+          display: flex;
+          align-items: center;
+        }
+        .material-icons-round{
+          margin-right: 5px;
+        }
+      </style>
+</main>
+<div class="container-fluid">
+    {% if leyenda %}
+    <div class="table-responsive" style="border:solid 6px #A9CCE3; border-radius: 25px; padding: 25px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);">
+
+    <table class="table table-striped table-hover table-bordered mt-5"
+            style="border:solid 10px #0B2265; border-radius: 20px;" id="datatable">
+              <thead class="table-primary" style="background-color: #C5CAE9;">
+                <tr>
+                  <th class="text-center">PEDIDO</th>
+                  <th class="text-center">RAZON SOCIAL</th>
+                  <th class="text-center">VENDEDOR</th>
+                  <th class="text-center">FECHA</th>
+                  <th class="text-center">CLASIFICACION</th>
+                  <th class="text-center">FECHA PARCIALIDAD</th>
+                  <th class="text-center">FECHA ENTREGA</th> <!--6-->
+                  <th class="text-center">NUEVA FECHA</th><!--7-->
+                  <th class="text-center">DETALLE</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for fila in resultado %}
+                  <tr>
+                    <td class="text-center" style="font-weight: bold;">{{ fila.0 }}</td>
+                    <td class="text-center">{{ fila.1 }}</td>
+                    <td class="text-center" style="font-style: italic;">{{ fila.2 }}</td>
+                    <td class="text-center">{{ fila.3|date:"d/m/y" }}</td>
+                    <td class="text-center">{{ fila.4 }}</td>
+                    {% if fila.5|date:"Y-m-d" == "1900-12-31" %}
+                    <td></td>
+                    {% else %}
+                    <td class="text-center" style="font-weight: bold;">{{ fila.5|date:"d/m/y" }}</td>
+                    {% endif %}
+                    <td class="text-center" style="font-style: italic;">{{ fila.6|date:"d/m/y" }}</td>
+          
+                    {% if fila.6 == fila.7 %}
+                      <td></td>
+                    {% else %}
+                      {% if fila.8 == "7VEN" %}
+                      <td class="text-center" style="font-style: italic;">{{ fila.7|date:"d/m/y" }} - DETENIDO POR EL VENDEDOR</td>
+                      {% else %}
+                        <td class="text-center" style="font-weight: bold;">{{ fila.7|date:"d/m/y" }}</td>
+                      {% endif %}
+                    {% endif %}
+                    {% if usuario %}
+                    <td class="text-center">
+                      <form id="myForm" method="POST" action="{% url 'detalle_activos_ventas' %}" target="_blank">
+                        {% csrf_token %}
+                        <input type="hidden" name="variable" value="{{ fila.0 }}" target="_blank">
+                        <button type="submit" class="btn btn-outline-warning" style="border-radius: 25px;" target="_blank">
+                          <span class="material-symbols-rounded">data_info_alert</span>
+                          Detalle
+                        </button>
+                      </form>
+                    </td>
+                  {% else %}
+                    <td class="text-center">
+                      <form id="myForm" method="POST" action="{% url 'produccion' %}" target="_blank">
+                        {% csrf_token %}
+                        <input type="hidden" name="variable" value="{{ fila.0 }}" target="_blank">
+                        <button type="submit" class="btn btn-outline-warning" style="border-radius: 25px;" target="_blank">
+                          <span class="material-symbols-rounded">data_info_alert</span>
+                          Detalle
+                        </button>
+                      </form>
+                    </td>
+                  {% endif %}
+                </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

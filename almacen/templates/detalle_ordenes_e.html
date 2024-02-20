@@ -1,0 +1,75 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+<style>
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    text-align: center; 
+  }
+  .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+
+  .material-icons-round {
+    margin-right: 5px;
+  }
+</style>
+<h1 class="text-center display-1 fw-bold title subtitulos" style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;">
+  {{ title }}</h1><p class="fs-1 text-left fw-bold text-center title subtitulos" style="color: #fccc0a; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); padding: 15px; background: linear-gradient(to bottom, #2586a6, #f8f7f6);">Detalle de la orden</p>
+</h1>
+<main class="container-fluid"> <!--INCIO MAIN-->
+<div class="card" style="border:solid 9px #FEF9E7; padding: 15px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.5); background-color: #f3e9d2;">
+    <table class="table table-hover table-striped table-borderless table-success mt-1" style="border:solid 10px #138D75; border-radius: 20px; box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);" id="datatable">
+        <thead class="table-success" style="background-color: #D0ECE7;">
+            <tr>
+              <th class="text-center">FECHA</th>
+              <th class="text-center">PEDIDO</th>
+              <th class="text-center">SKU PRENDA</th>
+              <th class="text-center">DESCRIPCIÓN</th>
+              <th class="text-center">CANTIDAD</th>
+              <th class="text-center">QUIEN CORTA</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fila in respuesta %}
+                <tr>
+                  <td class="text-center" >{{ fila.0|date:"d/m/y" }}</td>
+                  <td class="text-center" style="font-weight: bold;">{{ fila.1 }}</td>
+                  <td class="text-center">{{ fila.2 }}</td>
+                  <td class="text-center" style="font-style: italic;">{{ fila.3 }}</td>
+                  <td class="text-center">{{ fila.4|floatformat:"0" }}</td>
+                  <td class="text-center">{{ fila.5 }}</td>
+                </tr>
+            {% endfor %}
+            {% for item in totales_detalle %}
+                <tfoot>
+                    <th colspan="4" style="text-transform: uppercase; background-color: #138D75;" class="text-center fw-bold">Total</th>
+                    <th style="background-color: #FCF3CF;" class="text-center fw-bold">{{ item.1|floatformat:0|floatformat }}</th>
+                </tfoot>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+</main> <!--FIN MAIN-->
+<footer class=" text-center mt-4" style="background-color: #f2f2f2;">
+  <div class="row">
+
+    <section style="padding: 23px;" class="titulos">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/" class="titulos">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center titulos p-4 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px; background: linear-gradient(to top, #0B2265, #2586a6);">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+</footer>
+{% endblock %}

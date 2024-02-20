@@ -1,0 +1,537 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}
+    {{title}}
+{% endblock %}
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<style>
+  .icon-above-text {
+    align-items: center; 
+    text-align: center; 
+  }
+  .icon-above-text .material-icons {
+    margin-bottom: 1px; 
+  }
+  .btn{
+    display: flex;
+    align-items: center;
+  }
+  .material-icons-round{
+    margin-right: 5px;
+  }
+  #resultados-clasificacion {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 15px;
+    border: 5px solid #cad2c5;
+    background-color: #84a98c;
+    border-radius: 25px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-style: italic;
+  }
+</style>
+<main >
+  <div class="container-fluid">
+    <div class="row row-cols-2  row-cols-md-3 g-4 justify-content-center text-center" style="background: linear-gradient(to bottom, #2586a6, #2586a6); padding: 15px;">
+        {% if total_ped != "" %}
+            <div class="card text-dark bg-light " style="max-width: 18rem; border:solid 5px #D6DBDF; padding: 3px;">
+                <div class="card-header">Pedidos Activos</div>
+                <div class="card-body">
+                <h5 class="card-title">Total: {{total_ped}}</h5>
+                <p class="card-text">Los pedidos activos, son aquellos que no estan facturados al 100%.</p>
+                </div>
+            </div>
+        {% endif%}
+        
+        {% if total_ped != "" %}
+            <div class="card text-dark bg-warning " style="max-width: 18rem; border:solid 5px #F1C40F; padding: 3px;">
+                <div class="card-header">Vencen hoy</div>
+                <div class="card-body">
+                <h5 class="card-title">Total: {{total_ven_hoy}}</h5>
+                <p class="card-text">Estos pedidos tienen fecha de vencimiento del día de hoy.</p>
+                </div>
+            </div>
+        {% endif%}
+
+        {% if total_ped != "" %}
+            <div class="card text-white bg-danger " style="max-width: 18rem; border:solid 5px #E74C3C">
+                <div class="card-header">Pedidos Vencidos</div>
+                <div class="card-body">
+                    <h5 class="card-title">Total: {{total_vencidos}} ( {{resultado_porcentaje|floatformat:2}}% )</h5>
+                    <p class="card-text">Estos pedidos no se cumplio con la fecha compromiso de entrega al cliente.</p>
+                </div>
+            </div>
+        {% endif%}
+        {% if total_ped != "" %}
+        <div class="card text-white bg-info " style="max-width: 18rem; border:solid 5px #AED6F1">
+                <div class="card-header">Vencen en 3 semanas</div>
+                <div class="card-body">
+                <h5 class="card-title">Total: {{total_ven_sem}}</h5>
+                <p class="card-text">Estos pedidos tienen fecha de vencimiento dentro de tres semana.</p>
+                </div>
+            </div>
+        {% endif%}
+        <div class="card text-white bg-dark " style="max-width: 18rem; border: solid 5px #34495E;">
+          <div class="card-header">Pedidos en tiempo</div>
+          <div class="card-body">
+            <h5 class="card-title">Total: {{resumen_resultado}} ( {{resultado_porcentaje_dos|floatformat:2}}% )</h5>
+            <p class="card-text">Muestra el % de los pedidos totales en tiempo </p>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <section style="display: flex; justify-content: center; align-items: center; padding: 25px; background-color: #f8f7f6;">
+    <ul class="nav nav-tabs flex-column flex-sm-row mx-auto" id="ex-with-icons" role="tablist">
+        <li class="nav-item" role="presentation">
+         <a class="nav-link " aria-current="page" href="http://bodegalazzar.ddns.net:3000/envios" style="color: #6c8ead; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+           <div class="d-flex flex-column icon-above-text">
+             <span class="material-symbols-outlined" style="font-size: 35px;">local_shipping</span>
+             Rastreo Lazzar
+           </div>
+         </a>
+       </li>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" aria-current="page" href="{% url 'pedidos-activos' %}" style="color: #087e8b; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded" style="font-size: 35px;">fast_forward</span>
+            Pedidos Activos
+          </div>
+        </a>
+      </li>
+      <!--<li class="nav-item">
+        <a class="nav-link " aria-current="page" href="{% url 'procesos' %}" style="color: #5DADE2; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);"">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded">running_with_errors</span>
+            Procesos
+          </div>
+        </a>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'vencidos' %}" style="color: #f82f2f; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded" style="font-size: 35px;">gpp_bad</span>
+            Pedidos Vencidos
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'vencidos_semana' %}" style="color: #fb8b24; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded" style="font-size: 35px;">quick_reference</span>
+            Prox. A Vencer
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " aria-current="page" href="{% url 'dashboard' %}" style="color: #ffc354; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded" style="font-size: 35px;">donut_small</span>
+            Dashboard
+          </div>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " aria-current="page" href="{% url 'factura' %}" style="color: #07bca7; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-outlined" style="font-size: 35px;">task</span>
+            Facturación
+          </div>
+        </a>
+      </li>
+      <!--<li class="nav-item">
+        <a class="nav-link " aria-current="page" href="{% url 'search_pedido' %}" style="color: #0B2265; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);" >
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-outlined">manage_search</span>
+            Buscar Pedido
+          </div>
+        </a>
+      </li> -->
+        <li class="nav-item">
+            <a class="nav-link " aria-current="page" href="{% url 'programacion' %}" style="color: #0b2265; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+              <div class="d-flex flex-column icon-above-text">
+                <span class="material-symbols-outlined" style="font-size: 35px;">edit_calendar</span>
+                Programación
+              </div>
+            </a>
+        </li>
+        <li class="nav-item" role="presentation">
+        <a class="nav-link " aria-current="page" href="{% url 'muestras' %}" style="color: #345995; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded" style="font-size: 35px;">shopping_cart_checkout</span>
+            Muestras
+          </div>
+        </a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link " download="Existencias.xlsx" aria-current="page" href="https://www.lazzarmexico.com/archivos/existencias/Existencias_Lazzar.xlsx" style="color: #00a9db; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-outlined" style="font-size: 35px;">download</span>
+            Existencias
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+  </section>
+
+    
+        <!--<div class="d-flex justify-content-center align-items-center mt-5 ">
+          <button onclick="window.location.href='{% url 'descargar_excel_activos' %}'" class="btn btn-success text-center" style="border-radius: 25px; font-weight: bold; height: 55px; width: 130px;">Descargar a Excel</button>
+        </div>-->
+        
+        {% if user.email == 'logistica@lazzar.com.mx' %}
+        <div class="container mt-2 mb-2">
+          <div class="row">
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra # de Pedido:" type="text" id="filtro_pedido" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Razón social:" type="text" id="filtro_fecha" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Vendedor:" type="text" id="filtro_proveedor" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Fecha:" type="text" id="filtro_inicio" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Clasificación:" type="text" id="filtro_class" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Fecha parcialidad:" type="text" id="filtro_parcial" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Fecha de entrega:" type="text" id="filtro_entrega" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Nueva fecha:" type="text" id="filtro_nueva" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="C.P. :" type="text" id="filtro_cp" oninput="filtrarTabla()">
+            </div>
+          </div>
+      </div>    
+        {% endif %}
+        
+        {% if user.email == 'embarque@lazzarmexico.com' %}
+        <div class="container mt-2 mb-2">
+          <div class="row">
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra # de Pedido:" type="text" id="filtro_pedido" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Razón social:" type="text" id="filtro_fecha" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Vendedor:" type="text" id="filtro_proveedor" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Fecha:" type="text" id="filtro_inicio" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Clasificación:" type="text" id="filtro_class" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Fecha parcialidad:" type="text" id="filtro_parcial" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Fecha de entrega:" type="text" id="filtro_entrega" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Nueva fecha:" type="text" id="filtro_nueva" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="C.P. :" type="text" id="filtro_cp" oninput="filtrarTabla()">
+            </div>
+          </div>
+      </div>    
+        {% endif %}
+        
+        {% if user.email == 'glira@lazzar.com.mx' %}
+        <div class="form-outline mb-1 mt-1 container-sm ">
+          <input type="text" class="form-control form-control-lg " id="datatable-search-input" placeholder="Buscar Consulta. . ." style="border:solid 3px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); border-radius: 25px;"/>
+          <label class="form-label" for="datatable-search-input"></label>
+        </div>
+        {% else %}
+         <!--<div class="container mt-2 mb-2">
+          <div class="row">
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra # de Pedido:" type="text" id="filtro_pedido" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Razón social:" type="text" id="filtro_fecha" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Vendedor:" type="text" id="filtro_proveedor" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Fecha:" type="text" id="filtro_inicio" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtra Clasificación:" type="text" id="filtro_class" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Fecha parcialidad:" type="text" id="filtro_parcial" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Fecha de entrega:" type="text" id="filtro_entrega" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                  <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Nueva fecha:" type="text" id="filtro_nueva" oninput="filtrarTabla()">
+              </div>
+              <div class="col-md-6 col-lg-4">
+                <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="C.P. :" type="text" id="filtro_cp" oninput="filtrarTabla()">
+            </div>
+          </div>
+      </div>    -->
+      <div class="form-outline mb-1 mt-1 container-sm">
+        <input type="text" class="form-control form-control-lg " id="datatable-search-input" placeholder="Buscar Consulta. . ." style="border:solid 3px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); border-radius: 25px;"/>
+        <label class="form-label" for="datatable-search-input"></label>
+      </div>   
+        {% endif %}
+
+        <!--resultado de pedidos-->
+        <div class="container-sm " id="resultados-clasificacion">
+        </div> <!--.------------->
+
+        <div id="datatable-container"
+        style="border:solid 4px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);">
+
+        <div class="tbl-container">
+          <div class="table-responsive" style="overflow-y: auto; max-height: 550px;">
+            <table class="table table-sm table-striped table-hover table-responsive table-borderedless table-info" style="border:solid 1px #a5acaf; border-radius: 20px;" id="datatable">
+              <thead class="table-fixed table-dark" style="background-color: #C5CAE9; position: sticky; top: 0; z-index: 1000;">
+                <tr>
+                  <th class="text-center">PEDIDO</th>
+                  <th class="text-center">RAZON SOCIAL</th>
+                  <th class="text-center">VENDEDOR</th>
+                  <th class="text-center">FECHA</th>
+                  <th class="text-center">CLASIFICACION</th>
+                  <th class="text-center">FECHA PARCIALIDAD</th>
+                  <th class="text-center">FECHA ENTREGA</th> <!--6-->
+                  <th class="text-center">NUEVA FECHA</th><!--7-->
+                  <th class="text-center">C.P.</th><!--8-->
+                  <th class="text-center"></th>
+                </tr>
+              </thead>
+            </div>
+            <div class="tbl-body">
+              <tbody>
+                {% for fila in result_ped %}
+                  <tr>
+                    <td class="text-center" style="font-weight: bold;">{{ fila.0 }}</td>
+                    <td class="text-center">{{ fila.1 }}</td>
+                    <td class="text-center" style="font-style: italic;">{{ fila.2 }}</td>
+                    <td class="text-center">{{ fila.3|date:"d/m/y" }}</td>
+                    <td class="text-center">{{ fila.4 }}</td>
+                    {% if fila.5|date:"Y-m-d" == "1900-12-31" %}
+                    <td></td>
+                    {% else %}
+                    <td class="text-center" style="font-weight: bold;">{{ fila.5|date:"d/m/y" }}</td>
+                    {% endif %}
+                    <td class="text-center" style="font-style: italic;">{{ fila.6|date:"d/m/y" }}</td>
+          
+                    {% if fila.6 == fila.7 %}
+                      <td></td>
+                    {% else %}
+                      {% if fila.8 == "7VEN" %}
+                      <td class="text-center" style="font-style: italic;">{{ fila.7|date:"d/m/y" }} - DETENIDO POR EL VENDEDOR</td>
+                      {% else %}
+                        <td class="text-center" style="font-weight: bold;">{{ fila.7|date:"d/m/y" }}</td>
+                      {% endif %}
+
+                    {% endif %}
+                    <td class="text-center" style="font-weight: bold;">{{ fila.9 }}</td>
+                    <td class="text-center">
+                      <form id="myForm" method="POST" action="{% url 'produccion' %}" target="_blank">
+                        {% csrf_token %}
+                        <input type="hidden" name="variable" value="{{ fila.0 }}" target="_blank">
+                      <button type="submit" class="btn btn-warning" style="border-radius: 25px;" target="_blank">
+                        <span class="material-symbols-rounded">data_info_alert</span>
+                          Detalle
+                      </button>
+                      </form>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </div>
+            </table>
+          </div>
+
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              // Obtén todas las filas de la tabla
+              var filas = document.querySelectorAll('#datatable tbody tr');
+          
+              // Objeto para almacenar el recuento de cada clasificación
+              var clasificacionCount = {};
+          
+              // Itera sobre cada fila y cuenta las clasificaciones
+              filas.forEach(function (fila) {
+                var clasificacion = fila.cells[4].textContent.trim(); // El índice 4 representa la columna de clasificación
+          
+                if (clasificacionCount[clasificacion]) {
+                  clasificacionCount[clasificacion]++;
+                } else {
+                  clasificacionCount[clasificacion] = 1;
+                }
+              });
+          
+              // Muestra los resultados en el contenedor
+              var resultadosContenedor = document.getElementById('resultados-clasificacion');
+              for (var clasificacion in clasificacionCount) {
+                var cantidad = clasificacionCount[clasificacion];
+                var resultado = clasificacion + ': ' + cantidad + ' pedidos';
+                var resultadoElemento = document.createElement('p');
+                resultadoElemento.textContent = resultado;
+                resultadosContenedor.appendChild(resultadoElemento);
+              }
+            });
+          </script>
+
+<!-- Asegúrate de que jQuery y DataTables estén incluidos en tu HTML -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
+<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
+
+
+<!-- Asegúrate de que DataTables CSS esté incluido -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
+
+<script>
+    $(document).ready(function() {
+        // Filtro de búsqueda por input
+        $('#datatable-search-input').on('input', function() {
+            var searchText = $(this).val().toLowerCase();
+            $('#datatable tbody tr').each(function() {
+                var rowText = $(this).text().toLowerCase();
+                if (rowText.indexOf(searchText) === -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        });
+
+        var table = $('#datatable').DataTable({
+            // Configuraciones de DataTables
+            scrollY: 200,
+            scrollCollapse: true,
+            paging: false,
+            fixedHeader: true,
+            // Agrega cualquier otra configuración específica de DataTables que necesites
+        });
+
+        // Filtros por columna utilizando initComplete
+        table.on('init.dt', function() {
+            this.api().columns().every(function() {
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo($(column.header()).empty())
+                    .on('change', function() {
+                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                        column.search(val ? '^' + val + '$' : '', true, false).draw();
+                    });
+
+                column.data().unique().sort().each(function(d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>');
+                });
+            });
+        });
+
+        // Filtro de búsqueda por input utilizando DataTables
+        $('#datatable-search-input').on('input', function() {
+            var searchText = $(this).val().toLowerCase();
+            table.search(searchText).draw();
+        });
+    });
+</script>
+
+<script>
+  function filtrarTabla() {
+    console.log("filtrar tabla");
+        var filtroPedido = document.getElementById("filtro_pedido").value.toUpperCase();
+        var filtroFecha = document.getElementById("filtro_fecha").value.toUpperCase();
+        var filtroProveedor = document.getElementById("filtro_proveedor").value.toUpperCase();
+        var filtroInicio = document.getElementById("filtro_inicio").value.toUpperCase();
+        var filtroClass = document.getElementById("filtro_class").value.toUpperCase();
+        var filtroParcial = document.getElementById("filtro_parcial").value.toUpperCase();
+        var filtroEntrega = document.getElementById("filtro_entrega").value.toUpperCase();
+        var filtroNueva = document.getElementById("filtro_nueva").value.toUpperCase();
+        var filtroCp = document.getElementById("filtro_cp").value.toUpperCase();
+        var tabla = document.getElementById("datatable");
+        var filas = tabla.getElementsByTagName("tr");
+
+        for (var i = 0; i < filas.length; i++) {
+            var celdaPedido = filas[i].getElementsByTagName("td")[0]; 
+            var celdaFecha = filas[i].getElementsByTagName("td")[1]; 
+            var celdaProveedor = filas[i].getElementsByTagName("td")[2]; 
+            var celdaInicio = filas[i].getElementsByTagName("td")[3];
+            var celdaClass = filas[i].getElementsByTagName("td")[4]; 
+            var celdaParcial = filas[i].getElementsByTagName("td")[5]; 
+            var celdaEntrega = filas[i].getElementsByTagName("td")[6];
+            var celdaNueva = filas[i].getElementsByTagName("td")[7];
+            var celdaCp = filas[i].getElementsByTagName("td")[8];
+            if (celdaPedido && celdaFecha && celdaProveedor) {
+                var textoPedido = celdaPedido.textContent || celdaPedido.innerText;
+                var textoFecha = celdaFecha.textContent || celdaFecha.innerText;
+                var textoProveedor = celdaProveedor.textContent || celdaProveedor.innerText;
+                var textoInicio = celdaInicio.textContent || celdaInicio.innerText;
+                var textoClass = celdaClass.textContent || celdaClass.innerText;
+                var textoParcial = celdaParcial.textContent || celdaParcial.innerText;
+                var textoEntrega = celdaEntrega.textContent || celdaEntrega.innerText;
+                var textoNueva = celdaNueva.textContent || celdaNueva.innerText;
+                var textoCp = celdaCp.textContent || celdaCp.innerText;
+
+                // Solo considera la columna de fecha y proveedor para el filtrado
+                if (textoPedido.toUpperCase().indexOf(filtroPedido) > -1 &&
+                    textoFecha.toUpperCase().indexOf(filtroFecha) > -1 &&
+                    textoInicio.toUpperCase().indexOf(filtroInicio) > -1 &&
+                    textoClass.toUpperCase().indexOf(filtroClass) > -1 &&
+                    textoParcial.toUpperCase().indexOf(filtroParcial) > -1 &&
+                    textoEntrega.toUpperCase().indexOf(filtroEntrega) > -1 &&
+                    textoCp.toUpperCase().indexOf(filtroCp) > -1 &&
+                    textoNueva.toUpperCase().indexOf(filtroNueva) > -1 &&
+                    textoProveedor.toUpperCase().indexOf(filtroProveedor) > -1) {
+                    filas[i].style.display = "";
+                } else {
+                    filas[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+
+</div>
+</main>
+
+<footer class=" text-center mt-4" style="background-color: #f2f2f2;">
+  <div class="row">
+
+    <section style="padding: 23px;" class="titulos">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/" class="titulos">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center titulos p-4 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px; background: linear-gradient(to top, #0B2265, #2586a6);">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+</footer>
+{% endblock %}

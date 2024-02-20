@@ -1,0 +1,70 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center display-4 mt-3" style="color: #566573;">{{title}}</h1>
+
+<main class="container">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="card card-body text-center mt-5 mb-5" style="border:solid 3px #F4D03F; border-radius: 30px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.4);">
+            {{ResetFrom.errors}} 
+            <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label" style="color: #7D6608; font-weight: bold;">Dirección de correo electronico</label>
+                <input type="email" class="form-control" id="id_email" placeholder="Email" name="email" style="color: #7D6608; font-weight: bold; border:solid 2px #FCF3CF; border-radius: 25px;">
+            </div>
+            {% csrf_token %}
+            <hr>
+            <button type="submit button" class="btn btn-outline-warning pd-4 justify-content-center" style="border-radius: 25px; color: #7D6608;">
+                <span class="material-symbols-rounded">how_to_reg</span>
+                Enviar
+                </button>
+        </form>
+        
+        </div>
+    </div>
+<!-- ---------.....ESTILO ICONOS.....--------- -->
+<style>
+    .btn {
+        display: flex;
+        align-items: center;
+      }
+    
+      .material-icons-round {
+        margin-right: 15px;
+      }
+  </style>
+<!-- ---------.....ESTILO ICONOS.....--------- -->
+</main>
+
+<footer class="bg-light text-center mt-4 fixed-bottom">
+
+    <div class="row">
+  
+      <section class="mb-4 mt-4">
+        © 2023 Copyright:
+        <a class="text-dark" href="https://www.lazzarmexico.com/">Lazzarmexico.com</a>
+        
+      </section>
+  
+    <div class="text-center p-3 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px">
+        <p style="color: azure;">
+            Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+        </p>
+    </div>
+
+  </footer>
+{% endblock %}

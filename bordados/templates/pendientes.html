@@ -1,0 +1,371 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}
+  Listado de Pedidos
+{% endblock %}
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<h1 class="text-center display-1 fw-bold title" style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;">Bordados</h1>   
+<p class="display-4 text-left fw-bold text-center title subtitulos" style="color: #fccc0a; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); padding: 15px; background: linear-gradient(to bottom, #2586a6, #f8f7f6);"
+>Activos</p>
+
+<main class="container-fluid">
+
+<section class="container-fluid " style="display: flex; justify-content: center; align-items: center; padding: 25px;">
+  <ul class="nav nav-tabs flex-column flex-sm-row mx-auto" id="ex-with-icons" role="tablist">
+    <li class="nav-item" role="presentation">
+         <a class="nav-link " aria-current="page" href="http://bodegalazzar.ddns.net:3000/envios" style="color: #6c8ead; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+           <div class="d-flex flex-column icon-above-text">
+             <span class="material-symbols-outlined" style="font-size: 35px;">local_shipping</span>
+             Rastreo Lazzar
+           </div>
+         </a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" aria-current="page" href="{% url 'pendientes_folios' %}" style="color: #16A085; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">hourglass_bottom</span>
+          Pendientes
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{% url 'entregados_folios' %}" style="color: #3498DB; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">verified</span>
+          Entregados
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{% url 'dashboard_Bord' %}" style="color: #F1C40F; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.07); font-size: 16px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">donut_small</span>
+          Dashboard
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{% url 'buscar_ventas' %}" style="color: #E67E22; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">search</span>
+          Buscar
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{% url 'pedidos_dia' %}" style="color: #82E0AA; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.08); font-size: 16px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">today</span>
+          Pedidos x día
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{% url 'historial' %}" style="color: #76448A; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size 16px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">deployed_code_history</span>
+          Productividad
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+          <a class="nav-link " download="Existencias.xlsx" aria-current="page" href="https://www.lazzarmexico.com/archivos/existencias/Existencias_Lazzar.xlsx" style="color: #00a9db; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 16px;"> 
+            <div class="d-flex flex-column icon-above-text">
+              <span class="material-symbols-rounded" style="font-size: 35px;">download</span>
+              Existencias
+            </div>
+          </a>
+    </li>
+  </ul>
+</section>
+<!-----------.....ESTILO ICONOS.....----------->
+      <style>
+        .icon-above-text {
+      align-items: center; 
+      text-align: center; 
+    }
+  
+    .icon-above-text .material-icons {
+      margin-bottom: 1px; 
+    }
+    .btn{
+      display: flex;
+      align-items: center;
+    }
+    .material-icons-round{
+      margin-right: 5px;
+    }
+      </style>
+<!-----------.....ESTILO ICONOS.....----------->
+<div class="container mt-2 mb-2">
+  <div class="row">
+      <div class="col-md-6 col-lg-4">
+          <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtrar Fecha de entrega:" type="text" id="filtro_fecha" oninput="filtrarTabla()">
+      </div>
+      <div class="col-md-6 col-lg-4">
+          <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtrar por # de Orden:" type="text" id="filtro_pedido" oninput="filtrarTabla()">
+      </div>
+      <div class="col-md-6 col-lg-4">
+          <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtrar por Proveedor:" type="text" id="filtro_proveedor" oninput="filtrarTabla()">
+      </div>
+      <div class="col-md-6 col-lg-4">
+          <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtrar por Surtido:" type="text" id="filtro_surtido" oninput="filtrarTabla()">
+      </div>
+      <div class="col-md-6 col-lg-4">
+          <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtrar por Estatus:" type="text" id="filtro_estatus" oninput="filtrarTabla()">
+      </div>
+      <div class="col-md-6 col-lg-4">
+          <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtrar por Recibió:" type="text" id="filtro_recibio" oninput="filtrarTabla()">
+      </div>
+      <div class="col-md-6 col-lg-4">
+          <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtrar por Deshebró:" type="text" id="filtro_deshebro" oninput="filtrarTabla()">
+      </div>
+      <div class="col-md-6 col-lg-4">
+          <input style="border:solid 1px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); border-radius: 10px;" class="form-control mb-2" placeholder="Filtrar por Pedido:" type="text" id="filtro_Ped" oninput="filtrarTabla()">
+      </div>
+  </div>
+</div>    
+{% if user.email == 'bordados@lazzarmexico.com' %}
+<div class="d-flex justify-content-center align-items-center mt-1 ">
+  <button onclick="window.location.href='{% url 'descargar_excel' %}'" class="btn btn-success text-center mb-1 mt-1" style="border-radius: 25px; font-weight: bold; height: 55px; width: 130px;">Descargar a Excel</button>
+</div>
+{% endif %}
+{% if user.email == 'ponchados@lazzar.com.mx' %}
+<div class="d-flex justify-content-center align-items-center mt-1 ">
+  <button onclick="window.location.href='{% url 'descargar_excel' %}'" class="btn btn-success text-center mb-1 mt-1" style="border-radius: 25px; font-weight: bold; height: 55px; width: 130px;">Descargar a Excel</button>
+</div>
+{% endif %}
+<section class="mt-3 mb-5 p-3 bg-light rounded shadow">
+  <div class="mt-2" style="display: flex; justify-content: center;">
+    <p class="text-center me-5" style="font-weight: bold;">Total de resultados:<span id="totalResultados">0</span></p>
+    <p class="text-center me-5" style="font-weight: bold;">Total filtrado:<span id="totalFiltrado">0</span></p>
+    <p class="text-center me-5" style="font-weight: bold;">Cantidad Piezas: <span id="totalPiezas">0</span></p>
+  </div>
+</section>
+</main>
+        {% if leyenda %}
+  <div id="datatable-container" style="border:solid 8px #087e8b; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);">
+      
+    <div class="tbl-container">
+      <div class="table-responsive" style="overflow-y: auto; max-height: 700px;">
+        <table class="table table-striped table-hover table-success table-responsive table-borderedless table-sm" style="border:solid 1px #a5acaf; border-radius: 20px;" id="miTabla">
+            <thead class="table-fixed table-dark" style="background-color: #C5CAE9; position: sticky; top: 0; z-index: 1000;">
+                <tr>
+                    <th class="text-center" style="font-weight: bolder;">PEDIDO</th>
+                    <th class="text-center" style="font-weight: bolder;">FECHA</th>
+                    <th class="text-center" style="font-weight: bolder;">ORDEN</th>
+                    <th class="text-center" style="font-weight: bolder;">PIEZAS</th>
+                    <th class="text-center" style="font-weight: bolder;">ENTREGADO</th>
+                    <th class="text-center" style="font-weight: bolder;">PROVEEDOR</th>
+                    <th class="text-center" style="font-weight: bolder;">FECHA DE SURTIDO</th>
+                    <th class="text-center" style="font-weight: bolder;">RECEPCIÓN DE LA ORDEN</th>
+                    <th class="text-center" style="font-weight: bolder;">FECHA DE ENTREGA</th>
+                    <th class="text-center" style="font-weight: bolder;">SURTIDO</th>
+                    <th class="text-center" style="font-weight: bolder;">ESTATUS</th>
+                    <th class="text-center" style="font-weight: bolder;">RECIBIÓ</th>
+                    <th class="text-center" style="font-weight: bolder;">DESHEBRÓ</th>
+                    <th class="text-center">DETALLE</th>
+                </tr>
+            </thead>
+          </div>
+          <div class="tbl-body">
+            <tbody>
+                {% for fila in resultado %}
+                    <tr>
+                        <td class="text-center">{{ fila.0 }}</td>
+                        <td class="text-center">{{ fila.1 | date:"d/m/y" }}</td>
+                        <td class="text-center" style="font-weight: bold;">{{ fila.2 }}</td>
+                        <td class="text-center">{{ fila.11|floatformat:0 }}</td>
+                        <td class="text-center">{{ fila.12|floatformat:0 }}</td>
+                        <td class="text-center">{{ fila.3 }}</td>
+                        <td class="text-center">{{ fila.4|date:"d/m/y" }}</td>
+                        {% if fila.5|date:"Y-m-d" == "1900-12-31" %}
+                            <td></td>
+                        {% else %}
+                            <td class="text-center" style="font-weight: bolder;">{{ fila.5|date:"d/m/y" }}</td>
+                        {% endif %}
+                        {% if fila.6|date:"Y-m-d" == "1900-12-31" %}
+                            <td></td>
+                        {% else %}
+                            <td class="text-center" style="font-style: italic;">{{ fila.6|date:"d/m/y" }}</td>
+                        {% endif %}
+                        {% if fila.7 is none %}
+                            <td></td>
+                        {% else %}
+                            <td class="text-center">{{ fila.7 }}</td>
+                        {% endif %}
+                        {% if fila.8 is none %}
+                            <td></td>
+                        {% else %}
+                            <td class="text-center" style="font-weight: bold;">{{ fila.8 }}</td>
+                        {% endif %}
+                        {% if fila.9 is none %}
+                            <td></td>
+                        {% else %}
+                            <td class="text-center">{{ fila.9 }}</td>
+                        {% endif %}
+                        {% if fila.10 is none %}
+                            <td class="text-center"></td>
+                        {% else %}
+                            <td class="text-center">{{ fila.10 }}</td>
+                        {% endif %}
+                        <td class="text-center">
+                          <form id="myForm" method="POST" action="{% url 'detalle_bordados' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="variable" value="{{ fila.2 }}">
+                          <button type="submit" class="btn btn-success" style="border-radius: 25px;">
+                            <span class="material-symbols-rounded">data_info_alert</span>
+                              Detalle
+                      </button>
+                    </form>
+                </td>
+              </tr>
+        {% endfor %}
+      </tbody>
+      </div>
+    </table>
+    </div>
+  </div>   
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+  <script>
+     // Función para filtrar la tabla
+     function filtrarTabla() {
+            // Obtener los valores de los filtros
+            var filtroPedido = document.getElementById("filtro_pedido").value.toUpperCase();
+            var filtroFecha = document.getElementById("filtro_fecha").value.toUpperCase();
+            var filtroProveedor = document.getElementById("filtro_proveedor").value.toUpperCase();
+            var filtroSurtido = document.getElementById("filtro_surtido").value.toUpperCase();
+            var filtroEstatus = document.getElementById("filtro_estatus").value.toUpperCase();
+            var filtroRecibio = document.getElementById("filtro_recibio").value.toUpperCase();
+            var filtroDeshebro = document.getElementById("filtro_deshebro").value.toUpperCase();
+            var filtroPed = document.getElementById("filtro_Ped").value.toUpperCase();
+        
+            // Obtener la tabla y las filas
+            var tabla = document.getElementById("miTabla");
+            var filas = tabla.getElementsByTagName("tr");
+        
+            // Iterar sobre las filas y aplicar los filtros
+            for (var i = 0; i < filas.length; i++) {
+              var celdaPedido = filas[i].getElementsByTagName("td")[2];
+              var celdaFecha = filas[i].getElementsByTagName("td")[8];
+              var celdaProveedor = filas[i].getElementsByTagName("td")[5];
+              var celdaSurtido = filas[i].getElementsByTagName("td")[9];
+              var celdaEstatus = filas[i].getElementsByTagName("td")[10];
+              var celdaRecibio = filas[i].getElementsByTagName("td")[11];
+              var celdaDeshebro = filas[i].getElementsByTagName("td")[12];
+              var celdaPed = filas[i].getElementsByTagName("td")[0];
+        
+              // Verificar si las celdas existen
+              if (celdaPedido && celdaFecha && celdaProveedor && celdaSurtido && celdaEstatus && celdaRecibio && celdaDeshebro && celdaPed) {
+                var textoPedido = celdaPedido.textContent || celdaPedido.innerText;
+                var textoFecha = celdaFecha.textContent || celdaFecha.innerText;
+                var textoProveedor = celdaProveedor.textContent || celdaProveedor.innerText;
+                var textoSurtido = celdaSurtido.textContent || celdaSurtido.innerText;
+                var textoEstatus = celdaEstatus.textContent || celdaEstatus.innerText;
+                var textoRecibio = celdaRecibio.textContent || celdaRecibio.innerText;
+                var textoDeshebro = celdaDeshebro.textContent || celdaDeshebro.innerText;
+                var textoPed = celdaPed.textContent || celdaPed.innerText;
+        
+                // Se considera columna para el filtrado
+                if (
+                  textoPedido.toUpperCase().indexOf(filtroPedido) > -1 &&
+                  textoFecha.toUpperCase().indexOf(filtroFecha) > -1 &&
+                  textoProveedor.toUpperCase().indexOf(filtroProveedor) > -1 &&
+                  textoSurtido.toUpperCase().indexOf(filtroSurtido) > -1 &&
+                  textoEstatus.toUpperCase().indexOf(filtroEstatus) > -1 &&
+                  textoRecibio.toUpperCase().indexOf(filtroRecibio) > -1 &&
+                  textoPed.toUpperCase().indexOf(filtroPed) > -1 &&
+                  textoDeshebro.toUpperCase().indexOf(filtroDeshebro) > -1
+                ) {
+                  filas[i].style.display = "";
+                } else {
+                  filas[i].style.display = "none";
+                }
+              }
+            }
+        
+            // Después de aplicar el filtro, recalcular los totales
+            calcularTotalResultados();
+          }
+        
+          // Coloca este script al final de tu archivo o donde corresponda
+          document.addEventListener('DOMContentLoaded', function () {
+            calcularTotalResultados();
+          });
+        
+          // Función para calcular el total de resultados sin filtrar y el total de piezas filtradas
+          function calcularTotalResultados() {
+            var tabla = document.getElementById("miTabla");
+            var filas = tabla.getElementsByTagName("tr");
+            var totalResultados = filas.length -1;
+            var totalPiezas = 0;
+        
+            // Iterar sobre las filas y sumar las piezas filtradas
+            for (var i = 0; i < filas.length; i++) {
+              var celdaPiezas = filas[i].getElementsByTagName("td")[3]; // Ajusta el índice según la posición de la columna "PIEZAS"
+        
+              if (celdaPiezas && filas[i].style.display !== "none") {
+                var textoPiezas = celdaPiezas.textContent || celdaPiezas.innerText;
+                var valorPiezas = parseFloat(textoPiezas) || 0;
+                totalPiezas += valorPiezas;
+              }
+            }
+        
+            // Actualiza el contenido del elemento HTML con los totales calculados
+            document.getElementById("totalResultados").textContent = totalResultados;
+            document.getElementById("totalPiezas").textContent = totalPiezas;
+        
+            // Llama a la función de calcularTotales cada vez que se filtra la tabla
+            calcularTotales();
+          }
+        
+          // Función para calcular el total filtrado
+          function calcularTotales() {
+            // Calcula el total filtrado
+            var totalFiltrado = -1;
+            var tabla = document.getElementById("miTabla");
+            var filas = tabla.getElementsByTagName("tr");
+        
+            for (var i = 0; i < filas.length; i++) {
+              if (filas[i].style.display !== "none") {
+                totalFiltrado++;
+              }
+            }
+        
+            // Actualiza el contenido del elemento HTML con el total filtrado
+            document.getElementById("totalFiltrado").textContent = totalFiltrado;
+          }
+  </script>
+
+</div>
+</main>
+
+<footer class=" text-center mt-4" style="background-color: #f2f2f2;">
+      <div class="row">
+    
+        <section style="padding: 23px;" class="titulos">
+          © 2023 Copyright:
+          <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/" class="titulos">Lazzarmexico.com</a>
+          
+        </section>
+    
+      <div class="text-center titulos p-4 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px; background: linear-gradient(to top, #0B2265, #2586a6);">
+          <p style="color: azure;">
+              Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+          </p>
+      </div>
+</footer>
+{% endif %}
+{% endblock %}

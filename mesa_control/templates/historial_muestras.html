@@ -1,0 +1,145 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}
+    {{title}}
+{% endblock %}
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<style>
+  .icon-above-text {
+    align-items: center; 
+    text-align: center; 
+  }
+
+  .icon-above-text .material-icons {
+    margin-bottom: 1px; 
+  }
+  .btn{
+    display: flex;
+    align-items: center;
+  }
+  .material-icons-round{
+    margin-right: 5px;
+  }
+</style>
+<h1 class="text-center display-1 fw-bold title" style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;">Estatus De Pedidos</h1>
+<p class="fs-1 text-left fw-bold text-center title subtitulos" style="color: #fccc0a; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); padding: 15px; background: linear-gradient(to bottom, #2586a6, #f8f7f6);"
+>Historial de muestras</p>
+
+<main class="container-fluid mt-3">
+  
+<section style="display: flex; justify-content: center; align-items: center;">
+  <ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'muestras' %}" style="color: #45B39D; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 17px">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">styler</span>
+          Muestras Ingresadas
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'historial_muestras' %}" style="color: #0B2265; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 17px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">history</span>
+          Historial De Muestras
+        </div>
+      </a>
+    </li>
+    <!--<li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{% url 'muestras_recibidas' %}" style="color: #FFB612; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);"">
+          <div class="d-flex flex-column icon-above-text">
+            <span class="material-symbols-rounded">history</span>
+            Muestras Entregadas
+          </div>
+        </a>
+      </li>-->
+  </ul>
+</section>
+  
+<div class="form-outline mt-5 container-sm">
+  <input type="text" class="form-control form-control-lg " id="datatable-search-input" placeholder="Buscar Consulta. . ." style="border:solid 6px #A9CCE3; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); border-radius: 25px;"/>
+  <label class="form-label" for="datatable-search-input" ></label>
+</div>
+
+<div class="container-fluid mb-5" id="datatable-container">
+      <table class="table table-info table-borderless table-sm table-hover table-responsive table-striped" style="border: solid 10px; color: #A9CCE3;" id="datatable">
+        <thead class="table-primary sticky-top">
+        <tr>
+          <th class="text-center">FECHA</th>
+          <th class="text-center">F. SURTIDO</th>
+          <th class="text-center">FOLIO</th>
+          <th class="text-center">PAQUETERIA</th>
+          <th class="text-center">GUIA</th>
+          <th class="text-center">CLIENTE</th>
+          <th class="text-center">VENDEDOR</th>
+          <th class="text-center">ESTADO</th>
+          <th class="text-center">PZ. ENVIADAS</th>
+          <th class="text-center">PZ. RECIBIDAS</th>
+          <th class="text-center">DOCUMENTO</th>
+          <th class="text-center">COMENTARIOS</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for fila in result_ped %}
+          <tr>
+            <td class="text-center" style="font-weight: bold;">{{ fila.0|date:"d/m/y" }}</td>
+            <td class="text-center" style="font-style: italic;">{{ fila.1|date:"d/m/y" }}</td>
+            <td class="text-center" style="font-weight: bold;">{{ fila.2 }}</td>
+            <td class="text-center" style="font-style: italic;">{{ fila.3 }}</td>
+            <td class="text-center" style="font-style: italic;"><a target="_blank" href="http://bodegalazzar.ddns.net:3000/envios/{{ fila.4 }}"</a>{{ fila.4 }}</td>
+            <td class="text-center" style="font-weight: bold;" >{{ fila.5 }}</td>
+            <td class="text-center" style="font-weight: bold;">{{ fila.6 }}</td>
+            <td class="text-center" style="font-weight: bold;">{{ fila.7 }}</td>
+            <td class="text-center" style="font-style: italic;">{{ fila.8|floatformat }}</td>
+            <td class="text-center" style="font-style: italic;">{{ fila.9|floatformat }}</td>
+            <td class="text-center" style="font-style: italic;">{{ fila.10 }}</td>
+            <td class="text-center" style="font-style: italic;">{{ fila.11 }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</main>
+<script>
+  $(document).ready(function() {
+    // Filtro de búsqueda por input
+    $('#datatable-search-input').on('input', function() {
+        var searchText = $(this).val().toLowerCase();
+        $('#datatable tbody tr').each(function() {
+            var rowText = $(this).text().toLowerCase();
+            if (rowText.indexOf(searchText) === -1) {
+                $(this).hide();
+            } else {
+                $(this).show();
+            }
+        });
+    });
+});
+</script>
+
+<footer class=" text-center mt-4" style="background-color: #f2f2f2;">
+  <div class="row">
+
+    <section style="padding: 23px;" class="titulos">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/" class="titulos">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center titulos p-4 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px; background: linear-gradient(to top, #0B2265, #2586a6);">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+</footer>
+{% endblock %}

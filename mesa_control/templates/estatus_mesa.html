@@ -1,0 +1,117 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}
+    {{title}}
+{% endblock %}
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<style>
+  .icon-above-text {
+    align-items: center; 
+    text-align: center; 
+  }
+
+  .icon-above-text .material-icons {
+    margin-bottom: 1px; 
+  }
+</style>
+<h1 class="text-center display-1 fw-bold title " style="background-color: #2586a6; color: #f8f7f6; font-weight: bold; text-shadow: 3px 3px 4px rgba(0, 0, 0, 0.7); padding: 5px;">Estatus de pedidos</h1>
+<p class="display-4 text-left fw-bold text-center title subtitulos" style="color: #fccc0a; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); padding: 15px; background: linear-gradient(to bottom, #2586a6, #f8f7f6);"
+>Interno</p>
+
+<main class="container-fluid mt-5">
+
+<section class="container-fluid" style="display: flex; justify-content: center; align-items: center; padding: 25px;">
+  <ul class="nav nav-tabs flex-column flex-sm-row mx-auto" id="ex-with-icons" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" aria-current="page" href="{% url 'pedidos-activos' %}" style="color: #16A085; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 15px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">fast_forward</span>
+          Pedidos Activos
+        </div>
+      </a>
+    </li>
+    <!--<li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'procesos' %}" style="color: #5DADE2; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);"">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">running_with_errors</span>
+          Procesos
+        </div>
+      </a>
+    </li> -->
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{% url 'vencidos' %}" style="color: #CB4335; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 15px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">gpp_bad</span>
+          Pedidos Vencidos
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" aria-current="page" href="{% url 'vencidos_semana' %}" style="color: #F39C12; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 15px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">quick_reference</span>
+          Prox. Vencidos 3 semanas
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'dashboard' %}" style="color: #D4AC0D; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 15px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded" style="font-size: 35px;">donut_small</span>
+          Dashboard
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'factura' %}" style="color: #82E0AA; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 15px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-outlined" style="font-size: 35px;">task</span>
+          Facturación
+        </div>
+      </a>
+    </li>
+    <!--<li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'search_pedido' %}" style="color: #0B2265; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);" >
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-outlined">manage_search</span>
+          Buscar Pedido
+        </div>
+      </a>
+    </li> -->
+        <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'reporte_dia' %}" style="color: #0B2265; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1); font-size: 15px;">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-outlined" style="font-size: 35px;">flag_circle</span>
+          Reporte del día
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>
+</section>
+</div>
+</main>
+
+<!--{%if user.email == 'sistemas@lazzarmexico.com' %}
+<section style="display: flex; justify-content: center; padding: 35px;">
+  <button onclick="window.location.href='{% url 'boton_activos' %}'" class="btn btn-primary text-center" style="border-radius: 25px; font-weight: bold; height: 35px; width: 100px;">Activos</button>
+</section>
+{% endif %}
+{%if user.email == 'desarrollo@lazzarmexico.com' %}
+<section style="display: flex; justify-content: center; padding: 35px; mt-5">
+  <button onclick="window.location.href='{% url 'boton_activos' %}'" class="btn btn-primary text-center" style="border-radius: 25px; font-weight: bold; height: 35px; width: 100px;">Activos</button>
+</section>
+{% endif %}-->
+
+
+{% endblock %}

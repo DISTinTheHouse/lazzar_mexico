@@ -1,0 +1,61 @@
+{% extends 'configuracion.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<div class="container-fluid">
+    <div class="p-3 mb-2 bg-secondary text-white">Catálogo de Empleados</div>
+    <hr class="container">
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Contrato</th>
+            <th scope="col">Fecha Alta</th>
+            <th scope="col">Vencimiento</th>
+            <th scope="col">Apellido Paterno</th>
+            <th scope="col">Apellido Materno</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Puesto</th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Ubicación</th>
+            <th scope="col">Correo Institucional</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Jefe Inmediato</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for empleado in empleados %}
+                <tr>
+                    <th scope="row">{{ empleado.codigo }}</th>
+                    <th>{{ empleado.contrato }}</th>
+                    <th>{{ empleado.fecha_alta }}</th>
+                    <th>{{ empleado.fecha_vencimiento }}</th>
+                    <th>{{ empleado.apellido_paterno }}</th>
+                    <th>{{ empleado.apellido_materno }}</th>
+                    <th>{{ empleado.nombre }}</th>
+                    <th>{{ empleado.puesto }}</th>
+                    <th>{{ empleado.departamento }}</th>
+                    <th>{{ empleado.ubicacion }}</th>
+                    <th>{{ empleado.correo_instucional }}</th>
+                    <th>{{ empleado.correo }}</th>
+                    <th>{{ empleado.jefe }}</th>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+</div>
+{% endblock %}

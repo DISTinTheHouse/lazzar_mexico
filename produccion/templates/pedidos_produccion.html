@@ -1,0 +1,75 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center display-4 mt-3 fw-bold" style="background-color: #C5CAE9; color: #FBFCFC; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);">Pedidos</h1>
+<p class="fs-3 text-center fw-bold" style=" color: #566573; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);">Materiales</p>
+<hr> <!--................................................-->
+
+<main class="container mt-3">
+  <ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'stock' %}" style="color: #566573; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">edit_square</span>
+          Stock
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'pedidos_ep' %}" style="color: #16A085; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">package_2</span>
+          Pedidos + P 
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'produccion_activos' %}" style="color: #2471A3; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-outlined">production_quantity_limits</span>
+          Producción
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="{% url 'pedidos_cedicor' %}" style="color: #A93226; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">rainy_snow</span>
+          Pedido Corte
+        </div>
+      </a>
+    </li>
+  </ul>
+  <style>
+    .icon-above-text {
+      align-items: center; 
+      text-align: center; 
+    }
+  
+    .icon-above-text .material-icons {
+      margin-bottom: 1px; 
+    }
+  </style>
+</main>
+
+<footer class=" text-center mt-4 fixed-bottom" style="background-color: #F5F5F5;">
+  <div class="row">
+
+    <section class="mb-4 mt-4">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center p-3 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+</footer>
+{% endblock %}

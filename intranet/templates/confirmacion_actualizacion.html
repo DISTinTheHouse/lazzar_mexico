@@ -1,0 +1,21 @@
+{% extends 'configuracion.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<div class="container-fluid">
+    <div class="p-3 mb-2 bg-secondary text-white">Actualización Correcta</div>   
+</div>
+{% endblock %}

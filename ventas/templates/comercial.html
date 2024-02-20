@@ -1,0 +1,40 @@
+{% extends 'layouts/menuc.html' %}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+    <h1 class="text-center display-4 mt-3">Comercial</h1>
+    <hr>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success text-center">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if user.email %}
+
+<main class="container pd-4">
+    <section class="card-body">
+
+        <h3 class="display-6 pd-5 text-center mt-4">Favor de seleccionar en el Menu la opción deseada </h3>
+    
+    </section>
+    
+</main>
+
+    {% endif %}
+{% endblock %}

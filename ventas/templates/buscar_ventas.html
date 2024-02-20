@@ -1,0 +1,170 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+  Listado de Pedidos
+{% endblock %}
+
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<h1 class="text-center display-4 mt-3 fw-bold" style="background-color: #D0ECE7; color: #566573; font-weight: bold;">Buscar</h1>   
+<hr> <!--................................................-->
+<main class="container">
+<!-- ---------.....ESTILO ICONOS.....--------- -->
+      <style>
+        .icon-above-text {
+          align-items: center; 
+          text-align: center; 
+        }
+      
+        .icon-above-text .material-icons {
+          margin-bottom: 3px; 
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+          }
+        
+          .material-icons-round {
+            margin-right: 5px;
+          }
+      </style>
+<!-- ---------.....ESTILO ICONOS.....--------- -->
+  <div class="row justify-content-center mb-5"> <!--Se reemplazo box -->
+    <div class="col-md-4 col-lg-4 mt-3 text-center mb-5"style="border:solid 6px #AED6F1; padding: 15px; border-radius: 30px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);"> 
+      <form action="{% url 'buscar_ventas' %}" method="POST" class="card card-body text-center mt-5"style="border:solid 6px #EAECEE; border-radius: 30px;">
+        {% csrf_token %}
+      
+        <label for="start_pedido"style="color: #808B96;">Pedido:</label>
+        <input type="text" name="start_pedido" placeholder="Pedido:" style="border:solid 3px #ABB2B9; padding: 5px; border-radius: 15px; color: #ABB2B9;"/>
+
+        <hr>
+
+        <button type="submit button" class="btn btn-outline-info pd-3 justify-content-center"style="border-radius: 15px;">
+          <span class="material-symbols-rounded">manage_search</span>
+          BUSCAR
+        </button>
+
+      </form>
+    </div>
+  </div>
+
+  <div id="datatable">
+    <div class="row"> <!--Se reemplazo box -->
+        <div class="col-md-12 col-lg-12 mt-5"> 
+        {% if leyenda %}
+        </br>
+        <table class="table table-striped table-bordered mt-4" cellspacing="0" cellpadding="0" id="miTabla"
+        style="border:solid 5px #9A7D0A; padding: 25px">
+            <thead>
+                <tr class="table-warning">
+                    <th>PEDIDO</th>
+                    <th>FECHA</th>
+                    <th>ORDEN</th>
+                    <th>PIEZAS</th>
+                    <th>ENTREGADO</th>
+                    <th>PROVEEDOR</th>
+                    <th>FECHA DE SURTIDO</th>
+                    <th>RECEPCIÓN DE LA ORDEN</th>
+                    <th>FECHA DE ENTREGA</th>
+                    <th>SURTIDO</th>
+                    <th>ESTATUS</th>
+                    <th>RECIBIÓ</th>
+                    <th>DESEBRÓ</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in resultado %}
+                    <tr>
+                        <td>{{ fila.0 }}</td>
+                        <td>{{ fila.1 | date:"d/m/y" }}</td>
+                        <td>{{ fila.2 }}</td>
+                        <td>{{ fila.11|floatformat:0 }}</td>
+                        <td>{{ fila.12|floatformat:0 }}</td>
+                        <td>{{ fila.3 }}</td>
+                        <td>{{ fila.4|date:"d/m/y" }}</td>
+
+                        {% if fila.5|date:"Y-m-d" == "1900-12-31" %}
+                            <td></td>
+                        {% else %}
+                            <td>{{ fila.5|date:"d/m/y" }}</td>
+                        {% endif %}
+
+                        {% if fila.6|date:"Y-m-d" == "1900-12-31" %}
+                            <td></td>
+                        {% else %}
+                            <td>{{ fila.6|date:"d/m/y" }}</td>
+                        {% endif %}
+                        
+                        {% if fila.7 is none %}
+                            <td></td>
+                        {% else %}
+                            <td>{{ fila.7 }}</td>
+                        {% endif %}
+
+                        {% if fila.8 is none %}
+                            <td></td>
+                        {% else %}
+                            <td>{{ fila.8 }}</td>
+                        {% endif %}
+
+                        {% if fila.9 is none %}
+                            <td></td>
+                        {% else %}
+                            <td>{{ fila.9 }}</td>
+                        {% endif %}
+
+                        {% if fila.10 is none %}
+                            <td></td>
+                        {% else %}
+                            <td>{{ fila.10 }}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      </div>
+
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+
+        <script>
+            $(document).ready(function() {
+             $('#miTabla').DataTable({
+            });
+            });
+        </script>
+    </div>
+
+</main>
+
+
+<footer class="bg-light text-center mt-4">
+
+    <div class="row">
+  
+      <section class="mb-4 mt-4">
+        © 2023 Copyright:
+        <a class="text-dark" href="https://www.lazzarmexico.com/">Lazzarmexico.com</a>
+        
+      </section>
+  
+    <div class="text-center p-3 larger-text" style="background-color: rgba(14, 102, 85); font-size: 18px">
+        <p style="color: azure;">
+            Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+        </p>
+    </div>
+
+  </footer>
+
+{% endif %}
+{% endblock %}

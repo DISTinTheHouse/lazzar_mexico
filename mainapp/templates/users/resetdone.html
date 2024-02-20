@@ -1,0 +1,48 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center display-4 mt-3" style="color: #566573;">{{title}}</h1>
+
+<main class="container">
+    <div class="row">
+        <h3>Le enviamos instrucciones por correo electrónico para configurar su contraseña, si existe una cuenta con el correo electrónico que ingresó. Debería recibirlos en breve.</h3>
+
+        <h3>Si no recibe un correo electrónico, asegúrese de haber ingresado la dirección con la que se registró y verifique su carpeta de correo no deseado.</h3>
+    </div>
+<!-- ---------.....ESTILO ICONOS.....--------- -->
+<style>
+    .btn {
+        display: flex;
+        align-items: center;
+      }
+    
+      .material-icons-round {
+        margin-right: 15px;
+      }
+  </style>
+<!-- ---------.....ESTILO ICONOS.....--------- -->
+</main>
+
+<footer class="bg-light text-center mt-4 fixed-bottom">
+
+    <div class="row">
+  
+      <section class="mb-4 mt-4">
+        © 2023 Copyright:
+        <a class="text-dark" href="https://www.lazzarmexico.com/">Lazzarmexico.com</a>
+        
+      </section>
+  
+    <div class="text-center p-3 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px">
+        <p style="color: azure;">
+            Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+        </p>
+    </div>
+
+  </footer>
+{% endblock %}

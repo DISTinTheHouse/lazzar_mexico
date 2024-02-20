@@ -1,0 +1,247 @@
+{% extends 'layouts/layout.html' %}
+{% block title %}
+  Soporte Lazzar
+{% endblock %}
+{% block content %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<style>
+  .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+    .btn-warning:hover {
+        background-color: #ffc107;
+        color: #ffffff;
+        transform: scale(1.1);
+    }
+    .btn-success{
+      background-color: #99f7ab;
+      color: #212529;
+    }
+    .btn-success:hover {
+      background-color: #75dddd;
+      color: #ffffff;
+      transform: scale(1.1);
+    }
+    .btn-danger:hover {
+      transform: scale(1.1);
+  }
+  .custom-file-input {
+      display: none; /* Oculta el input de tipo archivo predeterminado */
+  }
+
+  .custom-file-label {
+      border: 3px solid #3498db; 
+      color: #3498db; 
+      padding: 9px 14px;
+      border-radius: 10px;
+      cursor: pointer; 
+  }
+
+  .custom-file-input:focus + .custom-file-label {
+      border-color: #0b2265; /* Cambia el color del borde cuando el input está enfocado */
+  }
+
+  .custom-file-input:active + .custom-file-label {
+      border-color: #e1bc29; /* Cambia el color del borde cuando se hace clic en el input */
+  }
+</style>
+</style>
+  <header class="blog-header title">
+    <div class=" bg-info text-white text-center title">
+      <h1 class="subtitulos fs-1" style="padding: 25px; background: linear-gradient(to bottom, #2586a6, #f8f7f6); color: #a71930;">
+        {{ ticket.asunto }}
+      </h1>
+    </div>
+  </header>
+  <main class="container-fluid">
+    <div class="row g-5">
+      <div class="col-md-8">
+        <h2 class="fst-italic border-bottom titulos text-center" style="padding: 25px; color: #0b2265; background-color: #f2f2f2;">
+          {{ ticket.usuario }} - envió esta solicitud el {{ ticket.fecha_alta|date:"d/m/y" }}
+        </h2>
+        <article class="blog-post">
+          <h3 class="blog-post-title titulos fs-3" style="color: #75dddd;">Solicitud # {{ ticket.folio }}:</h3>
+  
+          <p class="text-monospace titulos" style="color: #0b2265;">{{ ticket.descripcion }}.</p>
+          <p class="text-monospace titulos" style="color: #8e1529;">
+          {% if ticket.adjuntos %}
+            {{ ticket.adjuntos }} <a href="{{ ticket.adjuntos.url }}" target="_blank" download>Descargar</a>
+          {% endif %}
+          </p>
+          <hr>
+          {% if ticket.respuestas.all %}
+            <h3 class="titulos" style="color: green;">Historial de Respuestas</h3>
+              {% for respuesta in ticket.respuestas.all %}
+                <h4 class="blog-post-title titulos">
+                  {% if respuesta.tecnico.nombre != None %}
+                    {{ respuesta.tecnico.nombre }} - {{ respuesta.fecha_respuesta|date:"d/m/y" }}
+                  {% else %}
+                    {{ respuesta.usuario }} - {{ respuesta.fecha_respuesta|date:"d/m/y" }}
+                  {% endif %}
+                </h4>
+                <p class="text-monospace titulos" style="color: green;">{{ respuesta.respuesta_texto }}.</p>
+                {% if respuesta.adjuntos_res %}
+                  {{ respuesta.adjuntos_res}} <a href="{{ respuesta.adjuntos_res.url }}" target="_blank" download>Descargar</a>
+                {% endif %}
+                <hr>
+              {% endfor %}
+          {% endif %}
+
+          {% if ticket.estatus == "Resuelta" %}
+            <form method="post" action="{% url 'cambia_status' ticket.folio %}">
+              {% csrf_token %}
+
+              <input type="hidden" id="estatus" name="estatus" value="Abierta" required="">
+              <button class="btn btn-danger" type="submit" value="cambia_status">Abrir de nuevo la solicitud</button> 
+
+            </form>
+          {% else %}
+            {% if user.is_authenticated %}
+              <!-- Agrega formulario para agregar respuesta si el usuario está autenticado -->
+              <form method="post" enctype="multipart/form-data" action="{% url 'agregar_respuesta' ticket.folio %}">
+                {% csrf_token %}
+
+                <input type="hidden" name="tecnico_id" value="{{ ticket.tecnico.id }}">
+
+                <div class="form-group">
+                  <strong><label for="respuesta_texto" class="titulos" style="color: #0b2265;">Agregar Respuesta:</label></strong>
+                  <textarea class="form-control titulos" name="respuesta_texto" placeholder="Agrega tu respuesta maximo de 250 caracteres..." cols="40" rows="10" required="" id="respuesta_texto"></textarea>
+                </div>
+                <hr>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" id="adjuntos_res" name="adjuntos_res" onchange="verificarArchivoAdjunto()">
+                  <label class="custom-file-label titulos" for="adjuntos_res">Click aquí si desea agregar un archivo. . .</label>
+                  <div class="invalid-feedback titulos">No has seleccionado ningún archivo</div>
+                </div>
+                <hr>
+                <button class="btn btn-success titulos rounded-pill" type="submit" value="agregar_respuesta">Enviar Respuesta</button> 
+              </form>
+            {% endif %}
+          {% endif %}
+      </div>
+      <div class="col-md-4">
+          <div class="position-sticky" style="top: 2rem;">            
+            <div class="p-4 mb-3 bg-light rounded">
+                <h4 class="fst-italic titulos text-center fs-3" style="color: #75dddd; background-color: #f2f2f2; padding: 25px;">Solicitud # {{ ticket.folio }}</h4>
+                <p class="mb-0 titulos text-center" style="color: #0b2265;">{{ usuario_log }} - envió esta solicitud el {{ ticket.fecha_alta|date:"d/m/y" }}</p>
+                <hr>
+                <h4 class="fst-italic titulos text-center" style="color: #0b2265;">Estado:</h4>
+                {% if ticket.estatus == "Abierta" %}
+                  <p class="text-danger subtitulos text-center">{{ ticket.estatus }}</p>
+                {% elif ticket.estatus == "Esperando su respuesta" %}
+                  <p class="text-warning subtitulos text-center">{{ ticket.estatus }}</p>
+                {% else %}
+                  <p class="text-success subtitulos text-center">{{ ticket.estatus }}</p>
+                {% endif %}
+                <h4 class="fst-italic titulos text-center" style="color: #0b2265;">Prioridad:</h4>
+                <p class="mb-0 subtitulos text-center">{{ ticket.prioridad }}</p>
+                <h4 class="fst-italic titulos text-center" style="color: #0b2265;">Asignado a</h4>
+                <p class="mb-0 subtitulos text-center">{{ ticket.tecnico.nombre }}</p>
+                <hr>
+                {% if soporte %}
+                  <!-- Agrega formulario para agregar respuesta si el usuario está autenticado -->
+                  <form method="post" action="{% url 'cambia_status' ticket.folio %}">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                      <label for="estatus" class="text-center">Estatus</label>
+                      <select class="form-control titulos" id="estatus" name="estatus" required="">
+                        <option></option>
+                        <option value='Abierta'>Abierta</option>
+                        <option value='Esperando su respuesta'>Esperando su respuesta</option>
+                        <option value='Resuelta'>Resuelta</option>               
+                      </select>
+                    </div>
+                    <hr>
+                    <button class="btn btn-warning titulos rounded-pill" type="submit" value="cambia_status" style="display: flex; justify-content: center; align-items: center;">Guardar</button> 
+                  </form>
+                {% endif %}
+            </div>
+          </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.5/js/dataTables.semanticui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.2/semantic.min.js"></script>
+<script>
+  function verificarArchivoAdjunto() {
+      var adjuntoInput = document.getElementById('adjuntos_res');
+      var label = adjuntoInput.nextElementSibling;  // Obtener el elemento siguiente al input
+
+      if (adjuntoInput.files.length > 0) {
+          // Archivo seleccionado, actualiza el texto del label
+          label.innerHTML = adjuntoInput.files[0].name;
+      } else {
+          // No hay archivo seleccionado, restaura el texto por defecto
+          label.innerHTML = 'Agregue un archivo...';
+      }
+  }
+</script>
+<script>
+    $(document).ready(function() {
+      $('#miTabla').DataTable({
+
+        // Habilitar filtros por columna
+        initComplete: function () {
+        this.api().columns().every(function () {
+            var column = this;
+            var select = $('<select><option value=""></option></select>')
+            .appendTo($(column.footer()).empty())
+            .on('change', function () {
+                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                column.search(val ? '^' + val + '$' : '', true, false).draw();
+            });
+    
+            column.data().unique().sort().each(function (d, j) {
+            select.append('<option value="' + d + '">' + d + '</option>');
+            });
+        });
+        }
+    });
+    });
+</script>
+<footer class=" text-center mt-4" style="background-color: #f2f2f2;">
+  <div class="row">
+
+    <section style="padding: 23px;" class="titulos">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/" class="titulos">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center titulos p-4 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px; background: linear-gradient(to top, #0B2265, #2586a6);">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+</footer>
+{% endblock %}

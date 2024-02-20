@@ -1,0 +1,61 @@
+{% extends 'configuracion.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<div class="container-fluid">
+    <div class="p-3 mb-2 bg-secondary text-white">Actualiza Bono</div>
+    <hr class="container">
+
+    <h1>Actualizar Calificaciones</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_año">Año:</label>
+        <input type="number" id="id_año" name="año">
+        <label for="id_mes">Mes:</label>
+        <input type="number" id="id_mes" name="mes">
+        <label for="id_quincena">Quincena:</label>
+        <input type="number" id="id_quincena" name="quincena">
+        <button type="submit">Actualizar</button>
+    
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Materno</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Puesto</th>
+                    <th scope="col">Departamento</th>
+                    <th scope="col">Calificación</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for empleado in empleados %}
+                <tr>
+                    <td scope="row">{{ empleado.codigo }}</td>
+                    <td>{{ empleado.apellido_paterno }}</td>
+                    <td>{{ empleado.apellido_materno }}</td>
+                    <td>{{ empleado.nombre }}</td>
+                    <td>{{ empleado.puesto }}</td>
+                    <td>{{ empleado.departamento }}</td>
+                    <td><input type="number" id="id_calificacion_{{ empleado.id }}" name="calificacion_{{ empleado.id }}"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>    
+</div>
+{% endblock %}

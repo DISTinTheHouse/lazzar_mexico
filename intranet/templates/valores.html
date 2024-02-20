@@ -1,0 +1,141 @@
+{% extends 'layouts/menu_intranet.html' %}
+{% load static %}
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<b><p style="font-size: 2em; text-align: center; color: #ffb612;"><span id="fecha"></span></p></b>
+
+
+<section class="container mt-5" style="text-align: justify; font-size: 18px;">
+  <div class="mb-3" style="border:solid 3px #ffb612; padding: 25px; border-radius: 30px; box-shadow:0 10px 20px rgba(0, 0, 0, 0.6);">
+       <p>Los valores en una empresa son principios fundamentales que guían el comportamiento y las decisiones de la organización
+         y sus miembros. Estos valores proporcionan una base ética y cultural que influye en cómo se llevan a cabo las actividades
+          y se interactúa dentro y fuera de la empresa. Aquí hay algunas funciones clave de los valores en una empresa:</p>
+
+        <p>En resumen, los valores en una empresa son esenciales para establecer una cultura sólida, orientar el comportamiento
+           y las decisiones, y contribuir al éxito a largo plazo de la organización.</p>
+
+       
+   
+
+</div>
+</section>
+ 
+    <div id="carouselExampleFade" class="carousel slide carousel-fade container mb-4" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'img/honestidad.png' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/confianza.png' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/responsabilidad.png' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/lealtad.png' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/compromiso.png' %}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'img/respeto.png' %}" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+
+
+<!-- Footer -->
+<footer class="text-center text-white" style="background-color: #0B2265;">
+  <!-- Grid container 
+  <div class="container p-4">
+  
+  <section class="">
+  
+  <div class="row">
+  
+  <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+  <h5 class="text-uppercase">Contacta con tus compañeros</h5>
+  
+  <ul class="list-unstyled mb-0">
+  <li>
+  <a href="{% url 'directorio' %}" class="text-white" style="font-size: 20px;">Directorio Lazzar</a>
+  </li>
+  </ul>
+  </div>
+  
+  
+  
+  <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+  <a href="{% url 'recursoshumanos' %}"><h5 class="text-uppercase" style="color: white;">Recursos Humanos</h5></a>
+  </div>
+  
+  
+  
+  <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+  <h5 class="text-uppercase">Recursos para colaboradores</h5>
+  
+  <ul class="list-unstyled mb-0">
+  <li>
+  <a href="#!" class="text-white" style="font-size: 20px;">Mi Bono</a>
+  </li>
+  </ul>
+  </div>
+  
+  
+  
+  <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+  <h5 class="text-uppercase">Portales Lazzar</h5>
+  
+  <ul class="list-unstyled mb-0">
+  <li>
+  <a href="https://portal-lazzar.com/inicio" class="text-white" style="font-size: 20px;">Portal Lazzar</a>
+  </li>
+  </ul>
+  </div>
+        
+ 
+  </div>
+ 
+
+  </div>-->
+  
+  
+  
+  <div class="text-center p-3" style="background-color: #0B2265;">
+     
+  <a class="text-white" href="https://www.lazzarmexico.com/?gad_source=1&gclid=CjwKCAiA0syqBhBxEiwAeNx9N9qr5NZiQtMzemAF1oxE1KCO3GMdkljiwfnZrojzigeE9L6HeAw61BoCPOMQAvD_BwE" style="font-size: 24px; text-decoration: none;"> ©2024 lazzarmexico.com</a> 
+  <a class="text-white" href="{% url 'nosotros' %}" style="text-decoration: none;">- con tecnologia de Lazzar IT</a>
+  </div>
+  </footer>
+
+      <script>
+        function actualizarFecha() {
+            var fechaElemento = document.getElementById("fecha");
+            var fechaActual = new Date();
+            var opciones = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            fechaElemento.textContent = fechaActual.toLocaleDateString('es-ES', opciones);
+        }
+      
+        // Llama a la función para actualizar la fecha cada segundo
+        actualizarFecha();
+        setInterval(actualizarFecha, 1000);
+      </script>
+{% endblock %}

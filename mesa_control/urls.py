@@ -1,0 +1,31 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('estatus_mesa/',views.estatus_mesa, name="estatus_mesa"),
+    path('activos/',views.activos, name="activos"),
+    path('pedidos-activos/',views.estatus_pedido_mesa, name="pedidos-activos"),
+    path('detalle/',views.detalle, name="detalle"),
+    path('dashboard/', views.dashboard, name="dashboard"),
+    path('vencidos/', views.vencidos, name="vencidos"),
+    path('produccion/',views.bit_produccion, name="produccion"),
+    path('faltantes/',views.faltantes, name="faltantes"),
+    path('vencidos_semana/', views.vencidos_semana, name="vencidos_semana"),
+    path('existencias_mesa/', views.existencias_mesa, name="existencias_mesa"),
+    path('procesos/', views.procesos, name="procesos"),
+    path('factura/', views.factura, name="factura"),
+    path('detalle_factura/', views.detalle_factura, name="detalle_factura"),
+    path('factura_pedido/', views.factura_pedido, name="factura_pedido"),
+    path('descargar_excel_activos/', views.descargar_excel_activos, name="descargar_excel_activos"),
+    path('programacion/', views.programacion, name="programacion"),
+    path('muestras/', views.muestras, name="muestras"),
+    path('historial_muestras/', views.historial_muestras, name="historial_muestras"),
+    path('muestras_recibidas/', views.muestras_recibidas, name="muestras_recibidas"),
+    path('reporte_dia/', views.reporte_dia, name="reporte_dia"),
+    path('search_pedido/', views.search_pedido, name="search_pedido"),
+    path('boton_activos/', views.boton_activos, name="boton_activos"),
+    path('info/', views.info, name="info"),
+    path('historial_programacion/', views.historial_programacion, name="historial_programacion"),
+    path('reporte_activos/', views.reporte_activos, name="reporte_activos"),
+    path('reporte_facturados/', views.reporte_facturados, name="reporte_facturados"),
+]

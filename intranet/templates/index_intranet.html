@@ -1,0 +1,338 @@
+{% extends 'layouts/menu_intranet.html' %}
+{% load static %}
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+{% csrf_token %}
+<section style="background: linear-gradient(to bottom, aliceblue, aliceblue);">
+    <div>
+        <h1 style="text-align: center; color: white; font-size: 48px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+            <b>BIENVENIDO A INTRANET LAZZAR</b>
+        </h1>
+    </div>
+</section>
+<!-- //reloj// -->
+<b><p style="font-size: 2em; text-align: center; color: #ffb612;"><span id="fecha"></span></p></b>
+
+
+<section>
+<!-- //noticias// -->
+<h1 style="text-align: center; color: #0B2265;"><b>Noticias</b></h1>
+
+
+
+
+<hr class="container">
+
+<!-- //puntualidad// -->
+<!-- <div id="puntualidad" class="container-fluid" style="text-align: center;">
+<img src="{% static 'img/puntualidad.png' %}" class="img-fluid">
+</div></br><hr class="container">
+
+Mayer Orozco 15/01/2024-->
+
+<!-- <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        {% for imagen in imagenes %}
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %} aria-label="Slide {{ forloop.counter }}">
+            </button>
+        {% endfor %}
+    </div>
+
+    <div class="carousel-inner">
+        {% for imagen in imagenes %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ imagen.imagen.url }}" class="d-block mx-auto img-fluid" alt="{{ imagen }}">
+            </div>
+        {% endfor %}
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div> -->
+
+
+
+<!-- //boletin cositas// -->
+<div class="container-fluid" style="text-align: center;">
+<iframe src="https://issuu.com/lazzarmkt/docs/boletin_nov_enero?fr=xKAE9_zU1NQ" width="1050" height="850" frameborder="0"></iframe></div></br>
+<hr class="container">
+
+
+<!-- //boletos// -->
+<div class="container-fluid" style="text-align: center;">
+<!-- <b><p style="font-size: 36px; color:#ffb612;">Siguiente pedido en:</p></b>
+<div id="countdown" style="font-size: 2em; font-weight: bold; color: #ffb612; text-align: center;"></div> -->
+<img src="{% static 'img/boletos.png' %}"  style="width: 550px; height: 850px;">
+<img src="{% static 'img/combos.png' %}"  style="width: 550px; height: 850px;"></br>
+<br><a href="https://forms.gle/v2F69bmf78ERXAZb8 "><button class="boton-sin-relleno mb-3" style="background: none;
+width: 30%; 
+border: 2px solid black;
+padding: 5px 10px; 
+cursor: pointer; 
+color: black;
+margin: auto; 
+border-radius: 20px;
+font-size: 20px;">
+Pedir Boletos
+</button></a>
+</div>
+<hr class="container">
+</section>
+
+
+
+<!-- //cumpleaños// -->
+<section style="text-align: center;">
+
+    <div class="mb-3" id="mesActual" style="font-size: 48px; font-weight: bold; color: #0b2265;"></div>
+
+    <table class="table table-striped table-bordered container">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">CÓDIGO</th>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">APELLIDO PATERNO</th>
+                <th scope="col">APELLIDO MATERNO</th>
+                <th scope="col">CUMPLEAÑOS</th>
+                <th scope="col">DEPARTAMENTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.codigo }}</td>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.apellido_paterno }}</td>
+                <td>{{ usuario.apellido_materno }}</td>
+                <td>{{ usuario.fecha_cumpleaños|date:"d/m" }}</td>
+                <td>{{ usuario.departamento }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% comment %}
+ <!-- //metas// -->
+<section>  
+<div class="metas" style="display: flex; justify-content: center; align-items: center;">
+<iframe src="https://docs.google.com/spreadsheets/u/0/d/e/2CAIWO3emZkuA1bJMDkGVUVVsd3rx7KnT7mMeMlPJsyYb1BO8ITyra8ixg6GsCCFWutdRHn9fPxokgukMq9Q/gviz/chartiframe?oid=1890227427&resourcekey" width="800" height="1020" frameborder="0"></iframe></div></br> 
+</div>
+<div class="metas" style="display: flex; justify-content: center; align-items: center;">
+<iframe src="https://docs.google.com/spreadsheets/u/0/d/e/2CAIWO3emZkuA1bJMDkGVUVVsd3rx7KnT7mMeMlPJsyYb1BO8ITyra8ixg6GsCCFWutdRHn9fPxokgukMq9Q/gviz/chartiframe?oid=1914240082&resourcekey" width="900" height="1020" frameborder="0"></iframe></div></br>
+</div> 
+</section>   {% endcomment %}
+
+{% comment %}
+<!-- //bono// -->
+<section >
+<hr class="container">
+<div style="background: #0b2265; text-align: center;">
+<h2 style="color: white; text-align: center; font-family: Montserrat; font-size: 48px;"><b>Bono</b></h2>
+<a href="{% url 'bono' %}"><button class="boton-sin-relleno mb-3" style="background: none;
+width: 30%; 
+border: 2px solid #ffff;
+padding: 5px 10px; 
+cursor: pointer; 
+color: white;
+margin: auto; 
+border-radius: 20px;
+font-size: 20px;">
+Ver mi calificación
+</button></a>
+</div> 
+</section>
+{% endcomment %}
+
+{% comment %} <div id="chat-container">
+    <div id="chat-messages"></div>
+    <input type="text" id="user-input" placeholder="Escribe aquí...">
+</div> {% endcomment %}
+
+<script src="https://chatbolt.ai/widget/c58644cb-0105-4a65-b91e-2455da5be27d.js"></script>
+
+{% if user.email == 'sistemas@lazzarmexico.com' %}
+<header class="pb-3" style="background: linear-gradient(to right, #0B2265, #0c2340, #0c2340); padding: 25px;">
+    <form method="post" action="{% url 'inicio_intranet' %}">
+        {% csrf_token %}
+        <div class="input-group">
+            <button type="submit" class="btn btn-primary btn-lg">Enviar Correos De Hoy</button>
+        </div>
+    </form>
+</header>
+{% endif %}
+{% if user.email == 'intranet@lazzar.com.mx' %}
+<header class="pb-3" style="background: linear-gradient(to right, #0B2265, #0c2340, #0c2340); padding: 25px;">
+    <form method="post" action="{% url 'inicio_intranet' %}">
+        {% csrf_token %}
+        <div class="input-group">
+            <button type="submit" class="btn btn-primary btn-lg">Enviar Correos De Hoy</button>
+        </div>
+    </form>
+</header>
+{% endif %}
+{% if user.email == 'desarrollo@lazzarmexico.com' %}
+<header class="pb-3" style="background: linear-gradient(to right, #0B2265, #0c2340, #0c2340); padding: 25px;">
+    <form method="post" action="{% url 'inicio_intranet' %}">
+        {% csrf_token %}
+        <div class="input-group">
+            <button type="submit" class="btn btn-primary btn-lg">Enviar Correos De Hoy</button>
+        </div>
+    </form>
+</header>
+{% endif %}
+
+      <!-- Footer -->
+      <footer class="text-center text-white" style="background-color: #0B2265;">
+        <div class="text-center p-3" style="background-color: #0B2265;">
+        <a class="text-white" href="https://www.lazzarmexico.com/?gad_source=1&gclid=CjwKCAiA0syqBhBxEiwAeNx9N9qr5NZiQtMzemAF1oxE1KCO3GMdkljiwfnZrojzigeE9L6HeAw61BoCPOMQAvD_BwE" style="font-size: 24px; text-decoration: none;"> ©2024 lazzarmexico.com</a> 
+        <a class="text-white" href="{% url 'nosotros' %}" style="text-decoration: none;">- Con tecnologia de Lazzar IT</a>
+        </div>
+        </footer>
+<script>
+function actualizarFecha() {
+    var fechaElemento = document.getElementById("fecha");
+    var fechaActual = new Date();
+    var opciones = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    fechaElemento.textContent = fechaActual.toLocaleDateString('es-ES', opciones);
+}
+
+// Llama a la función para actualizar la fecha cada segundo
+actualizarFecha();
+setInterval(actualizarFecha, 1000);
+</script>
+<script>
+    // Establecer la fecha de finalización
+    const fechaFinalizacion = new Date("December 22, 2023 00:00:00").getTime();
+
+    // Actualizar el contador cada segundo
+    const x = setInterval(function() {
+        // Obtener la fecha y hora actual
+        const fechaActual = new Date().getTime();
+
+        // Calcular la diferencia entre la fecha de finalización y la fecha actual
+        const diferencia = fechaFinalizacion - fechaActual;
+
+        // Calcular días, horas, minutos y segundos
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+        // Mostrar el resultado en el elemento con id "countdown"
+        document.getElementById("countdown").innerHTML = dias + "d " + horas + "h " + minutos + "m " + segundos + "s ";
+
+        // Si la cuenta regresiva ha terminado, mostrar un mensaje
+        if (diferencia < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "¡No te preocupes, contamos con un stock!";
+        }
+    }, 1000);
+</script>
+
+<script>
+    // Función para agregar mensajes al chat
+    function addMessage(sender, message) {
+        const chatMessages = document.getElementById('chat-messages');
+        const newMessage = document.createElement('div');
+        newMessage.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatMessages.appendChild(newMessage);
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Desplazar hacia abajo para mostrar el último mensaje
+    }
+
+    // Función para manejar la entrada del usuario
+    function handleUserInput() {
+        const userInput = document.getElementById('user-input');
+        const userMessage = userInput.value.trim();
+
+        if (userMessage !== '') {
+            addMessage('Tú', userMessage);
+            // Aquí puedes llamar a un servicio de chatbot o realizar tu propia lógica de procesamiento.
+            // En este ejemplo, simplemente responderá con un mensaje fijo.
+            setTimeout(() => addMessage('Chatbot', '¡Hola! Soy un chatbot.'), 500);
+            userInput.value = ''; // Limpiar el campo de entrada
+        }
+    }
+
+    // Manejar el evento cuando el usuario presiona Enter
+    document.getElementById('user-input').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            handleUserInput();
+        }
+    });
+</script>
+
+<script>
+    // Obtener el nombre del mes actual
+    var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    var mesActual = new Date().getMonth();
+    var nombreMes = meses[mesActual];
+
+    // Definir colores para cada mes
+    var coloresMes = ['#0b2265', '#ffb612', '#0b2265', '#ffb612', '#0b2265', '#ffb612', '#0b2265', '#ffb612', '#0b2265', '#ffb612', '#0b2265', '#ffb612'];
+    // Cambiar el color del texto del div según el mes actual
+    document.getElementById('mesActual').innerText = 'Cumpleaños de' + ' ' + nombreMes;
+    document.getElementById('mesActual').style.color = coloresMes[mesActual];
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Obtener el token CSRF del documento HTML
+            var csrftoken = getCookie('csrftoken');
+
+            // Realizar una solicitud AJAX al cargar la página
+            $.ajax({
+                url: '/intranet/',  // URL de la vista index_intranet
+                type: 'POST',  // Cambiar el tipo de solicitud a POST
+                headers: {
+                    'X-CSRFToken': csrftoken  // Agregar el token CSRF como encabezado
+                },
+                success: function(response) {
+                    // La solicitud fue exitosa, puedes realizar acciones adicionales aquí si lo deseas
+                    console.log('La página index de intranet se ha cargado.');
+                    // Manejar la respuesta si es necesario
+                    // Por ejemplo, si la vista devuelve datos en formato JSON, puedes acceder a ellos aquí
+                },
+                error: function(xhr, status, error) {
+                    // Ocurrió un error durante la solicitud
+                    console.error('Error al cargar la página index de intranet:', status, error);
+                }
+            });
+        });
+
+        // Función para obtener el token CSRF del documento HTML
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    // Buscar el token CSRF en las cookies
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+    
+{% endblock %}

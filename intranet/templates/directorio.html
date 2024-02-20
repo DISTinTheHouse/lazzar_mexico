@@ -1,0 +1,555 @@
+{% extends 'layouts/menu.html' %}
+{% load static %}
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+<body>
+    <section style="background: white;">
+      <!-- //slider// -->
+        <div>
+            <h1 style="text-align: center; color: white; font-size: 48px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">
+                <b>DIRECTORIO LAZZAR</b>
+            </h1>
+        </div>
+    </section>
+    <!-- //reloj// -->
+    <b><p style="font-size: 2em; text-align: center; color: #ffb612;"><span id="fecha"></span></p></b>
+   
+      
+<div class="container">
+
+  
+  <section class="mt-5 p-3 bg-light rounded shadow">
+    <div class="d-flex justify-content-center align-items-center">
+      <input class="form-control me-2" placeholder="Filtrar por nombre:" type="text" id="filtro_nombre" oninput="filtrarTabla()">
+    </div>
+</section>
+<table class="table table-hover table-striped table-bordered" id="miTabla">
+  <tr><th class="text-center" colspan="2" style="background-color: #0B2265; color: white;">CORPORATIVO Mar Egeo 1415</th>
+      <th class="text-center" colspan="2" style="background-color: #0B2265; color: white;">(33) 3280-1750 (33) 3280-1770</th></tr>
+  <tr>
+      <th class="text-center">Nombre</th>
+      <th class="text-center">Puesto</th>
+      <th class="text-center">Correo</th>
+      <th class="text-center">Extensión</th>
+  </tr>
+  <tr>
+      <td class="text-center">Rosamaria Lázaro</td>
+      <td class="text-center">Dirección General</td>
+      <td class="text-center">rlazaro@lazzarmexico.com</td>
+      <td class="text-center">119</td>
+  </tr>
+  <tr>
+      <td class="text-center">Ramón Becerra</td>
+      <td class="text-center">Dirección Comercial</td>
+      <td class="text-center">rbecerra@lazzarmexico.com</td>
+      <td class="text-center">112</td>
+  </tr>
+  <tr>
+      <td class="text-center">Roberto Valdivia</td>
+      <td class="text-center">Líder & Ventas | GDL</td>
+      <td class="text-center">rvaldivia@lazzarmexico.com</td>
+      <td class="text-center">103</td>
+  </tr>
+  <tr>
+      <td class="text-center">Sandra Sánchez</td>
+      <td class="text-center">Asistente de Dirección & Ventas</td>
+      <td class="text-center">ssanchez@lazzarmexico.com</td>
+      <td class="text-center">110</td>
+  </tr>
+  <tr>
+      <td class="text-center">Irma Osuna</td>
+      <td class="text-center">Auxiliar de Dirección Comercial</td>
+      <td class="text-center">iosuna@lazzarmexico.com</td>
+      <td class="text-center">101</td>
+  </tr>
+  <tr>
+      <td class="text-center">Ana Bañuelos</td>
+      <td class="text-center">Mercadotecnia</td>
+      <td class="text-center">mercadotecnia@lazzar.com.mx</td>
+      <td class="text-center">114</td>
+  </tr>
+  <tr>
+      <td class="text-center">Andrei Nava Aguilar</td>
+      <td class="text-center">Mercadotecnia Digital</td>
+      <td class="text-center">anava@lazzar.com.mx</td>
+      <td class="text-center">114</td>
+  </tr>
+  <tr>
+      <td class="text-center">Orlando Gutiérrez</td>
+      <td class="text-center">Auditor de Ventas</td>
+      <td class="text-center">ogutierrez@lazzar.com.mx</td>
+      <td class="text-center">114</td>
+  </tr>
+  <tr>
+      <td class="text-center">Diego Malta </td>
+      <td class="text-center">Soporte de Ventas </td>
+      <td class="text-center">dmalta@lazzar.com.mx</td>
+      <td class="text-center">114</td>
+  </tr>
+  <tr>
+      <td class="text-center">María Villegas</td>
+      <td class="text-center">Ventas | GDL</td>
+      <td class="text-center">mvillegas@lazzar.com.mx</td>
+      <td class="text-center">107</td>
+  </tr>
+  <tr>
+      <td class="text-center">Rosy Ramírez</td>
+      <td class="text-center">Ventas | GDL</td>
+      <td class="text-center">rramirez@lazzar.com.mx</td>
+      <td class="text-center">115</td>
+  </tr>
+  <tr>
+      <td class="text-center">Karen Rosales Barrera </td>
+      <td class="text-center">Auxiliar Administrativo de Ventas </td>
+      <td class="text-center">auxiliargdl@lazzar.com.mx</td>
+      <td class="text-center">115</td>
+  </tr>
+  <tr>
+      <td class="text-center">José Guillermo Zuñiga Ayala </td>
+      <td class="text-center">Ventas | GDL</td>
+      <td class="text-center">gzuniga@lazzar.com.mx</td>
+      <td class="text-center">118</td>
+  </tr>
+  <tr>
+      <td class="text-center">Mary Mora</td>
+      <td class="text-center">Asistente Personal Dirección ADO</td>
+      <td class="text-center">mmora@lazzarmexico.com</td>
+      <td class="text-center">102</td>
+  </tr>
+  <tr>
+      <td class="text-center">Maria Ulisa Torres Santillan</td>
+      <td class="text-center">Auxiliar de Contabilidad ADO</td>
+      <td class="text-center">aux.contable@lazzarmexico.com</td>
+      <td class="text-center">116</td>
+  </tr>
+  <tr>
+      <td class="text-center">Luis Emiliano Blanco</td>
+      <td class="text-center">Auxiliar de Contabilidad ADO</td>
+      <td class="text-center">auxcontable@lazzar.com.mx</td>
+      <td class="text-center">116</td>
+  </tr>
+  <tr>
+      <td class="text-center">Edith de Leon Carbajal</td>
+      <td class="text-center">Ventas | GDL</td>
+      <td class="text-center">eleon@lazzar.com.mx</td>
+      <td class="text-center">111</td>
+  </tr>
+  <tr>
+      <td class="text-center">Sara Antúnez Sánchez</td>
+      <td class="text-center">Gerente Family Office</td>
+      <td class="text-center">santunez@lazzarmexico.com</td>
+      <td class="text-center">105</td>
+  </tr>
+  
+  <tr><th class="text-center" colspan="2" style="background-color: #0B2265; color: white;">CENTRO DE DISTRIBUCIÓN Y ALMACÉN GREGORIO DÁVILA 1445</th>
+      <th class="text-center" colspan="2" style="background-color: #0B2265; color: white;">(33) 3817-8395 (33) 3823-3898</th></tr>
+  <tr>
+      <th class="text-center">Nombre</th>
+      <th class="text-center">Puesto</th>
+      <th class="text-center">Correo</th>
+      <th class="text-center">Extensión</th>
+  </tr>
+  <tr>
+      <td class="text-center">José de Jesús Álvarez</td>
+      <td class="text-center">Gerente de Operaciones</td>
+      <td class="text-center">embarque@lazzarmexico.com</td>
+      <td class="text-center">108</td>
+  </tr>
+  <tr>
+      <td class="text-center">Julio César Barba Toscano</td>
+      <td class="text-center">Coordinador de embarques</td>
+      <td class="text-center">logistica@lazzar.com.mx</td>
+      <td class="text-center">108</td>
+  </tr>
+  <tr>
+      <td class="text-center">Carolina Jimenez</td>
+      <td class="text-center">Capturista de guías</td>
+      <td class="text-center">embarques@lazzarmexico.com</td>
+      <td class="text-center">108</td>
+  </tr>
+  <tr>
+      <td class="text-center">Gabriela Lira</td>
+      <td class="text-center">Coordinador de Mesa de Control</td>
+      <td class="text-center">glira@lazzar.com.mx</td>
+      <td class="text-center">115</td>
+  </tr>
+  <tr>
+    <td class="text-center">Carolina Cortéz</td>
+    <td class="text-center">Programación</td>
+    <td class="text-center">programacion@lazzar.com.mx</td>
+    <td class="text-center">115</td>
+</tr>
+<tr>
+  <td class="text-center">Fernanda Ponce</td>
+  <td class="text-center">Auxiliar de Mesa de Control</td>
+  <td class="text-center">pedidos@lazzarmexico.com</td>
+  <td class="text-center">107</td>
+</tr>
+<tr>
+<td class="text-center">Judith Moreno</td>
+<td class="text-center">Coordinador de Compras Producto Terminado</td>
+<td class="text-center">compras@lazzarmexico.com</td>
+<td class="text-center">111</td>
+</tr>
+<tr>
+<td class="text-center">Jorge Mauno Leyva</td>
+<td class="text-center">Coordinador de Almacén</td>
+<td class="text-center">inventario@lazzar.com.mx</td>
+<td class="text-center">104</td>
+</tr>
+<tr>
+<td class="text-center">Alejandra Vargas Chew</td>
+<td class="text-center">Auxiliar Administrativo de Almacén</td>
+<td class="text-center">almacen@lazzar.com.mx</td>
+<td class="text-center">104</td>
+</tr>
+<tr>
+<td class="text-center">Verónica Álvarez</td>
+<td class="text-center">Auxiliar de muestras y devoluciones</td>
+<td class="text-center">almacen2@lazzarmexico.com</td>
+<td class="text-center">105</td>
+</tr>
+<tr>
+<td class="text-center">Sócrates Osorio</td>
+<td class="text-center">Recepción de mercancía</td>
+<td class="text-center">almacen@lazzarmexico.com</td>
+<td class="text-center">112</td>
+</tr>
+<tr>
+<td class="text-center">Roberto Omar Olmos</td>
+<td class="text-center">Coordinador de Calidad</td>
+<td class="text-center">calidad@lazzar.com.mx</td>
+<td class="text-center">106</td>
+</tr>
+<tr>
+<td class="text-center">Josías Mendoza</td>
+<td class="text-center">Auditor de Calidad en sitio</td>
+<td class="text-center">jmendoza@lazzar.com.mx</td>
+<td class="text-center">01 (33) 19876911</td>
+</tr>
+<tr>
+<td class="text-center">Diego Alberto Medina</td>
+<td class="text-center">Auxiliar de Mesa de Control</td>
+<td class="text-center">pedidos@lazzar.com.mx</td>
+<td class="text-center">107</td>
+</tr>
+<tr><th class="text-center" colspan="2" style="background-color: #0B2265; color: white;">ADMINISTRACIÓN / BORDADOS GREGORIO DÁVILA 1425</th>
+<th class="text-center" colspan="2" style="background-color: #0B2265; color: white;">(33) 3817-8395 (33) 3823-3898</th></tr>
+<tr>
+<td class="text-center">Yolanda Curiel Hernández</td>
+<td class="text-center">Directora de Administración</td>
+<td class="text-center">ycuriel@lazzarmexico.com</td>
+<td class="text-center">124</td>
+</tr>
+<tr>
+<td class="text-center">Alexander Przybylski</td>
+<td class="text-center">Director de Operaciones</td>
+<td class="text-center">alexp@lazzar.com.mx</td>
+<td class="text-center">104</td>
+</tr>
+<tr>
+<td class="text-center">César Oswaldo Ramírez</td>
+<td class="text-center">Subdirector de Operaciones</td>
+<td class="text-center">cramirez@lazzar.com.mx</td>
+<td class="text-center">104</td>
+</tr>
+<tr>
+<td class="text-center">Jimena Castro</td>
+<td class="text-center">Gerente de Recursos Humanos</td>
+<td class="text-center">recursoshumanos@lazzarmexico.com </td>
+<td class="text-center">116</td>
+</tr>
+<tr>
+  <td class="text-center">Yolotl Gonzalez Aguirre</td>
+  <td class="text-center">Auxiliar Contable</td>
+  <td class="text-center">recursoshumanos@lazzar.com.mx</td>
+  <td class="text-center">119</td>
+</tr>
+<tr>
+<td class="text-center">Jessica Adriana Nuño Sánchez</td>
+<td class="text-center">Contador General</td>
+<td class="text-center">contabilidad@lazzar.com.mx</td>
+<td class="text-center">122</td>
+</tr>
+<tr>
+<td class="text-center">Alberto González García</td>
+<td class="text-center">Auxiliar Contable</td>
+<td class="text-center">aux.cobranza@lazzar.com.mx</td>
+<td class="text-center">118</td>
+</tr>
+<tr>
+<td class="text-center">Hilary Gómez Zamudio</td>
+<td class="text-center">Auxiliar Contable</td>
+<td class="text-center">aux.contable@lazzar.com.mx</td>
+<td class="text-center">117</td>
+</tr>
+<tr>
+<td class="text-center">Judith Luis Martínez</td>
+<td class="text-center">Coordinadora de Crédito y Cobranza</td>
+<td class="text-center">cobranza@lazzarmexico.com</td>
+<td class="text-center">120</td>
+</tr>
+<tr>
+<td class="text-center">Yojani Román Gaxiola</td>
+<td class="text-center">Auxiliar de crédito y cobranza</td>
+<td class="text-center">cobranza@lazzar.com.mx</td>
+<td class="text-center">121</td>
+</tr>
+<tr>
+<td class="text-center">Gabriel Hernández Cárdenas </td>
+<td class="text-center">Auxiliar de crédito y cobranza</td>
+<td class="text-center">auxcobranza@lazzarmexico.com</td>
+<td class="text-center">121</td>
+</tr>
+<tr>
+<td class="text-center">Mayer Orozco Piña</td>
+<td class="text-center">Gerente de sistemas</td>
+<td class="text-center">sistemas@lazzarmexico.com</td>
+<td class="text-center">109</td>
+</tr>
+<tr>
+<td class="text-center">Jonathan Saúl Castillo</td>
+<td class="text-center">Auxiliar de Sistemas-Proscai</td>
+<td class="text-center">sistemas@lazzar.com.mx</td>
+<td class="text-center">109</td>
+</tr>
+<tr>
+<td class="text-center">Jesus Alberto Ibarra Morales</td>
+<td class="text-center">Programador Jr</td>
+<td class="text-center">desarrollo@lazzarmexico.com</td>
+<td class="text-center">109</td>
+</tr>
+<tr>
+<td class="text-center">Oscar Zermeño</td>
+<td class="text-center">Auxiliar de Sistemas-Intranet</td>
+<td class="text-center">intranet@lazzar.com.mx</td>
+<td class="text-center">109</td>
+</tr>
+<tr>
+<td class="text-center">Abigail Barajas</td>
+<td class="text-center">Líder de producción</td>
+<td class="text-center">viviana@lazzar.com.mx</td>
+<td class="text-center">113</td>
+</tr>
+<tr>
+<td class="text-center">Carlos Alberto Tapia</td>
+<td class="text-center">Líder de producción</td>
+<td class="text-center">produccion@lazzarmexico.com</td>
+<td class="text-center">113</td>
+</tr>
+<tr>
+<td class="text-center">José Bernardo Galindo Ramirez</td>
+<td class="text-center">Líder de producción</td>
+<td class="text-center">produccion@lazzar.com.mx</td>
+<td class="text-center">113</td>
+</tr>
+<tr>
+<td class="text-center">Ulises Ambríz</td>
+<td class="text-center">Líder de Planeación</td>
+<td class="text-center">planeacion@lazzar.com.mx</td>
+<td class="text-center">113</td>
+</tr>
+<tr>
+<td class="text-center">Mónica Velasco </td>
+<td class="text-center">Auxiliar de Producción</td>
+<td class="text-center">fact.produccion@lazzar.com.mx</td>
+<td class="text-center">113</td>
+</tr>
+<tr>
+<td class="text-center">Luis Mauricio Ramírez Gómez</td>
+<td class="text-center">Líder de Planeación de Bordados</td>
+<td class="text-center">mramirez@lazzar.com.mx</td>
+<td class="text-center">114</td>
+</tr>
+<tr>
+<td class="text-center">Ismael Mendoza Aceves</td>
+<td class="text-center">Coordinador de Bordados</td>
+<td class="text-center">coor.bordados@lazzar.com.mx</td>
+<td class="text-center">123</td>
+</tr>
+<tr>
+<td class="text-center">Noemí de la O Villalobos</td>
+<td class="text-center">Auxiliar de ponchados </td>
+<td class="text-center">ponchados@lazzar.com.mx</td>
+<td class="text-center">123</td>
+</tr>
+<tr>
+<td class="text-center">Adrián Fernández Navarro</td>
+<td class="text-center">Líder de Ponchados</td>
+<td class="text-center">bordados@lazzarmexico.com</td>
+<td class="text-center">123</td>
+</tr>
+<tr>
+<td class="text-center">Mariana Michel Navarrete</td>
+<td class="text-center">Auxiliar de Ponchados</td>
+<td class="text-center">bordados@lazzar.com.mx</td>
+<td class="text-center">123</td>
+</tr>
+<tr><th class="text-center" colspan="2" style="background-color: #0B2265; color: white;">CENTRO DE DISEÑO Y CORTE GREGORIO DAVILA 1240</th>
+<th class="text-center" colspan="2" style="background-color: #0B2265; color: white;">(33) 3853-3234 (33) 3823-8658</th></tr>
+<tr>
+<tr>
+<td class="text-center">Vacante</td>
+<td class="text-center">Gerente de Cedicor</td>
+<td class="text-center">cedicor@lazzar.com.mx</td>
+<td class="text-center">104</td>
+</tr>
+<tr>
+<td class="text-center">Estela Bautista</td>
+<td class="text-center">Líder de Diseño y Trazo</td>
+<td class="text-center">ebautista@lazzarmexico.com</td>
+<td class="text-center">103</td>
+</tr>
+<tr>
+<td class="text-center">José Antonio Martínez</td>
+<td class="text-center">Líder de Corte</td>
+<td class="text-center">corte2@lazzar.com.mx</td>
+<td class="text-center">102</td>
+</tr>
+<tr>
+<td class="text-center">Diego Escudero</td>
+<td class="text-center">Gerente de Planeación y Compras </td>
+<td class="text-center">descudero@lazzar.com.mx</td>
+<td class="text-center">101</td>
+</tr>
+<tr>
+<td class="text-center">Edith Marlene López Lara</td>
+<td class="text-center">Coordinador de Compras de Materia Prima</td>
+<td class="text-center">compras@lazzar.com.mx</td>
+<td class="text-center">101</td>
+</tr>
+<tr>
+<td class="text-center">Edher Espinoza Avila </td>
+<td class="text-center">Coordinador de Almacén de Materia Prima</td>
+<td class="text-center">almacenmp@lazzar.com.mx</td>
+<td class="text-center">105</td>
+</tr>
+<tr>
+<td class="text-center">Nancy Beatriz González Díaz </td>
+<td class="text-center">Auxiliar Administrativo de Almacén Materia Prima</td>
+<td class="text-center">embarquescedicor@lazzar.com.mx</td>
+<td class="text-center">105</td>
+</tr>
+<tr>
+<td class="text-center">Erik Ivan Gómez Zamudio </td>
+<td class="text-center">Auxiliar de Almacén de Materia Prima</td>
+<td class="text-center">almacenavios@lazzar.com.mx</td>
+<td class="text-center">105</td>
+</tr>
+<tr>
+<td class="text-center">Jesús Barajas Serrano</td>
+<td class="text-center">Auxiliar de Almacén de Materia Prima</td>
+<td class="text-center">almacentelas@lazzar.com.mx</td>
+<td class="text-center">105</td>
+</tr>
+  <!-- Agrega más filas según sea necesario -->
+</table>
+</div>
+<section>
+     <!-- Footer -->
+<section>
+  <footer class="text-center text-white mb-3" style="background: linear-gradient(to bottom, #2586a6, #2586a6);">
+  <!-- Grid container -->
+  <div class="container p-4">
+  <!-- Section: Links -->
+  <section class="">
+  <!--Grid row-->
+  <div class="row">
+  <!--Grid column-->
+  <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+  <h5 class="text-uppercase">Contacta con tus compañeros</h5>
+  
+  <ul class="list-unstyled mb-0">
+  <li>
+  <a href="{% url 'directorio' %}" class="text-white" style="font-size: 20px;">Directorio Lazzar</a>
+  </li>
+  </ul>
+  </div>
+  <!--Grid column-->
+  
+  <!--Grid column-->
+  <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+  <a href="#"><h5 class="text-uppercase" style="color: white;">Recursos Humanos</h5></a>
+  </div>
+  <!--Grid column-->
+  
+  <!--Grid column-->
+  <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+  <h5 class="text-uppercase">Recursos para colaboradores</h5>
+  
+  <ul class="list-unstyled mb-0">
+  <li>
+  <a href="#!" class="text-white" style="font-size: 20px;">Mi Bono</a>
+  </li>
+  </ul>
+  </div>
+  <!--Grid column-->
+  
+  <!--Grid column-->
+  <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+  <h5 class="text-uppercase">Portales Lazzar</h5>
+  
+  <ul class="list-unstyled mb-0">
+  <li>
+  <a href="https://portal-lazzar.com/inicio" class="text-white" style="font-size: 20px;">Portal Lazzar</a>
+  </li>
+  </ul>
+  </div>
+        
+  <!--Grid column-->
+  </div>
+  <!--Grid row-->
+  </section>
+  <!-- Section: Links -->
+  </div>
+  <!-- Grid container -->
+  
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background: linear-gradient(to right, #2586a6, #2586a6);">
+     
+  <a class="text-white" href="https://www.lazzarmexico.com/?gad_source=1&gclid=CjwKCAiA0syqBhBxEiwAeNx9N9qr5NZiQtMzemAF1oxE1KCO3GMdkljiwfnZrojzigeE9L6HeAw61BoCPOMQAvD_BwE" style="font-size: 24px;"> ©2023 lazzarmexico.com</a>
+  </div>
+  </footer>
+  </section>
+    <script>
+      function filtrarTabla() {
+        var filtroNombre = document.getElementById("filtro_nombre").value.toUpperCase();
+        var tabla = document.getElementById("miTabla");
+        var filas = tabla.getElementsByTagName("tr");
+
+        for (var i = 0; i < filas.length; i++) {
+            var celdaNombre = filas[i].getElementsByTagName("td")[0];   
+            if (celdaNombre) {
+                var textoNombre = celdaNombre.textContent || celdaNombre.innerText;
+                // Solo considera la columna de fecha y proveedor para el filtrado
+                if (textoNombre.toUpperCase().indexOf(filtroNombre) > -1){
+                    filas[i].style.display = "";
+                } else {
+                    filas[i].style.display = "none";
+                }
+            }
+        }
+    }
+      </script>
+      <script>
+        function actualizarFecha() {
+            var fechaElemento = document.getElementById("fecha");
+            var fechaActual = new Date();
+            var opciones = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            fechaElemento.textContent = fechaActual.toLocaleDateString('es-ES', opciones);
+        }
+      
+        // Llama a la función para actualizar la fecha cada segundo
+        actualizarFecha();
+        setInterval(actualizarFecha, 1000);
+      </script>
+{% endblock %}

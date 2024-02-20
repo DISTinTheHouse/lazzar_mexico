@@ -1,0 +1,75 @@
+{% extends 'layouts/layout.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center display-4 mt-3 fw-bold" style="background-color: #C5CAE9; color: #FBFCFC; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);">Almacén</h1>
+<p class="fs-3 text-center fw-bold" style=" color: #566573; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);">Pedidos</p>
+<hr> <!--................................................-->
+<main class="container mt-3">
+
+  <ul class="nav nav-tabs mb-3" id="ex-with-icons" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" aria-current="page" href="#" style="color: #00BCD4; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.1);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">design_services</span>
+          Diseño
+        </div>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " aria-current="page" href="#" style="color: #FF9800; font-weight: bold; text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.07);">
+        <div class="d-flex flex-column icon-above-text">
+          <span class="material-symbols-rounded">package_2</span>
+          Compras
+        </div>
+      </a>
+    </li>
+  </ul>
+  <style>
+    .icon-above-text {
+      align-items: center; 
+      text-align: center; 
+    }
+  
+    .icon-above-text .material-icons {
+      margin-bottom: 1px; 
+    }
+  </style>
+
+<div class="toast show">
+  <div class="toast-header">
+    <strong class="me-auto" style="color: #B7950B; ">AVISO</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+  </div>
+  <div class="toast-body">
+    <p style="font-style: italic;">En esta sección puedes verificar los pedidos de Diseño y pedidos de Ventas;
+      favor de seleccionar la opcion deseada.
+    </p>
+  </div>
+</div>
+</main>
+
+
+
+<footer class=" text-center mt-4 fixed-bottom" style="background-color: #F2F4F4;">
+
+  <div class="row">
+
+    <section class="mb-4 mt-4">
+      © 2023 Copyright:
+      <a style="color: #B7950B; text-decoration:underline;" href="https://www.lazzarmexico.com/">Lazzarmexico.com</a>
+      
+    </section>
+
+  <div class="text-center p-3 larger-text" style="background-color: rgba(11, 34, 101); font-size: 18px">
+      <p style="color: azure;">
+          Respeto, Honestidad, Confianza, Responsabilidad, Lealtad
+      </p>
+  </div>
+
+</footer>
+{% endblock %}
