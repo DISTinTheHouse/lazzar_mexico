@@ -1,0 +1,84 @@
+{% extends 'layouts/menu_intranet.html' %}
+{% load static %}
+{% block content %}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SP1MJ3P87D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SP1MJ3P87D');
+</script>
+
+{% csrf_token %}
+
+<b><div style="text-align: center; font-size: 48px; color: #0B2265;">MACROPROCESO</div></b>
+<section class="mb-3 " style="display: flex; justify-content: center; align-items: center; height: 645px;">
+    <iframe src="https://drive.google.com/file/d/1fNJ4t5pB7f-E51meov5FBZaTcBE7qHO6/preview" width="865" height="645" frameborder="0" allowfullscreen></iframe>
+</section>
+
+<footer class="text-center text-white" style="background-color: #0B2265;">
+    <div class="text-center p-3" style="background-color: #0B2265;">
+    <a class="text-white" href="https://www.lazzarmexico.com/?gad_source=1&gclid=CjwKCAiA0syqBhBxEiwAeNx9N9qr5NZiQtMzemAF1oxE1KCO3GMdkljiwfnZrojzigeE9L6HeAw61BoCPOMQAvD_BwE" style="font-size: 24px; text-decoration: none;"> ©2024 lazzarmexico.com</a> 
+    <a class="text-white" href="{% url 'nosotros' %}" style="text-decoration: none;">- Con tecnologia de Lazzar IT</a>
+    </div>
+</footer>
+
+<script>
+    function updateClock() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const seconds = now.getSeconds().toString().padStart(2, '0');
+    const timeString = `${hours}:${minutes}:${seconds}`;
+    document.getElementById("clock").innerHTML = timeString;
+    }
+    
+    // Actualizar el reloj cada segundo
+    setInterval(updateClock, 1000);
+            
+    // Llamar a la función para mostrar la hora actual de inmediato
+    updateClock();
+    </script>
+    <script>
+    function actualizarFecha() {
+    var fechaElemento = document.getElementById("fecha");
+    var fechaActual = new Date();
+    var opciones = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    fechaElemento.textContent = fechaActual.toLocaleDateString('es-ES', opciones);
+    }
+      
+    // Llama a la función para actualizar la fecha cada segundo
+    actualizarFecha();
+    setInterval(actualizarFecha, 1000);
+    </script>
+    <script>
+    // Establecer la fecha de finalización
+    const fechaFinalizacion = new Date("December 22, 2023 00:00:00").getTime();
+      
+    // Actualizar el contador cada segundo
+    const x = setInterval(function() {
+    // Obtener la fecha y hora actual
+    const fechaActual = new Date().getTime();
+      
+    // Calcular la diferencia entre la fecha de finalización y la fecha actual
+    const diferencia = fechaFinalizacion - fechaActual;
+      
+    // Calcular días, horas, minutos y segundos
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+      
+    // Mostrar el resultado en el elemento con id "countdown"
+    document.getElementById("countdown").innerHTML = dias + "d " + horas + "h " + minutos + "m " + segundos + "s ";
+      
+    // Si la cuenta regresiva ha terminado, mostrar un mensaje
+    if (diferencia < 0) {
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = "¡No te preocupes, contamos con un stock!";
+    }
+    }, 1000);
+    </script>
+{% endblock %}

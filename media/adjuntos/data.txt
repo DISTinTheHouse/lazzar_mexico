@@ -1,0 +1,36 @@
+FECHA DE HOY: 09/NOVIEMBRE/2023
+
+INFORME DE PEDIDOS:
+pedido:P82660
+fecha:01/11/23
+orden de bordado:E87756
+piezas:146
+proveedor:BORDADORA LAZZAR
+fecha_de_surtido_bordados:02/11/23
+recepcion_de_la_orde: 03/11/23
+fecha_entrega_almacen:08/11/23
+surtido: COMPLETO
+recibio: JOHANA
+clasificación: B
+cliente: ENSEÑANZA E INVESTIGACION SUPERIOR, AC
+fecha_programada_envio: 03/11/2023
+fecha_entrega_al_cliente: aun no se envía.
+nueva_fecha: 05/11/2023
+
+pedido:P81369
+fecha:02/11/23
+orden de bordado:E87763
+piezas:62
+proveedor:BORDADORA LAZZAR
+fecha_de_surtido_bordados:02/11/23
+recepcion_de_la_orde: 03/11/23
+fecha_entrega_almacen: SIN FECHA
+surtido: PROGRAMADO
+recibio: CRISTINA
+clasificación: B
+cliente: RAFAEL ABREGO OSORNIO
+fecha_programada_envio: 21/11/2023
+fecha_entrega_al_cliente: aun no se envía.
+nueva_fecha: 21/11/2023
+
+

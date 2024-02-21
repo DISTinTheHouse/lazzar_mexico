@@ -73,6 +73,7 @@ class empleados(models.Model):
     ubicacion = models.ForeignKey(ubicacion, on_delete=models.CASCADE, related_name='centro_de_trabajo_empleados')
     fecha_cumpleaños = models.DateField(null=True, blank=True, verbose_name="Fecha Cumpleaños")
     correo_cumple_enviado = models.BooleanField(default=False)
+    correo_aniversario_enviado = models.BooleanField(default=False)
     
     class Meta:
         verbose_name = "Empleado"
@@ -112,7 +113,6 @@ class DiasProgramadasVacaciones(models.Model):
     def __str__(self):
         return f"Vacaciones de {self.prog_empleado.codigo} - {self.prog_empleado.apellido_paterno} - {self.prog_empleado.apellido_materno} - {self.prog_empleado.nombre} - del {self.fecha_inicio} al {self.fecha_final}"
 
-# bono
 class bono(models.Model):
     id = models.AutoField(primary_key= True, verbose_name="id")
     Año = models.IntegerField(default=2024, verbose_name="Año")
@@ -120,9 +120,16 @@ class bono(models.Model):
     Quincena = models.IntegerField(default=0, verbose_name="Quincena" )
     Calificacion = models.IntegerField(default=0, verbose_name="Calificación")
     cal_empleado = models.OneToOneField(empleados, on_delete=models.CASCADE, related_name='cal_empleado', verbose_name="Empleado")
-    
+
     class Meta:
         verbose_name = "Bono"
 
     def __str__(self):
         return f"{self.Año} - {self.Mes} - {self.Quincena} - {self.Calificacion} - {self.cal_empleado.codigo}"
+    
+
+    
+    
+
+
+    

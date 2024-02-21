@@ -20,6 +20,7 @@ from email.mime.image import MIMEImage
 import os
 from django.urls import reverse
 
+
 def index_intranet(request):
     imagenes = Imagen.objects.all()
     num_imagenes = len(imagenes)
@@ -27,6 +28,7 @@ def index_intranet(request):
     mes_actual = datetime.now().month
 
     usuarios = empleados.objects.filter(fecha_cumpleaños__month=mes_actual).order_by('fecha_cumpleaños__day')
+    usuariosa = empleados.objects.filter(fecha_alta__month=mes_actual).order_by('fecha_alta__day') #oscar zermeño 16/02/2024
     
     for usuario in usuarios:
         if usuario.fecha_cumpleaños.day == datetime.now().day:  # Es el cumpleaños hoy
@@ -36,20 +38,25 @@ def index_intranet(request):
                 cumpleañero.correo_cumple_enviado = True
                 cumpleañero.save() #----------------------------------------------------------------
 
+    for usuario in usuariosa:
+        if usuario.fecha_alta.day == datetime.now().day:  # Es el aniversario hoy
+            empleado = empleados.objects.get(codigo=usuario.codigo)
+            if request.method == "POST" and not empleado.correo_aniversario_enviado:
+                enviar_correo_aniversario(usuario)
+                empleado.correo_aniversario_enviado = True
+                empleado.save()
+            
+
     context = {
         'imagenes': imagenes,
         'num_imagenes': num_imagenes,
         'usuarios': usuarios,
+        'usuariosa': usuariosa, #oscar zermeño 16/02/2024
     }
     return render(request, 'index_intranet.html', context)
 
 def enviar_correo_feliz_cumple(usuario):
-    # subject = '¡Feliz Cumpleaños!'
-    # message = f'¡Hola {usuario.nombre}!\n\n¡Feliz Cumpleaños! Esperamos que tengas un día increíble.'
-    # from_email = 'sistemas@lazzarmexico.com'  # Reemplaza con tu dirección de correo
-    # to_email = [usuario.correo_nomina]
 
-    # send_mail(subject, message, from_email, to_email, fail_silently=False)
 
     # MAYER OROZCO 15/02/2024
     nombre = usuario.nombre
@@ -114,6 +121,71 @@ def enviar_correo_feliz_cumple(usuario):
     except Exception as e:
         print(f"Error al enviar el correo: {e}")
 
+def enviar_correo_aniversario(usuario):
+
+
+    # MAYER OROZCO 15/02/2024     #oscar zermeño 16/02/2024
+    nombre = usuario.nombre
+    ruta_imagen_cumple = os.path.join('mainapp', 'static', 'correos', 'aniversario.png')
+
+    # Adjuntar las imágenes al mensaje MIME
+    with open(ruta_imagen_cumple, 'rb') as f:
+        imagen1 = MIMEImage(f.read())
+        imagen1.add_header('Content-ID', '<imagen1>')  # Identificador para la imagen1
+
+    # Configuración del mensaje
+    msg = MIMEMultipart()
+    msg['From'] = 'sistemas@lazzarmexico.com'
+    msg['To'] = usuario.correo_nomina
+    msg['Subject'] = '¡Feliz Aniversario ' + nombre + '!'
+
+    # Cuerpo del mensaje en HTML
+    html = f"""
+        <html lang="es">
+        <head>
+            <style>
+                body {{
+                    background-color: #ADD8E6;
+                    text-align: center;
+                }}
+                p {{
+                    margin: 0 auto; /* Centrar párrafos */
+                    padding: 10px; /* Espaciado interior */
+                }}
+            </style>
+        </head>
+        <body style>
+            <h1>¡Querido {nombre}!</h1>
+            <p>Recuerda que eres más que solo un número, o un día en el calendario, 
+            eres un elemento muy importante para Lazzar, agradecemos tu permanencia, 
+            dedicación y valiosa contribución</p>
+            <img src="cid:imagen1">
+        </body>
+        </html>
+    """
+    destinatarios = obtener_destinatarios('destinatarios.txt')
+    total_destinatarios = destinatarios + [usuario.correo_nomina]
+
+    # Adjuntar el cuerpo del mensaje
+    msg.attach(MIMEText(html, 'html'))
+
+    # Adjuntar las imágenes al mensaje MIME
+    with open(ruta_imagen_cumple, 'rb') as f:
+        imagen1 = MIMEImage(f.read())
+        imagen1.add_header('Content-ID', '<imagen1>')  # Identificador para la imagen1
+        msg.attach(imagen1)
+
+    # Enviar el correo
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login('sistemas@lazzarmexico.com', 'nldflybxyeiukvko')
+        server.sendmail('sistemas@lazzarmexico.com', total_destinatarios, msg.as_string())
+        server.quit()
+        print("Correo enviado correctamente")
+    except Exception as e:
+        print(f"Error al enviar el correo: {e}")        
+
 def obtener_destinatarios(nombre_archivo):
     ruta_archivo = os.path.join('mainapp', 'static', 'correos', nombre_archivo)
 
@@ -152,6 +224,49 @@ def recursoshumanos(request):
 
 def cedicor(request):
     return render(request, 'cedicor.html')
+
+@login_required(login_url="login")
+def catalogo_empleados(request):
+    lista_empleados = empleados.objects.all()
+
+    return render(request, 'catalogo_empleados.html', {
+        'empleados': lista_empleados,
+        })
+
+@login_required(login_url="login")
+def actualiza_bono(request):
+    # Procesar el formulario para el año y el mes
+    if request.method == 'POST':
+        año = request.POST.get('año')
+        mes = request.POST.get('mes')
+        quincena = request.POST.get('quincena')
+
+        # Procesar el formulario para las calificaciones de los empleados
+        for empleado in empleados.objects.all():
+            calificacion = request.POST.get('calificacion_' + str(empleado.id))
+
+            # Verificar si ya existe un bono para este empleado en el año y mes especificados
+            bono_existente = bono.objects.filter(Año=año, Mes=mes, Quincena=quincena, cal_empleado=empleado)
+            if bono_existente.exists():
+                bono_existente.update(Calificacion=calificacion)
+            else:
+                # Si no existe un bono para este empleado en el año y mes especificados, crear uno nuevo
+                nuevo_bono = bono(Año=año, Mes=mes, Quincena=quincena, Calificacion=calificacion, cal_empleado=empleado)
+                nuevo_bono.save()
+
+        # Redirigir al usuario a una página de confirmación
+        return redirect('confirmacion_actualizacion')
+
+    else:
+        # Obtener todos los empleados para mostrar en el formulario
+        todos_empleados = empleados.objects.all()
+        form = BonoForm()
+
+    return render(request, 'actualiza_calificacion.html', {'empleados': todos_empleados, 'form': form})
+
+def confirmacion_actualizacion(request):
+    # Esta vista podría mostrar un mensaje de éxito o alguna otra información relevante
+    return render(request, 'confirmacion_actualizacion.html')
 
 def produccion(request):
     return render(request, 'produccion.html')
@@ -208,7 +323,7 @@ def organigrama(request):
     return render(request, 'organigrama.html')
 
 def macroproceso(request):
-    return render(request, 'macro proceso.html')
+    return render(request, 'macroproceso.html')
 
 def dcedicor(request):
     return render(request, 'cedicord.html')
@@ -224,49 +339,6 @@ def configuracion(request):
     
 def avisop(request):
     return render(request, 'aviso de privacidad.html')
-
-@login_required(login_url="login")
-def catalogo_empleados(request):
-    lista_empleados = empleados.objects.all()
-
-    return render(request, 'catalogo_empleados.html', {
-        'empleados': lista_empleados,
-        })
-
-@login_required(login_url="login")
-def actualiza_bono(request):
-    # Procesar el formulario para el año y el mes
-    if request.method == 'POST':
-        año = request.POST.get('año')
-        mes = request.POST.get('mes')
-        quincena = request.POST.get('quincena')
-
-        # Procesar el formulario para las calificaciones de los empleados
-        for empleado in empleados.objects.all():
-            calificacion = request.POST.get('calificacion_' + str(empleado.id))
-
-            # Verificar si ya existe un bono para este empleado en el año y mes especificados
-            bono_existente = bono.objects.filter(Año=año, Mes=mes, Quincena=quincena, cal_empleado=empleado)
-            if bono_existente.exists():
-                bono_existente.update(Calificacion=calificacion)
-            else:
-                # Si no existe un bono para este empleado en el año y mes especificados, crear uno nuevo
-                nuevo_bono = bono(Año=año, Mes=mes, Quincena=quincena, Calificacion=calificacion, cal_empleado=empleado)
-                nuevo_bono.save()
-
-        # Redirigir al usuario a una página de confirmación
-        return redirect('confirmacion_actualizacion')
-
-    else:
-        # Obtener todos los empleados para mostrar en el formulario
-        todos_empleados = empleados.objects.all()
-        form = BonoForm()
-        
-    return render(request, 'actualiza_calificacion.html', {'empleados': todos_empleados, 'form': form})
-
-def confirmacion_actualizacion(request):
-    # Esta vista podría mostrar un mensaje de éxito o alguna otra información relevante
-    return render(request, 'confirmacion_actualizacion.html')
 
 def inicio_portal(request):
     if request.user.is_authenticated:

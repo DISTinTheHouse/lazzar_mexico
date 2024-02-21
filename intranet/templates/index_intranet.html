@@ -100,7 +100,7 @@ Pedir Boletos
 <!-- //cumpleaños// -->
 <section style="text-align: center;">
 
-    <div class="mb-3" id="mesActual" style="font-size: 48px; font-weight: bold; color: #0b2265;"></div>
+    <div class="mb-3" id="mesActual" style="font-size: 48px; font-weight: bold;"></div>
 
     <table class="table table-striped table-bordered container">
         <thead class="thead-dark">
@@ -128,45 +128,75 @@ Pedir Boletos
     </table>
 </section>
 
-{% comment %}
- <!-- //metas// -->
-<section>  
-<div class="metas" style="display: flex; justify-content: center; align-items: center;">
-<iframe src="https://docs.google.com/spreadsheets/u/0/d/e/2CAIWO3emZkuA1bJMDkGVUVVsd3rx7KnT7mMeMlPJsyYb1BO8ITyra8ixg6GsCCFWutdRHn9fPxokgukMq9Q/gviz/chartiframe?oid=1890227427&resourcekey" width="800" height="1020" frameborder="0"></iframe></div></br> 
-</div>
-<div class="metas" style="display: flex; justify-content: center; align-items: center;">
-<iframe src="https://docs.google.com/spreadsheets/u/0/d/e/2CAIWO3emZkuA1bJMDkGVUVVsd3rx7KnT7mMeMlPJsyYb1BO8ITyra8ixg6GsCCFWutdRHn9fPxokgukMq9Q/gviz/chartiframe?oid=1914240082&resourcekey" width="900" height="1020" frameborder="0"></iframe></div></br>
-</div> 
-</section>   {% endcomment %}
+<section class="mb-3" style="text-align: center;">
 
-{% comment %}
-<!-- //bono// -->
-<section >
-<hr class="container">
-<div style="background: #0b2265; text-align: center;">
-<h2 style="color: white; text-align: center; font-family: Montserrat; font-size: 48px;"><b>Bono</b></h2>
-<a href="{% url 'bono' %}"><button class="boton-sin-relleno mb-3" style="background: none;
-width: 30%; 
-border: 2px solid #ffff;
-padding: 5px 10px; 
-cursor: pointer; 
-color: white;
-margin: auto; 
-border-radius: 20px;
-font-size: 20px;">
-Ver mi calificación
-</button></a>
-</div> 
+    <div class="mb-3" id="mesAniversario" style="font-size: 48px; font-weight: bold;"></div>
+
+    <table class="table table-striped table-bordered container">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">CÓDIGO</th>
+                <th scope="col">NOMBRE</th>
+                <th scope="col">APELLIDO PATERNO</th>
+                <th scope="col">APELLIDO MATERNO</th>
+                <th scope="col">ANIVERSARIO</th>
+                <th scope="col">DEPARTAMENTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuariosa %}
+            <tr>
+                <td>{{ usuario.codigo }}</td>
+                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.apellido_paterno }}</td>
+                <td>{{ usuario.apellido_materno }}</td>
+                <td>{{ usuario.fecha_alta|date:"d/m" }}</td>
+                <td>{{ usuario.departamento }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </section>
-{% endcomment %}
 
-{% comment %} <div id="chat-container">
-    <div id="chat-messages"></div>
-    <input type="text" id="user-input" placeholder="Escribe aquí...">
-</div> {% endcomment %}
+<!--frases celebres-->
+<div class="container">
 
+    <h1 class="fw-light text-center text-lg-start mt-4 mb-0">Frases Celebres</h1>
+  
+    <hr class="mt-2 mb-5">
+  
+    <div class="row text-center text-lg-start">
+  
+      <div class="col-lg-3 col-md-4 col-6">
+        <a href="#" class="d-block mb-4 h-100">
+          <img class="img-fluid img-thumbnail" src="{% static 'img/1.png' %}" alt="">
+        </a>
+      </div>
+      <div class="col-lg-3 col-md-4 col-6">
+        <a href="#" class="d-block mb-4 h-100">
+          <img class="img-fluid img-thumbnail" src="{% static 'img/2.png' %}" alt="">
+        </a>
+      </div>
+      <div class="col-lg-3 col-md-4 col-6">
+        <a href="#" class="d-block mb-4 h-100">
+          <img class="img-fluid img-thumbnail" src="{% static 'img/4.png' %}" alt="">
+        </a>
+      </div>
+      <div class="col-lg-3 col-md-4 col-6">
+        <a href="#" class="d-block mb-4 h-100">
+          <img class="img-fluid img-thumbnail" src="{% static 'img/5.png' %}" alt="">
+        </a>
+      </div>
+
+    </div>
+    
+  </div>
+
+<!--chatbot-->
 <script src="https://chatbolt.ai/widget/c58644cb-0105-4a65-b91e-2455da5be27d.js"></script>
 
+
+<!--boton de cumpleaños-->
 {% if user.email == 'sistemas@lazzarmexico.com' %}
 <header class="pb-3" style="background: linear-gradient(to right, #0B2265, #0c2340, #0c2340); padding: 25px;">
     <form method="post" action="{% url 'inicio_intranet' %}">
@@ -288,10 +318,13 @@ setInterval(actualizarFecha, 1000);
     var coloresMes = ['#0b2265', '#ffb612', '#0b2265', '#ffb612', '#0b2265', '#ffb612', '#0b2265', '#ffb612', '#0b2265', '#ffb612', '#0b2265', '#ffb612'];
     // Cambiar el color del texto del div según el mes actual
     document.getElementById('mesActual').innerText = 'Cumpleaños de' + ' ' + nombreMes;
+    document.getElementById('mesAniversario').innerText = 'Aniversarios en' + ' ' + nombreMes;
     document.getElementById('mesActual').style.color = coloresMes[mesActual];
+    document.getElementById('mesAniversario').style.color = coloresMes[mesActual];
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function() {
             // Obtener el token CSRF del documento HTML

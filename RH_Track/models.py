@@ -13,7 +13,7 @@ class Nomina(models.Model): #ajuste Jesus Ibarra 09/02/2024
 
         def __str__(self):
             return f"Nómina de {self.num_empleado} - {self.fecha}"
-        
+                
 class Tabla_Nomina(models.Model): #Mayer Orozco 20/02/2024
         year = models.IntegerField(default=2024, verbose_name="Año")
         quincena = models.IntegerField(default=0, verbose_name="Quincena")

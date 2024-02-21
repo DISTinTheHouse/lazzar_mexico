@@ -374,34 +374,49 @@
 
           <script>
             document.addEventListener('DOMContentLoaded', function () {
-              // Obtén todas las filas de la tabla
-              var filas = document.querySelectorAll('#datatable tbody tr');
-          
-              // Objeto para almacenar el recuento de cada clasificación
-              var clasificacionCount = {};
-          
-              // Itera sobre cada fila y cuenta las clasificaciones
-              filas.forEach(function (fila) {
-                var clasificacion = fila.cells[4].textContent.trim(); // El índice 4 representa la columna de clasificación
-          
-                if (clasificacionCount[clasificacion]) {
-                  clasificacionCount[clasificacion]++;
-                } else {
-                  clasificacionCount[clasificacion] = 1;
+                // Obtén todas las filas de la tabla
+                var filas = document.querySelectorAll('#datatable tbody tr');
+        
+                // Objeto para almacenar el recuento de cada clasificación
+                var clasificacionCount = {};
+        
+                // Itera sobre cada fila y cuenta las clasificaciones
+                filas.forEach(function (fila) {
+                    var clasificacion = fila.cells[4].textContent.trim(); // El índice 4 representa la columna de clasificación
+        
+                    if (clasificacionCount[clasificacion]) {
+                        clasificacionCount[clasificacion]++;
+                    } else {
+                        clasificacionCount[clasificacion] = 1;
+                    }
+                });
+        
+                // Define el orden personalizado de las clasificaciones
+                var order = ['3A', '3B', '3C', '3D', '3E', '3F', '3X', ''];
+        
+                // Ordenar las clasificaciones según el orden personalizado
+                var sortedResults = Object.keys(clasificacionCount)
+                    .sort(function (a, b) {
+                        // Ordenar por índice personalizado y luego por la cantidad
+                        return order.indexOf(a) - order.indexOf(b) || clasificacionCount[b] - clasificacionCount[a];
+                    })
+                    .reduce(function (obj, key) {
+                        obj[key] = clasificacionCount[key];
+                        return obj;
+                    }, {});
+        
+                // Muestra los resultados ordenados en el contenedor
+                var resultadosContenedor = document.getElementById('resultados-clasificacion');
+                for (var clasificacion in sortedResults) {
+                    var cantidad = sortedResults[clasificacion];
+                    var resultado = clasificacion + ': ' + cantidad + ' pedidos';
+                    var resultadoElemento = document.createElement('p');
+                    resultadoElemento.textContent = resultado;
+                    resultadosContenedor.appendChild(resultadoElemento);
                 }
-              });
-          
-              // Muestra los resultados en el contenedor
-              var resultadosContenedor = document.getElementById('resultados-clasificacion');
-              for (var clasificacion in clasificacionCount) {
-                var cantidad = clasificacionCount[clasificacion];
-                var resultado = clasificacion + ': ' + cantidad + ' pedidos';
-                var resultadoElemento = document.createElement('p');
-                resultadoElemento.textContent = resultado;
-                resultadosContenedor.appendChild(resultadoElemento);
-              }
             });
-          </script>
+        </script>
+        
 
 <!-- Asegúrate de que jQuery y DataTables estén incluidos en tu HTML -->
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

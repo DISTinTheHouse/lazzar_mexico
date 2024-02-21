@@ -82,12 +82,12 @@ def vacaciones(request):
     })
 
 @login_required(login_url="login")
-def ver_nomina(request): #Ajuste Jes  s Ibarra 09/02/2024
+def ver_nomina(request): #Ajuste Jes��s Ibarra 09/02/2024
     try:
         # obtener el usuario registrado en CorreosLazzar
         usuario_correos_lazzar = CorreosLazzar.objects.get(correo=request.user.email)
 
-        # Si es CorreosLazzar, mostrar solo las n  minas asociadas a ese usuario
+        # Si es CorreosLazzar, mostrar solo las n��minas asociadas a ese usuario
         nominas = Nomina.objects.filter(num_empleado__codigo=usuario_correos_lazzar.num_empleado)
         context = {
             'nominas': nominas,
@@ -100,7 +100,7 @@ def ver_nomina(request): #Ajuste Jes  s Ibarra 09/02/2024
             # obtener el empleado asociado al usuario actual
             usuario_empleado = empleados.objects.get(codigo=request.user.username)
 
-            # Si es Empleados, mostrar solo las n  minas para el empleado actual
+            # Si es Empleados, mostrar solo las n��minas para el empleado actual
             nominas = Nomina.objects.filter(num_empleado=usuario_empleado)
             context = {
                 'nominas': nominas,
@@ -127,7 +127,7 @@ def ver_nomina_propuesta(request): #MAYER OROZCO 20/02/2024
 
         for year, quincena, fecha in periodos:
             ruta_pdf = os.path.join('mainapp', 'static', 'nominas', str(year), str(quincena))
-            
+
             if len(str(usuario_correos_lazzar.num_empleado)) == 1:
                 codigo_empleado = "00" + str(usuario_correos_lazzar.num_empleado)
             elif len(str(usuario_correos_lazzar.num_empleado)) == 2:
@@ -162,7 +162,7 @@ def ver_nomina_propuesta(request): #MAYER OROZCO 20/02/2024
 
             for year, quincena, fecha in periodos:
                 ruta_pdf = os.path.join('mainapp', 'static', 'nominas', str(year), str(quincena))
-                
+
                 if len(str(usuario_empleado.codigo)) == 1:
                     codigo_empleado = "00" + str(usuario_empleado.codigo)
                 elif len(str(usuario_empleado.codigo)) == 2:

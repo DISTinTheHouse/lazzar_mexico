@@ -1,5 +1,6 @@
 {% extends 'layouts/menu_rh.html' %}
 {% block content %}
+
 <!--BANNER-->
 <div class="p-5" style="background-color: #03202f;">
     <div class="container-fluid py-5">
@@ -18,14 +19,14 @@
 
 
 <div class="p-5" style="background: linear-gradient(to right, #0B2265, #03202f, #03202f, #0B2265);">
-    <h2 class="text-center display-1 fw-semibold  " style="color: #fdfefe;">Nómina:</h2>
-        {% load static %}
+    <h2 class="text-center display-1 fw-semibold  " style="color: #fdfefe;">Nomina:</h2>
+    {% load static %}
         {% for nomina in nominas %}
         <div class="card mb-3 text-white rounded-5 p-4 mt-5" style="background: linear-gradient(to right, #ffb600, #ff4800);">
             <div class="card-body">
                 <h5 class="card-title display-4 fw-light   ">Empleado: {{ nombre }} {{ apellido_paterno }}</h5>
                 <p class="card-text fw-bold   ">Fecha: {{nomina.1}}</p>
-            
+
                 <a href="{% static nomina.0 %}" class="btn btn-light btn-lg fw-semibold  " style="border-radius: 25px; color: #ff4800;" target="_blank">Descargar Archivo</a>
             </div>
         </div>

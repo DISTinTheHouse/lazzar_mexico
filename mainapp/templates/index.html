@@ -621,10 +621,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 INTRANET:
             </a>
           </h2>
-          <p style="color:#808b96; text-align: justify;">Solicita tus permisos de menera eficiente y sin complicaciones. Con nuestra plataforma, puedes enviar y gestionar tus solicitudes de permisos de forma transparente.</p>
-          <a href="{% url 'inicio_intranet' %}" class="btn btn-outline-info btn-lg" type="button">Ver más...</a>
+          <p style="color:#808b96; text-align: justify;">En esta sección puedes ver las noticias más relevantes de Lazzar y estar al día con temas internos relevantes.</p>
+          <a href="{% url 'inicio_intranet' %}" class="btn btn-outline-info btn-lg" type="button">Ver noticias</a>
         </div>
       </div>
+      <div class="col-md-12 mt-4 text-center">
+        <div class="h-100 p-5 text-white  rounded-3 animate-on-hover" style="background-color: #0c2340;">
+          <h2 class="fw-bold  ">
+            <a href="{% url 'index-exclusive' %}" class=" text-warning ">
+                KIOSKO LAZZAR:
+            </a>
+          </h2>
+          <p class="text-light" style="text-align: justify;">Aqui podrás solicitar tus permisos de manera eficiente y sin complicaciones. Con nuestra plataforma de kiosko lazzar <ins>podrás enviar y gestionar tus solicitudes de permisos de forma transparente</ins>.</p>
+          <a href="{% url 'index-exclusive' %}" class="btn btn-outline-warning btn-lg" type="button">Ver más...</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center p-3">
+        <figcaption class="blockquote-footer lead mb-5 mt-5 titulos" style="color: #fdfefe; font-size: larger; font-style: italic;">
+            Ya tienes tu cuenta? <ins><a href="{% url 'login' %}" class="text-reset ">Inicia sesión:</a></ins><br>o<br><ins><a href="{% url 'register' %}" class="text-reset">Crea una cuenta nueva.</a></ins>
+        </figcaption>  
     </div>
 </section>
 <!--FIN OPCIONES CONTENIDO-->
