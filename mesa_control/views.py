@@ -1623,7 +1623,7 @@ def historial_programacion (request):
         'acceso_total': acceso_total,
         'mesa_control': mesa_control, # End Admin-Groups
     })
-
+    
 @login_required(login_url="login")
 def reporte_activos (request):
     ventas = request.user.groups.filter(name='ventas').exists() #Admin-Groups Jesus Ibarra 19/12/2023

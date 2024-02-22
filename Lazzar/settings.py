@@ -158,15 +158,15 @@ EMAIL_HOST_USER = 'sistemas@lazzarmexico.com'  # Tu dirección de correo Gmail
 EMAIL_HOST_PASSWORD = 'nldflybxyeiukvko'  # Tu contraseña de correo Gmail o una contraseña de aplicación si tienes la autenticación de dos factores habilitada
 
 #CONFIG-HTTPS 05/SEP/2023
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
-# HOST_SCHEME = "https://"
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+HOST_SCHEME = "https://"
 
-# SECURE_HSTS_SECONDS = None
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-# SECURE_FRAME_DENY = False
+SECURE_HSTS_SECONDS = None
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_FRAME_DENY = False
 
 CACHES = {
      'default': {

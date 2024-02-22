@@ -191,19 +191,19 @@
                                     <span class="text titulos">Estatus Interno</span>
                         </a> 
                         <li class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="material-symbols-outlined">lab_profile</span>
-                            <span class="text titulos">Reportes</span>
-                          </a>
-                            <ul class="dropdown-menu" style="background-color: #a7d0e6;">
-                                <li>
-                                    <a class="dropdown-item titulos" href="{% url 'reporte_activos' %}">Pedidos Activos</a>
+                                    <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="material-symbols-outlined">lab_profile</span>
+                                    <span class="text titulos">Reportes</span>
+                                  </a>
+                                    <ul class="dropdown-menu" style="background-color: #a7d0e6;">
+                                        <li>
+                                            <a class="dropdown-item titulos" href="{% url 'reporte_activos' %}">Pedidos Activos</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item titulos" href="{% url 'reporte_facturados' %}">Pedidos Facturados</a>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <a class="dropdown-item titulos" href="{% url 'reporte_facturados' %}">Pedidos Facturados</a>
-                                </li>
-                            </ul>
-                        </li>
                         <li class="nav-item"><a href="{% url 'listar_tickets' %}" class="nav-link">
                           <span class="material-icons icon">info</span>
                           <span class="text titulos">Soporte</span>

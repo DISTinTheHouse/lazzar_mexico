@@ -8,20 +8,20 @@ class Nomina(models.Model): #ajuste Jesus Ibarra 09/02/2024
         archivo_nomina = models.FileField(upload_to='archivos_nomina/')
 
         class Meta:
-            verbose_name = "Nómina"
-            verbose_name_plural = "Nóminas"
+            verbose_name = "Nomina"
+            verbose_name_plural = "Nominas"
 
         def __str__(self):
-            return f"Nómina de {self.num_empleado} - {self.fecha}"
+            return f"Nomina de {self.num_empleado} - {self.fecha}"
                 
 class Tabla_Nomina(models.Model): #Mayer Orozco 20/02/2024
-        year = models.IntegerField(default=2024, verbose_name="Año")
+        year = models.IntegerField(default=2024, verbose_name="Anio")
         quincena = models.IntegerField(default=0, verbose_name="Quincena")
         fecha = models.DateField()
 
         class Meta:
-            verbose_name = "Tabla de Nómina"
-            verbose_name_plural = "Tabla de Nóminas"
+            verbose_name = "Tabla de Nomina"
+            verbose_name_plural = "Tabla de Nominas"
 
         def __str__(self):
             return f"{self.year} - {self.quincena} - {self.fecha}"
